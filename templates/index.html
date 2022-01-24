@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% set active_page = "/" %}
+
+{% block content %}
+
+<section>
+    <!-- Main Title -->
+    <div class="container px-4 px-lg-5 pt-3 text-white">
+        <div class="d-flex align-items-center">
+            <div class="gr-01"></div>
+            <h1 class="">Profile Image Resize</h1>
+        </div>
+        <h5 class="mb-5">A simple app to resize images for profiles.</h5>
+    </div>
+
+    <!-- Page Content Block 1 - Upload -->
+    <div class="container px-4 px-lg-5">
+        <!-- Message box -->
+        <div id="liveAlertPlaceholder"></div>
+
+        <!-- Upload & Options container -->
+        <div class="upload-container row p-4">
+            <div class="upload-box col-sm p-2">
+                <!-- FilePond Upload -->
+                <form method="POST" enctype="multipart/form-data">
+                    <input id="filePondUpload" type="file" class="filepond" name="filepond" multiple
+                        data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                </form>
+            </div>
+            <div class="options-box col-sm p-3">
+                <!-- Options -->
+                <div class="containerm-0 mb-3">
+                    <h6>Resize options:</h6>
+                    <div class="row">
+                        <div class="col">
+                            Width
+                            <div class="input-group mb-3">
+                                <input id="width" value="800" type="number" class="form-control" aria-label="Width">
+                                <span class="input-group-text" id="inputGroup-sizing-default">px</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            Height
+                            <div class="input-group mb-3">
+                                <input id="height" value="800" type="number" class="form-control" aria-label="Height">
+                                <span class="input-group-text" id="inputGroup-sizing-default">px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Click to auto-select:</p>
+                    <a id="profile-facebook" class="text-gray" href="#facebook-profile-pic">- Facebook profile pic (180x180px)</a><br/>
+                    <a id="profile-instagram" class="text-gray" href="#instagram-profile-pic">- Instagram profile pic (320x320px)</a><br/>
+                    <a id="profile-youtube" class="text-gray" href="#youtube-profile-pic">- Youtube profile pic (800x800px)</a><br/>
+
+                    <button id="downloadFileBtn" class="btn btn-download mt-4 disabled" type="submit">Download Resized Image</button>
+                </div>
+            </div>
+        </div>
+</section>
+<div class="spacer"></div>
+<!-- Page Content Block 2 -->
+<section>
+    <div class="container px-4 px-lg-5">
+        <!-- Content Row with cards -->
+        <div class="row gx-lg-5 text-center text-white">
+            <h2 class="my-5 slide-top-1">Photo editing 100% free, in your browser</h2>
+            <div class="col-md-4 mb-5 slide-top-2">
+                <div class="h-100">
+                    <div class="gr-04a mx-auto"></div>
+                    <p class="card-text">Shrink and enlarge your photos, crop for print or social media, flip or
+                        rotate
+                        for free.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5 slide-top-2">
+                <div class="h-100">
+                    <div class="gr-04b mx-auto"></div>
+                    <p class="card-text">Reduce and customize file properties and pixels to a desired quality or
+                        size.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5 slide-top-2">
+                <div class="h-100">
+                    <div class="gr-04c mx-auto"></div>
+                    <p class="card-text">Get web-ready image files by converting from BMP, GIF. JPG or PNG to a
+                        compressed JPG.</p>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <!-- Text Description -->
+        <div class="row mb-5 text-white">
+            <h2 class="pb-4 slide-top-1">How we do it?</h2>
+            <div class="col-sm slide-top-2">
+                <p>Free Resize Image is an online app that allows you to compress your image or photo optimizing
+                    quality. First method will reduce image quality. Quality will suffer as you increase compression
+                    and start losing data. Second method is to decrease the pixels it takes to store the image.
+                    Reducing image size doesn’t reduce image quality, although it may lose small details.
+                </p>
+                <p>Photos from modern cellphones and cameras usually have over 6 million pixels, while most
+                    cellphones, tablets, notebook or TV screens have only about 1.5 million pixels, which means you
+                    end up seeing a resized version of the image (you only use the full image if you print it). So
+                    if you resize your image, decreasing its width and height to a half, your image would have about
+                    the same number of pixels as the screens that will display it, and you wouldn’t be losing any
+                    quality or detail, even looking at your image in full screen mode.</p>
+            </div>
+            <div class="col-sm slide-top-2">
+                <p>Digital images are composed by pixels, and each of them has a color, represented as a combination
+                    of three basic colors (red, green and blue). To store each of these pixels, 3 bytes (24 ones or
+                    zeros) are generally used. When an image is large, it may have millions of pixels, and that
+                    means storing all information for an image like that in a computer or any device will take
+                    millions of bytes.</p>
+                <p>When a camera or cellphone says it takes 10 megapixels photos, it means that each photo has 10
+                    million pixels (mega = million). And having 10 million pixels means it takes 30 million bytes
+                    (or 30 megabytes) to store that photo (which is a lot of space!). If you want to send this photo
+                    (or many photos) to a friend by e-mail, it will have to transfer 30 megabytes of data and it
+                    will take a while to upload it and a lot for the recipient to download it later.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
