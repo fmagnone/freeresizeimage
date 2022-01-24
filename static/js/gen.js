@@ -10,8 +10,9 @@ var downloadURL = "";
 var uploadedImages = {};
 var img_width = 800;
 var img_height = 800;
+var downloadBtn;
 
-// Buttons Action Detection
+// Buttons Action Detection and loading
 $(document).ready(function () {
     // Image from File button or general box
     $("#uploadBox").click(function () {
@@ -25,6 +26,8 @@ $(document).ready(function () {
     $("#btnUploadFromUrl").click(function () {
         getClipboardContents();
     });
+
+    downloadBtn = document.getElementById("downloadFileBtn");
 });
 
 // Resolution Range change value
@@ -189,8 +192,11 @@ const pond = FilePond.create(input, {
 
     // Call back when image is added
     onaddfile: (err, fileItem) => {
-        //console.log("On Add File Function called");
+        console.log("On Add File Function called");
         //console.log(err, fileItem.getMetadata('resize'));
+        // Disabel FilePond Label
+        let label = document.getElementsByClassName("filepond--drop-label")[0];
+        label.style.display = "none";
     },
 
     // onpreparefile(file, output)
@@ -219,10 +225,6 @@ const pond = FilePond.create(input, {
 
         console.log(uploadedImages);
 
-
-        // Disabel FilePond Label
-        let label = document.getElementsByClassName("filepond--drop-label")[0];
-        label.style.display = "none";
     },
 
     // Resize the file
@@ -258,6 +260,9 @@ const pond = FilePond.create(input, {
         // Disabel FilePond Label
         let label = document.getElementsByClassName("filepond--drop-label")[0];
         label.style.display = "flex";
+
+        // Disable download button
+        downloadBtn.classList.add("disabled");
     },
     onaddfileprogress(file, progress) {
         console.log("On Add File Progress?", progress);
@@ -281,7 +286,6 @@ const pond = FilePond.create(input, {
 
 // Enable Download Button
 function enableDownloadBtn(fileUrl) {
-    var downloadBtn = document.getElementById("downloadFileBtn");
     downloadBtn.classList.remove("disabled");
     //downloadBtn.innerHTML = "Download file: " + downloadName;
     downloadBtn.href = downloadURL;

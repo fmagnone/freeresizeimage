@@ -60,7 +60,7 @@ h6 {
 .upload-box {
   z-index: 10;
   border-radius: var(--border-radius);
-  max-width: 450px;
+  /*max-width: 450px;*/
   min-height: 200px;
 }
 .options-box {
@@ -151,12 +151,11 @@ h6 {
 
 /* FilePond adaptation */
 .filepond--root {
-  
+  height: 300px;
 }
 .filepond--root .filepond--drop-label {
   /*min-height: 200px !important;*/
   height: 300px;
-  
 }
 .filepond--root .filepond--credits {
   display: none;
