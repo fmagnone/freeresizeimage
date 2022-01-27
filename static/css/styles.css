@@ -66,6 +66,9 @@ h6 {
 .options-box {
   min-height: 200px;
 }
+.input-group-text {
+  background-color: white;
+}
 /*
 .upload-box::after {
   position: absolute;
@@ -157,9 +160,11 @@ h6 {
   /*min-height: 200px !important;*/
   height: 300px;
 }
+/*
 .filepond--root .filepond--credits {
   display: none;
 }
+*/
 .filepond--file-action-button {
   cursor: pointer;
 }
@@ -170,12 +175,12 @@ h6 {
 
 
 /* Buttons */
-.btn-upload_from,
 .btn-download {
   background-color: #19233b;
   color: #ec4e6e;
+  padding: 10px;
+  border-radius: var(--border-radius);
 }
-.btn-upload_from:hover,
 .btn-download:hover {
   background-color: #071127;
   color: #ec4e6e;

@@ -8,27 +8,26 @@
 var downloadName = "resized_unknown.jpg";
 var downloadURL = "";
 var uploadedImages = {};
-var img_width = 800;
-var img_height = 800;
+var img_width = 100;
+var img_height = 100;
 var downloadBtn;
+var inputWidth;
+var inputHeight;
 
 // Buttons Action Detection and loading
 $(document).ready(function () {
-    // Image from File button or general box
-    $("#uploadBox").click(function () {
-        getManualUploadContents();
-    });
-    $("#btnUploadFromFile").click(function () {
-        getManualUploadContents();
-    });
-
-    // Image from URL button
-    $("#btnUploadFromUrl").click(function () {
-        getClipboardContents();
-    });
-
+    // Get objects from DOM
     downloadBtn = document.getElementById("downloadFileBtn");
+    inputWidth = document.getElementById("width");
+    inputHeight = document.getElementById("height");
+
+    inputWidth.addEventListener('change', event => { updatePondProperties() });
+    inputHeight.addEventListener('change', event => { updatePondProperties() });
+
+    // Assign pre-defined values to width and height
+    updatePondProperties();
 });
+
 
 // Resolution Range change value
 /*
@@ -40,6 +39,7 @@ document.getElementById('resolution-percentage').addEventListener('change', even
 */
 
 // Ctrl + V Detection
+/*
 $(document).ready(function () {
     var ctrlDown = false,
         ctrlKey = 17,
@@ -63,7 +63,7 @@ $(document).ready(function () {
             getClipboardContents();
         }
     });
-});
+});*/
 
 // Alert Message
 var alertPlaceholder = document.getElementById("liveAlertPlaceholder");
@@ -85,40 +85,8 @@ function alert_message(message, type) {
     }
 }
 
-// Get Contents Manual Upload
-function getManualUploadContents() {
-    $("#inputUploadFromFile").trigger("click");
-
-    // Select File
-    const inputElement = document.getElementById("inputUploadFromFile");
-    inputElement.addEventListener("change", handleFiles, false);
-    function handleFiles() {
-        const fileList = this.files;
-
-        // Get file information
-        const uploaded_files_count = fileList.length;
-        let uploaded_files_names = [];
-        console.log("Files uploaded: ", uploaded_files_count);
-        for (
-            let i = 0, uploaded_files_count = fileList.length;
-            i < uploaded_files_count;
-            i++
-        ) {
-            const file = fileList[i];
-            uploaded_files_names.push(file.name);
-            console.log("File " + i + " name = " + file.name);
-        }
-        alert_message(
-            "We catch " +
-            uploaded_files_count +
-            " file(s) dopped with this info:<br/>" +
-            uploaded_files_names,
-            "success"
-        );
-    }
-}
-
 // Get Contents Clipboard Upload
+/* 
 async function getClipboardContents() {
     let pasted_data = "(no data)";
 
@@ -152,13 +120,15 @@ async function getClipboardContents() {
         );
     }
 }
+*/
 
-// Get Content Drag and Drop - FilePond Plugin
+// Register plugins - FilePond
 FilePond.registerPlugin(
     //FilePondPluginGetFile,
-    FilePondPluginImagePreview,
+    //FilePondPluginImagePreview,
     FilePondPluginImageResize,
     FilePondPluginImageTransform,
+    FilePondPluginFileValidateType,
 );
 
 // Append Pond to document
@@ -166,9 +136,19 @@ const input = document.querySelector('input[id="filePondUpload"]');
 
 // Create a FilePond instance and post files to /upload
 const pond = FilePond.create(input, {
+    // CONFIG ------------
+    // Only accept images
+    acceptedFileTypes: ['image/*'],
+
+    // Main Options
     name: 'filepond',
-    maxFiles: 1,
+    credits: false,
+    allowImageResize: true,
+    dropOnElement: false,
+    dropOnPage: true,
     labelIdle: 'Drag & drop your image<br/><span class="filepond--label-action">or browse to upload</span>',
+
+    // Server configuration
     server: {
         url: "http://127.0.0.1:5000/",
         timeout: 7000,
@@ -190,6 +170,9 @@ const pond = FilePond.create(input, {
         },
     },
 
+    
+
+    // FUNCTIONS ------------
     // Call back when image is added
     onaddfile: (err, fileItem) => {
         console.log("On Add File Function called");
@@ -208,31 +191,18 @@ const pond = FilePond.create(input, {
         // Create new image
         const img = new Image();
         img.src = URL.createObjectURL(output);
-        console.log(file.fileSize, output.size);
+        console.log("Preparing file__", file.fileSize, output.size);
 
         // Pass new image URL
         downloadName = "res_" + file.filename;
         downloadURL = img.src;
 
-        // Pass new image to dict
-        uploadedImages[downloadName] = downloadURL;
-
         // Console print
-        //console.log("Image Name: ", downloadName);
-        //console.log("Image URL: ", downloadURL);
+        console.log("Image Name: ", downloadName);
+        console.log("Image URL: ", downloadURL);
 
         //console.log(file);
-
-        console.log(uploadedImages);
-
     },
-
-    // Resize the file
-    //imageResizeUpscale: false,
-    allowImageResize: true,
-    imageResizeMode: "contain",
-    imageResizeTargetWidth: 400,
-    imageResizeTargetHeight: 400,
 
     /*
         imageTransformVariants: {
@@ -283,13 +253,78 @@ const pond = FilePond.create(input, {
     },
 });
 
+// Update FilePond Properties
+function updatePondProperties() {
+    // Get data
+    if (!isNaN(parseInt(inputWidth.value))) { img_width = parseInt(inputWidth.value) };
+    if (!isNaN(parseInt(inputHeight.value))) { img_height = parseInt(inputHeight.value) };
+
+    // Assign
+    pond.setOptions({
+        maxFiles: 1,
+        imageResizeTargetWidth: img_width,
+        imageResizeTargetHeight: img_height,
+        imageResizeMode: "contain"
+    });
+
+    // Re-process files
+    pond.prepareFile().then((file) => {
+
+        onpreparefile: (file, output) => {
+            console.log("On Prepare File Function called");
+    
+            // Create new image
+            const img = new Image();
+            img.src = URL.createObjectURL(output);
+            console.log("Preparing file__", file.fileSize, output.size);
+    
+            // Pass new image URL
+            downloadName = "res_" + file.filename;
+            downloadURL = img.src;
+    
+            // Console print
+            console.log("Image Name: ", downloadName);
+            console.log("Image URL: ", downloadURL);
+    
+            //console.log(file);
+        };
+        console.log("__");
+        //console.log("Re-process function called, filesize: ", file.fileSize);
+    });
+    pond.processFile().then((file) => {
+        
+        onpreparefile: (file, output) => {
+            console.log("On Prepare File Function called");
+    
+            // Create new image
+            const img = new Image();
+            img.src = URL.createObjectURL(output);
+            console.log("Preparing file__", file.fileSize, output.size);
+    
+            // Pass new image URL
+            downloadName = "res_" + file.filename;
+            downloadURL = img.src;
+    
+            // Console print
+            console.log("Image Name: ", downloadName);
+            console.log("Image URL: ", downloadURL);
+    
+            //console.log(file);
+        };
+        console.log("__");
+        //console.log("Re-process function called, filesize: ", file.fileSize);
+    });
+    
+    // Print log
+    console.log("Pond Resize properties updated: ", pond.imageResizeTargetWidth, pond.imageResizeTargetHeight);
+};
+
 
 // Enable Download Button
 function enableDownloadBtn(fileUrl) {
     downloadBtn.classList.remove("disabled");
-    //downloadBtn.innerHTML = "Download file: " + downloadName;
     downloadBtn.href = downloadURL;
     downloadBtn.setAttribute("download", downloadName);
-
     //downloadBtn.click();
 }
+
