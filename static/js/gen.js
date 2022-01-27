@@ -5,6 +5,7 @@
  */
 
 // General variables
+var originalFile;
 var downloadName = "resized_unknown.jpg";
 var downloadURL = "";
 var uploadedImages = {};
@@ -13,6 +14,7 @@ var img_height = 100;
 var downloadBtn;
 var inputWidth;
 var inputHeight;
+var fileIsAvailable = false;
 
 // Buttons Action Detection and loading
 $(document).ready(function () {
@@ -24,7 +26,7 @@ $(document).ready(function () {
     inputWidth.addEventListener('change', event => { updatePondProperties() });
     inputHeight.addEventListener('change', event => { updatePondProperties() });
 
-    // Assign pre-defined values to width and height
+    // Assign pre-defined values to width and height to Pond
     updatePondProperties();
 });
 
@@ -176,47 +178,24 @@ const pond = FilePond.create(input, {
     // Call back when image is added
     onaddfile: (err, fileItem) => {
         console.log("On Add File Function called");
-        //console.log(err, fileItem.getMetadata('resize'));
+        
         // Disabel FilePond Label
         let label = document.getElementsByClassName("filepond--drop-label")[0];
         label.style.display = "none";
     },
 
-    // onpreparefile(file, output)
+    // Callback onpreparefile(file, output)
     // File has been transformed by the transform plugin or another plugin
     // subscribing to the prepare_output filter. It receives the file item and the output data.
     onpreparefile: (file, output) => {
         console.log("On Prepare File Function called");
+        prepareImgFile (file, output);
 
-        // Create new image
-        const img = new Image();
-        img.src = URL.createObjectURL(output);
-        console.log("Preparing file__", file.fileSize, output.size);
-
-        // Pass new image URL
-        downloadName = "res_" + file.filename;
-        downloadURL = img.src;
-
-        // Console print
-        console.log("Image Name: ", downloadName);
-        console.log("Image URL: ", downloadURL);
-
-        //console.log(file);
+        // Add file to variable originalFile
+        originalFile = output;
     },
 
-    /*
-        imageTransformVariants: {
-            thumb_medium_: (transforms) => {
-              transforms.resize.size.width = 384;
-              return transforms;
-            },
-            thumb_small_: (transforms) => {
-              transforms.resize.size.width = 128;
-              return transforms;
-            }
-        },
-        */
-
+    // File has been removed
     onremovefile: function (error, file) {
         console.log("On Remove File Function called");
         if (file.serverId) {
@@ -227,6 +206,11 @@ const pond = FilePond.create(input, {
             //uploadForm.appendChild(input);
         }
 
+        // Disable files variables
+        downloadName = "resized_unknown.jpg";
+        downloadURL = "";
+        fileIsAvailable = false;
+
         // Disabel FilePond Label
         let label = document.getElementsByClassName("filepond--drop-label")[0];
         label.style.display = "flex";
@@ -234,6 +218,8 @@ const pond = FilePond.create(input, {
         // Disable download button
         downloadBtn.classList.add("disabled");
     },
+
+    // File progress?
     onaddfileprogress(file, progress) {
         console.log("On Add File Progress?", progress);
         //buttonForm.classList.remove('filepondUpload');
@@ -243,21 +229,35 @@ const pond = FilePond.create(input, {
     // Call when upload finishes
     onprocessfile(error, file) {
         console.log("File Uploaded: ", file);
-        //buttonForm.classList.remove('filepondUpload');
-        //buttonForm.removeAttribute('disabled');
     },
     onprocessfiles() {
         console.log("All functions finished");
-
         enableDownloadBtn();
     },
 });
 
-// Update FilePond Properties
+function prepareImgFile (file, output) {
+    // Create new image
+    let img = new Image();
+    img.src = URL.createObjectURL(output);
+    console.log("Preparing file ... ", file.fileSize, output.size);
+
+    // Pass new image URL
+    downloadName = "res_" + file.filename;
+    downloadURL = img.src;
+    fileIsAvailable = true;
+
+    // Console print
+    console.log("Image Name: ", downloadName);
+    console.log("Image URL: ", downloadURL);
+};
+
 function updatePondProperties() {
-    // Get data
-    if (!isNaN(parseInt(inputWidth.value))) { img_width = parseInt(inputWidth.value) };
-    if (!isNaN(parseInt(inputHeight.value))) { img_height = parseInt(inputHeight.value) };
+    // Get data (check if value could be updated, or return second as an error)
+    //if (!isNaN(parseInt(inputWidth.value))) { img_width = parseInt(inputWidth.value) };
+    //if (!isNaN(parseInt(inputHeight.value))) { img_height = parseInt(inputHeight.value) };
+    img_width = getValue(inputWidth, img_width);
+    img_height = getValue(inputHeight, img_height);
 
     // Assign
     pond.setOptions({
@@ -268,57 +268,55 @@ function updatePondProperties() {
     });
 
     // Re-process files
-    pond.prepareFile().then((file) => {
+    if(fileIsAvailable) {
+        reProcessPondFiles();
+    };
 
-        onpreparefile: (file, output) => {
-            console.log("On Prepare File Function called");
-    
-            // Create new image
-            const img = new Image();
-            img.src = URL.createObjectURL(output);
-            console.log("Preparing file__", file.fileSize, output.size);
-    
-            // Pass new image URL
-            downloadName = "res_" + file.filename;
-            downloadURL = img.src;
-    
-            // Console print
-            console.log("Image Name: ", downloadName);
-            console.log("Image URL: ", downloadURL);
-    
-            //console.log(file);
-        };
-        console.log("__");
-        //console.log("Re-process function called, filesize: ", file.fileSize);
-    });
-    pond.processFile().then((file) => {
-        
-        onpreparefile: (file, output) => {
-            console.log("On Prepare File Function called");
-    
-            // Create new image
-            const img = new Image();
-            img.src = URL.createObjectURL(output);
-            console.log("Preparing file__", file.fileSize, output.size);
-    
-            // Pass new image URL
-            downloadName = "res_" + file.filename;
-            downloadURL = img.src;
-    
-            // Console print
-            console.log("Image Name: ", downloadName);
-            console.log("Image URL: ", downloadURL);
-    
-            //console.log(file);
-        };
-        console.log("__");
-        //console.log("Re-process function called, filesize: ", file.fileSize);
-    });
-    
     // Print log
     console.log("Pond Resize properties updated: ", pond.imageResizeTargetWidth, pond.imageResizeTargetHeight);
 };
 
+function reProcessPondFiles() {
+    console.log("________")
+
+    //pond.processFile();
+    //pond.prepareFile();
+    
+    /*
+    pond.prepareFile().then(({ file, output }) => {
+        console.log("New file preparation", file, output);
+        //console.log("Re-process function called, filesize: ", file.fileSize);
+    });
+    
+    
+    pond.processFile().then((file) => {
+        console.log("New file process", file.fileSize);
+        //console.log("__");
+        //console.log("Re-process function called, filesize: ", file.fileSize);
+    });
+    */
+
+    // Adding a single file
+    //pond.addFile(originalFileURL);
+
+    // Adding a Blob or File
+    //console.log("ORIGINAL: ", originalFile);
+    //let img = new Image();
+    //img.src = URL.createObjectURL(originalFile);
+    //console.log("ORIGINAL URL: ", img.src);
+    
+    //pond.addFile(img.src);
+};
+
+// Get values from input form
+function getValue(input, errorValue) {
+    // Check if value could be used
+    if (!isNaN(parseInt(input.value))) { 
+        return parseInt(input.value);
+    };
+    // Return original value
+    return errorValue;
+}
 
 // Enable Download Button
 function enableDownloadBtn(fileUrl) {
