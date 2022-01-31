@@ -35,8 +35,7 @@ FMR
 
 Copyright (c) [2022] [FMR]
 
-MIT License
-https://choosealicense.com/licenses/mit/
+MIT License (https://choosealicense.com/licenses/mit/)
 
 
 ## Acknowledgments
