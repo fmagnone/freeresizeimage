@@ -5,9 +5,9 @@
  */
 
 // General variables
-var originalFile;
 var downloadName = "resized_unknown.jpg";
 var downloadURL = "";
+var originalFile;
 var uploadedImages = {};
 var img_width = 100;
 var img_height = 100;
@@ -28,6 +28,9 @@ $(document).ready(function () {
 
     // Assign pre-defined values to width and height to Pond
     updatePondProperties();
+
+    // Test function jimp
+    jimpTesting();
 });
 
 
@@ -127,11 +130,13 @@ async function getClipboardContents() {
 // Register plugins - FilePond
 FilePond.registerPlugin(
     //FilePondPluginGetFile,
-    //FilePondPluginImagePreview,
-    FilePondPluginImageResize,
+    FilePondPluginImagePreview,
     FilePondPluginImageTransform,
+    FilePondPluginImageResize,
+    FilePondPluginImageEdit,
     FilePondPluginFileValidateType,
 );
+
 
 // Append Pond to document
 const input = document.querySelector('input[id="filePondUpload"]');
@@ -149,6 +154,10 @@ const pond = FilePond.create(input, {
     dropOnElement: false,
     dropOnPage: true,
     labelIdle: 'Drag & drop your image<br/><span class="filepond--label-action">or browse to upload</span>',
+    
+    
+    
+    //instantUpload: false,
 
     // Server configuration
     server: {
@@ -172,7 +181,16 @@ const pond = FilePond.create(input, {
         },
     },
 
-    
+
+    // TESTING !!
+    imageTransformBeforeCreateBlob: (blob) =>
+        new Promise((resolve) => {
+            // do something with the blob, for instance send it to a custom compression alogrithm
+            console.log("BLOB: ", blob);
+            // return the blob to the plugin for further processing
+            resolve(blob);
+    }),
+
 
     // FUNCTIONS ------------
     // Call back when image is added
@@ -189,7 +207,11 @@ const pond = FilePond.create(input, {
     // subscribing to the prepare_output filter. It receives the file item and the output data.
     onpreparefile: (file, output) => {
         console.log("On Prepare File Function called");
-        prepareImgFile (file, output);
+
+        // Prepare output file
+        prepareImgFile (file, output); // One item
+        //console.log("output files: ", output);
+        //prepareImgFile (file, output[0].file); // Multiple Items
 
         // Add file to variable originalFile
         originalFile = output;
@@ -198,13 +220,6 @@ const pond = FilePond.create(input, {
     // File has been removed
     onremovefile: function (error, file) {
         console.log("On Remove File Function called");
-        if (file.serverId) {
-            //let input = document.createElement('input');
-            //input.type = 'hidden';
-            //input.name = 'DeletedFilepondImages';
-            //input.value = file.serverId;
-            //uploadForm.appendChild(input);
-        }
 
         // Disable files variables
         downloadName = "resized_unknown.jpg";
@@ -240,7 +255,7 @@ function prepareImgFile (file, output) {
     // Create new image
     let img = new Image();
     img.src = URL.createObjectURL(output);
-    console.log("Preparing file ... ", file.fileSize, output.size);
+    console.log("Preparing file ... ... ", file.fileSize, output.size);
 
     // Pass new image URL
     downloadName = "res_" + file.filename;
@@ -250,22 +265,35 @@ function prepareImgFile (file, output) {
     // Console print
     console.log("Image Name: ", downloadName);
     console.log("Image URL: ", downloadURL);
+
+
+    // Temporary for testing
+    document.body.appendChild(img);
 };
 
 function updatePondProperties() {
     // Get data (check if value could be updated, or return second as an error)
-    //if (!isNaN(parseInt(inputWidth.value))) { img_width = parseInt(inputWidth.value) };
-    //if (!isNaN(parseInt(inputHeight.value))) { img_height = parseInt(inputHeight.value) };
     img_width = getValue(inputWidth, img_width);
     img_height = getValue(inputHeight, img_height);
 
-    // Assign
+    // Assign options
     pond.setOptions({
         maxFiles: 1,
+
+        // Image Size
         imageResizeTargetWidth: img_width,
         imageResizeTargetHeight: img_height,
-        imageResizeMode: "contain"
+        //imageCropAspectRatio: 1,
+        imageResizeMode: "contain",
+        //imageResizeUpscale: true,
+        
+        // Image Quality
+        //imageTransformOutputQuality: 100, // 0 to 100
     });
+
+    // Check file status
+    //console.log("Status", FilePond.FileStatus);
+    
 
     // Re-process files
     if(fileIsAvailable) {
@@ -279,9 +307,28 @@ function updatePondProperties() {
 function reProcessPondFiles() {
     console.log("________")
 
-    //pond.processFile();
-    //pond.prepareFile();
     
+    // Try with image transform
+    pond.setOptions({
+        
+    });
+
+
+    // Try to get file and then add it again
+    //console.log("File: ", pond.getFile());
+    //originalFile = URL.createObjectURL(pond.getFile());
+    //console.log("File2: ", originalFile);
+    //pond.addFile(originalFile);
+
+    //pond.requestPrepare();
+    
+    pond.prepareFile();
+
+    pond.processFile();
+    
+    
+    
+
     /*
     pond.prepareFile().then(({ file, output }) => {
         console.log("New file preparation", file, output);
@@ -326,3 +373,24 @@ function enableDownloadBtn(fileUrl) {
     //downloadBtn.click();
 }
 
+
+
+// JIMP
+function jimpTesting() {
+    async function resize() {
+        // reads the image
+        const image = await Jimp.read('https://images.pexels.com/photos/4629485/pexels-photo-4629485.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+        console.log("W: ", image.bitmap.width);
+        // resizes the image to width 150 and heigth 150.
+        await image.resize(150, 150);
+        console.log("W: ", image.bitmap.width);
+        
+        console.log(image.bitmap);
+
+        //await image.write(`${Date.now()}_rotate_150x150.png`);
+
+
+        
+    }
+    resize();
+}

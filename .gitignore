@@ -1,0 +1,8 @@
+# Python App #
+__pycache__
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+.Trashes
+Thumbs.db
