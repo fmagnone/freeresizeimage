@@ -5,7 +5,7 @@ Flask light-weight App to resize images.
 ## Description
 
 Simple light-weight and fast app allowing the user to upload an image and download it with exact resolution.
-User can pre-load social media resolution by clicking on a button or assign a custom size.
+User can select between 3 sizes by clicking on a button and then read the new resolution and size of the image.
 
 ## Getting Started
 
