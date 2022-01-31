@@ -5,13 +5,13 @@
  */
 
 // General variables
-var originalFile;
 var uploadedImages = [];
 var fileIsAvailable = false;
 var maxResolution = 2;
 var downloadBtn; 
 var infoType_old, infoName_old, infoRes_old, infoSize_old;
 var infoType, infoName, infoRes, infoSize;
+var originalName = "no-file";
 var downloadName = "no-file", downloadURL = "#";
 var inputDim;
 
@@ -181,6 +181,7 @@ const pond = FilePond.create(input, {
         console.log("On Remove File Function called");
 
         // Disable files variables
+        originalName = "no-file";
         downloadName = "no-file";
         downloadURL = "#";
         uploadedImages = [];
@@ -279,7 +280,7 @@ function prepareImgFile(file, output, prefix) {
 
 function optionsUpdated() {
     let imageInfo;
-    let originalName = "", originalRes = "", originalSize = "";
+    let originalRes = "", originalSize = "";
     let downloadType = "-", downloadRes = "", downloadSize = "";
     
     if (fileIsAvailable) {
