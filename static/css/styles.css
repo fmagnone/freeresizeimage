@@ -188,6 +188,18 @@ h6 {
 .btn-download {
   width: 100%;
 }
+.btn-100 {
+  width: 100%;
+}
+.text-small {
+  font-size: 0.85em;
+}
+.type {
+  border-radius: 4px;
+  width: 50px;
+  border: 1px solid grey;
+  font-size: 0.95em;
+}
 
 /* Sprites and Images */
 .gr-01,

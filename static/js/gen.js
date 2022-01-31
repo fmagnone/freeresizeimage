@@ -5,70 +5,44 @@
  */
 
 // General variables
-var downloadName = "resized_unknown.jpg";
-var downloadURL = "";
 var originalFile;
-var uploadedImages = {};
-var img_width = 100;
-var img_height = 100;
-var downloadBtn;
-var inputWidth;
-var inputHeight;
+var uploadedImages = [];
 var fileIsAvailable = false;
+var maxResolution = 2;
+var downloadBtn; 
+var infoType_old, infoName_old, infoRes_old, infoSize_old;
+var infoType, infoName, infoRes, infoSize;
+var downloadName = "no-file", downloadURL = "#";
+var inputDim;
 
 // Buttons Action Detection and loading
 $(document).ready(function () {
     // Get objects from DOM
+
+    // Options
+    inputDim = document.getElementsByName("dimension");
+    inputDim.forEach(element => {
+        element.addEventListener('change', function () {
+            if (element.id == "dim1") { maxResolution = 1 };
+            if (element.id == "dim2") { maxResolution = 2 };
+            if (element.id == "dim3") { maxResolution = 3 };
+            optionsUpdated();
+        });
+    });
+
+    // Download and Info
     downloadBtn = document.getElementById("downloadFileBtn");
-    inputWidth = document.getElementById("width");
-    inputHeight = document.getElementById("height");
-
-    inputWidth.addEventListener('change', event => { updatePondProperties() });
-    inputHeight.addEventListener('change', event => { updatePondProperties() });
-
-    // Assign pre-defined values to width and height to Pond
-    updatePondProperties();
-
-    // Test function jimp
-    jimpTesting();
+    infoType_old = document.getElementById("file_type_old");
+    infoName_old = document.getElementById("file_name_old");
+    infoRes_old = document.getElementById("file_res_old");
+    infoSize_old = document.getElementById("file_size_old");
+    infoType = document.getElementById("file_type");
+    infoName = document.getElementById("file_name");
+    infoRes = document.getElementById("file_res");
+    infoSize = document.getElementById("file_size");
 });
 
 
-// Resolution Range change value
-/*
-document.getElementById('resolution-percentage').addEventListener('change', event => {
-    resolution = document.getElementById('resolution-percentage').value;
-    document.getElementById('resolution-percentage-label').innerHTML = "Image compression: " + resolution + "%";
-    //console.log("resolution change", resolution);
-})
-*/
-
-// Ctrl + V Detection
-/*
-$(document).ready(function () {
-    var ctrlDown = false,
-        ctrlKey = 17,
-        cmdKey = 91,
-        vKey = 86;
-
-    $(document)
-        .keydown(function (e) {
-            if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
-        })
-        .keyup(function (e) {
-            if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
-        });
-
-    $(".no-copy-paste").keydown(function (e) {
-        if (ctrlDown && e.keyCode == vKey) return false;
-    });
-
-    $(document).keydown(function (e) {
-        if (ctrlDown && e.keyCode == vKey) {
-            getClipboardContents();
-        }
-    });
-});*/
 
 // Alert Message
 var alertPlaceholder = document.getElementById("liveAlertPlaceholder");
@@ -89,43 +63,6 @@ function alert_message(message, type) {
         }, duration);
     }
 }
-
-// Get Contents Clipboard Upload
-/* 
-async function getClipboardContents() {
-    let pasted_data = "(no data)";
-
-    try {
-        // Read image data
-        const img = await navigator.clipboard.read();
-
-        // Read text data
-        const text = await navigator.clipboard.readText();
-        pasted_data = text;
-
-        console.log("Pasted content: ", img);
-        console.log("Pasted content: ", text);
-
-        if (text != "") {
-            alert_message(
-                "We catch some text from Ctrl+V with this info:<br/>" + pasted_data,
-                "success"
-            );
-        } else {
-            alert_message(
-                "We catch something with Ctrl+V but is not an URL... Please copy your URL and try again!",
-                "danger"
-            );
-        }
-    } catch (err) {
-        console.error("Failed to read clipboard contents: ", err);
-        alert_message(
-            "Sorry, in this case we are not allowed to catch the data, please try another method!",
-            "danger"
-        );
-    }
-}
-*/
 
 // Register plugins - FilePond
 FilePond.registerPlugin(
@@ -154,9 +91,9 @@ const pond = FilePond.create(input, {
     dropOnElement: false,
     dropOnPage: true,
     labelIdle: 'Drag & drop your image<br/><span class="filepond--label-action">or browse to upload</span>',
-    
-    
-    
+    maxFiles: 1,
+    imageResizeMode: "contain",
+
     //instantUpload: false,
 
     // Server configuration
@@ -181,22 +118,42 @@ const pond = FilePond.create(input, {
         },
     },
 
-
-    // TESTING !!
-    imageTransformBeforeCreateBlob: (blob) =>
-        new Promise((resolve) => {
-            // do something with the blob, for instance send it to a custom compression alogrithm
-            console.log("BLOB: ", blob);
-            // return the blob to the plugin for further processing
-            resolve(blob);
-    }),
-
+    // Transform Variants
+    imageTransformVariants: {
+        res_1200_: (transforms) => {
+            transforms.resize = {
+                size: {
+                    width: 1200,
+                    height: 1200,
+                },
+            };
+            return transforms;
+        },
+        res_600_: (transforms) => {
+            transforms.resize = {
+                size: {
+                    width: 600,
+                    height: 600,
+                },
+            };
+            return transforms;
+        },
+        res_300_: (transforms) => {
+            transforms.resize = {
+                size: {
+                    width: 300,
+                    height: 300,
+                },
+            };
+            return transforms;
+        },
+    },
 
     // FUNCTIONS ------------
     // Call back when image is added
     onaddfile: (err, fileItem) => {
         console.log("On Add File Function called");
-        
+
         // Disabel FilePond Label
         let label = document.getElementsByClassName("filepond--drop-label")[0];
         label.style.display = "none";
@@ -208,13 +165,15 @@ const pond = FilePond.create(input, {
     onpreparefile: (file, output) => {
         console.log("On Prepare File Function called");
 
-        // Prepare output file
-        prepareImgFile (file, output); // One item
-        //console.log("output files: ", output);
-        //prepareImgFile (file, output[0].file); // Multiple Items
-
-        // Add file to variable originalFile
-        originalFile = output;
+        if (typeof output[0] === 'object') {
+            // Prepare output for MULTIPLE files
+            console.log(output);
+            output.forEach(out => { prepareImgFile(file, out.file, out.name) });
+        }
+        else {
+            // Prepare output for a SINGLE file
+            prepareImgFile(file, output);
+        };
     },
 
     // File has been removed
@@ -222,8 +181,9 @@ const pond = FilePond.create(input, {
         console.log("On Remove File Function called");
 
         // Disable files variables
-        downloadName = "resized_unknown.jpg";
-        downloadURL = "";
+        downloadName = "no-file";
+        downloadURL = "#";
+        uploadedImages = [];
         fileIsAvailable = false;
 
         // Disabel FilePond Label
@@ -232,6 +192,7 @@ const pond = FilePond.create(input, {
 
         // Disable download button
         downloadBtn.classList.add("disabled");
+        optionsUpdated();
     },
 
     // File progress?
@@ -243,105 +204,132 @@ const pond = FilePond.create(input, {
 
     // Call when upload finishes
     onprocessfile(error, file) {
-        console.log("File Uploaded: ", file);
+        //console.log("File Uploaded: ", file);
     },
+
     onprocessfiles() {
         console.log("All functions finished");
+        optionsUpdated();
         enableDownloadBtn();
     },
 });
 
-function prepareImgFile (file, output) {
+
+function prepareImgFile(file, output, prefix) {
+    console.log("Preparing file ... ... ", file.filename, file.fileSize);
+
+    // Make file available
+    fileIsAvailable = true;
+
     // Create new image
     let img = new Image();
     img.src = URL.createObjectURL(output);
-    console.log("Preparing file ... ... ", file.fileSize, output.size);
+    img.id = prefix;
 
-    // Pass new image URL
-    downloadName = "res_" + file.filename;
-    downloadURL = img.src;
-    fileIsAvailable = true;
+    // Get size (wait to the image to load)
+    img.onload = function () {
+        let w = img.width;
+        let h = img.height;
+        let id = img.id;
 
-    // Console print
-    console.log("Image Name: ", downloadName);
-    console.log("Image URL: ", downloadURL);
+        // Assign to previous function
+        uploadedImages.forEach(element => {
+            if (element.pre == prefix) {
+                element.res = w + "x" + h + "px";
+                console.log(element);
+            }
+        });
+    }
 
+    // Load data in array for main image
+    if (!prefix) {
+        console.log("PREFIX ", file);
 
-    // Temporary for testing
-    document.body.appendChild(img);
+        let imageData = {
+            pre: prefix,
+            name: file.filename,
+            url: "#",
+            size: output.size,
+            res: "",
+            type: file.type
+        };
+        uploadedImages.push(imageData);
+
+        // Console print
+        console.log("File prepared __  ", imageData.pre, output.size);
+    }
+    // Load data in array for images with prefix (transformed)
+    if (prefix) {
+        // Store data in array uploadedImages
+        let imageData = {
+            pre: prefix,
+            name: prefix + file.filename,
+            url: img.src,
+            size: output.size,
+            res: "",
+            type: output.type
+        };
+        uploadedImages.push(imageData);
+
+        // Console print
+        console.log("File prepared __  ", imageData.pre, output.size);
+    };
 };
 
-function updatePondProperties() {
-    // Get data (check if value could be updated, or return second as an error)
-    img_width = getValue(inputWidth, img_width);
-    img_height = getValue(inputHeight, img_height);
 
-    // Assign options
-    pond.setOptions({
-        maxFiles: 1,
-
-        // Image Size
-        imageResizeTargetWidth: img_width,
-        imageResizeTargetHeight: img_height,
-        //imageCropAspectRatio: 1,
-        imageResizeMode: "contain",
-        //imageResizeUpscale: true,
-        
-        // Image Quality
-        //imageTransformOutputQuality: 100, // 0 to 100
-    });
-
-    // Check file status
-    //console.log("Status", FilePond.FileStatus);
+function optionsUpdated() {
+    let imageInfo;
+    let originalName = "", originalRes = "", originalSize = "";
+    let downloadType = "-", downloadRes = "", downloadSize = "";
     
+    if (fileIsAvailable) {
+        // Old
+        imageInfo = uploadedImages[0];
+        
+        originalName = imageInfo.name;
+        originalRes = imageInfo.res;
+        originalSize = bytesToSize(imageInfo.size);
 
-    // Re-process files
-    if(fileIsAvailable) {
-        // TO DO
+        // New
+        imageInfo = uploadedImages[maxResolution];
+
+        downloadName = imageInfo.name;
+        downloadURL = imageInfo.url;
+        downloadType = imageInfo.type.substring(6);
+        downloadSize = bytesToSize(imageInfo.size);
+        downloadRes = imageInfo.res;
     };
 
-    // Print log
-    console.log("Pond Resize properties updated: ", pond.imageResizeTargetWidth, pond.imageResizeTargetHeight);
+    // Old file assign
+    infoType_old.innerHTML = downloadType;
+    infoName_old.innerHTML = originalName;
+    infoRes_old.innerHTML = originalRes;
+    infoSize_old.innerHTML = originalSize;
+
+    // New file assign
+    infoType.innerHTML = downloadType;
+    infoName.innerHTML = downloadName;
+    infoRes.innerHTML = downloadRes;
+    infoSize.innerHTML = downloadSize;
+
+    // Print options
+    console.log("Options Updated__", maxResolution, downloadName, downloadURL);
+
+    // Assign new options to download button
+    downloadBtn.href = downloadURL;
+    downloadBtn.setAttribute("download", downloadName);
 };
-
-
-
-// Get values from input form
-function getValue(input, errorValue) {
-    // Check if value could be used
-    if (!isNaN(parseInt(input.value))) { 
-        return parseInt(input.value);
-    };
-    // Return original value
-    return errorValue;
-}
 
 // Enable Download Button
 function enableDownloadBtn(fileUrl) {
     downloadBtn.classList.remove("disabled");
-    downloadBtn.href = downloadURL;
-    downloadBtn.setAttribute("download", downloadName);
     //downloadBtn.click();
 }
 
-
-
-// JIMP
-function jimpTesting() {
-    async function resize() {
-        // reads the image
-        const image = await Jimp.read('https://images.pexels.com/photos/4629485/pexels-photo-4629485.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-        console.log("W: ", image.bitmap.width);
-        // resizes the image to width 150 and heigth 150.
-        await image.resize(150, 150);
-        console.log("W: ", image.bitmap.width);
-        
-        console.log(image.bitmap);
-
-        //await image.write(`${Date.now()}_rotate_150x150.png`);
-
-
-        
-    }
-    resize();
+// Convert format
+function bytesToSize(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }

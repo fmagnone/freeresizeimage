@@ -23,40 +23,105 @@
             <div class="upload-box col-sm p-2">
                 <!-- FilePond Upload -->
                 <form method="POST" enctype="multipart/form-data">
-                    <input id="filePondUpload" type="file" class="filepond" name="filepond"
-                        data-max-file-size="3MB" accept="image/png, image/jpeg, image/gif">
+                    <input id="filePondUpload" type="file" class="filepond" name="filepond" data-max-file-size="3MB"
+                        accept="image/png, image/jpeg, image/gif">
                 </form>
             </div>
             <div class="options-box col-sm p-3">
-                <!-- Options -->
+                <!-- Options and info -->
                 <div class="containerm-0 mb-3">
-                    <h6>Resize options:</h6>
-                    <div class="row">
-                        <div class="col">
-                            Width
-                            <div class="input-group mb-3">
-                                <input id="width" value="800" type="number" class="form-control" aria-label="Width">
-                                <span class="input-group-text" id="inputGroup-sizing-default">px</span>
-                            </div>
+                    <h6 class="border-bottom border-dark pb-1">Select resize options:</h6>
+                    <div class="row py-2">
+                        <div class="col-4">
+                            Max dimension:
                         </div>
-                        <div class="col">
-                            Height
-                            <div class="input-group mb-3">
-                                <input id="height" value="800" type="number" class="form-control" aria-label="Height">
-                                <span class="input-group-text" id="inputGroup-sizing-default">px</span>
+                        <div class="col-8">
+                            <div class="btn-group btn-100">
+                                <input type="radio" class="btn-check" name="dimension" id="dim1" autocomplete="off" />
+                                <label class="btn btn-outline-secondary " for="dim1">1200px</label>
+
+                                <input type="radio" class="btn-check" name="dimension" id="dim2" autocomplete="off"
+                                    checked />
+                                <label class="btn btn-outline-secondary " for="dim2">600px</label>
+
+                                <input type="radio" class="btn-check" name="dimension" id="dim3" autocomplete="off" />
+                                <label class="btn btn-outline-secondary " for="dim3">300px</label>
                             </div>
                         </div>
                     </div>
+                    <div class="row py-2">
+                        <!--
+                        <div class="col-4">
+                            Compression:
+                        </div>
+                        <div class="col-8">
+                            <div class="btn-group btn-100">
+                                
+                                <input type="radio" class="btn-check" name="resolution" id="res1" autocomplete="off" disabled/>
+                                <label class="btn btn-outline-secondary" for="res1">100%</label>
 
-                    <p>Click to select a preset</p>
-                    <a id="profile-facebook" class="text-gray" href="#facebook-profile-pic">- Facebook profile pic (180x180px)</a><br/>
-                    <a id="profile-instagram" class="text-gray" href="#instagram-profile-pic">- Instagram profile pic (320x320px)</a><br/>
-                    <a id="profile-youtube" class="text-gray" href="#youtube-profile-pic">- Youtube profile pic (800x800px)</a><br/>
+                                <input type="radio" class="btn-check" name="resolution" id="res2" autocomplete="off" disabled />
+                                <label class="btn btn-outline-secondary" for="res2">75%</label>
 
-                    <a id="downloadFileBtn" class="btn btn-download mt-4 disabled">Download Resized Image</a>
+                                <input type="radio" class="btn-check" name="resolution" id="res3" autocomplete="off" disabled />
+                                <label class="btn btn-outline-secondary" for="res3">50%</label>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+
+
+                    <h6 class="border-bottom border-dark pb-1">File Info:</h6>
+
+                    <div class="row justify-content-center text-small">
+                        <div class="col-3">
+                            <div class="pt-2">Old &rarr;</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="d-flex text-center">
+                                <div class="p-2">
+                                    <div id="file_type_old" class="type">-</div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_name_old">no-file</div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_res_old"></div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_size_old"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center text-small">
+                        <div class="col-3">
+                            <div class="pt-2">New &rarr;</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="d-flex text-center">
+                                <div class="p-2">
+                                    <div id="file_type" class="type">-</div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_name">no-file</div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_res"></div>
+                                </div>
+                                <div class="align-self-center p-2">
+                                    <div id="file_size"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+                <a id="downloadFileBtn" class="btn btn-download mt-2 disabled" download="#">Download Resized Image</a>
             </div>
         </div>
+    </div>
 </section>
 <div class="spacer"></div>
 <!-- Page Content Block 2 -->
