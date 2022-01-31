@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-* Free Resize Image 
+* Image Resize 
 * Copyright 2022
 */
 
@@ -69,88 +69,6 @@ h6 {
 .input-group-text {
   background-color: white;
 }
-/*
-.upload-box::after {
-  position: absolute;
-  content: "";
-  top: calc(-1 * var(--border-width));
-  left: calc(-1 * var(--border-width));
-  z-index: -1;
-  width: calc(100% + var(--border-width) * 2);
-  height: calc(100% + var(--border-width) * 2);
-  background: linear-gradient(
-    60deg,
-    hsl(224, 85%, 66%),
-    hsl(269, 85%, 66%),
-    hsl(314, 85%, 66%),
-    hsl(359, 85%, 66%),
-    hsl(44, 85%, 66%),
-    hsl(89, 85%, 66%),
-    hsl(134, 85%, 66%),
-    hsl(179, 85%, 66%)
-  );
-  background-size: 300% 300%;
-  background-position: 0 50%;
-  border-radius: calc(2 * var(--border-width));
-  animation: moveGradient 4s alternate infinite;
-}
-*/
-/*
-.dropzone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999999999;
-  width: 100%;
-  height: 100%;
-  padding: 4%;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: visibility 175ms, opacity 175ms;
-}
-.dropzone .gradient-border {
-  --border-width: 3px;
-
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  color: #adb9d8;
-  background: #19233b;
-  border-radius: var(--border-width);
-}
-.dropzone .gradient-border::after {
-  position: absolute;
-  content: "";
-  top: calc(-1 * var(--border-width));
-  left: calc(-1 * var(--border-width));
-  z-index: -1;
-  width: calc(100% + var(--border-width) * 2);
-  height: calc(100% + var(--border-width) * 2);
-  background: linear-gradient(
-    60deg,
-    hsl(224, 85%, 66%),
-    hsl(269, 85%, 66%),
-    hsl(314, 85%, 66%),
-    hsl(359, 85%, 66%),
-    hsl(44, 85%, 66%),
-    hsl(89, 85%, 66%),
-    hsl(134, 85%, 66%),
-    hsl(179, 85%, 66%)
-  );
-  background-size: 300% 300%;
-  background-position: 0 50%;
-  border-radius: calc(2 * var(--border-width));
-  animation: moveGradient 4s alternate infinite;
-}
-@keyframes moveGradient {
-  50% {
-    background-position: 100% 50%;
-  }
-}
-*/
 
 /* FilePond adaptation */
 .filepond--root {
@@ -170,9 +88,8 @@ h6 {
 }
 .filepond--panel-root {
   background-color: white !important;
-  border: var(--border-width) solid #EC4E6E;
+  border: var(--border-width) solid #ec4e6e;
 }
-
 
 /* Buttons */
 .btn-download {
