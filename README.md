@@ -61,4 +61,4 @@ Inspiration and thanks.
 
 * Made with Flask: (https://flask.palletsprojects.com/)
 * Using FilePond library to upload files: (https://pqina.nl/filepond/)
-* Bootstrap to make things look better (https://getbootstrap.com)
+* Bootstrap to make things look better: (https://getbootstrap.com)
