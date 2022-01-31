@@ -297,63 +297,14 @@ function updatePondProperties() {
 
     // Re-process files
     if(fileIsAvailable) {
-        reProcessPondFiles();
+        // TO DO
     };
 
     // Print log
     console.log("Pond Resize properties updated: ", pond.imageResizeTargetWidth, pond.imageResizeTargetHeight);
 };
 
-function reProcessPondFiles() {
-    console.log("________")
 
-    
-    // Try with image transform
-    pond.setOptions({
-        
-    });
-
-
-    // Try to get file and then add it again
-    //console.log("File: ", pond.getFile());
-    //originalFile = URL.createObjectURL(pond.getFile());
-    //console.log("File2: ", originalFile);
-    //pond.addFile(originalFile);
-
-    //pond.requestPrepare();
-    
-    pond.prepareFile();
-
-    pond.processFile();
-    
-    
-    
-
-    /*
-    pond.prepareFile().then(({ file, output }) => {
-        console.log("New file preparation", file, output);
-        //console.log("Re-process function called, filesize: ", file.fileSize);
-    });
-    
-    
-    pond.processFile().then((file) => {
-        console.log("New file process", file.fileSize);
-        //console.log("__");
-        //console.log("Re-process function called, filesize: ", file.fileSize);
-    });
-    */
-
-    // Adding a single file
-    //pond.addFile(originalFileURL);
-
-    // Adding a Blob or File
-    //console.log("ORIGINAL: ", originalFile);
-    //let img = new Image();
-    //img.src = URL.createObjectURL(originalFile);
-    //console.log("ORIGINAL URL: ", img.src);
-    
-    //pond.addFile(img.src);
-};
 
 // Get values from input form
 function getValue(input, errorValue) {
