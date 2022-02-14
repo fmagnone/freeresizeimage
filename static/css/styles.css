@@ -111,6 +111,9 @@ h6 {
 .text-small {
   font-size: 0.85em;
 }
+.text-small-2 {
+  font-size: 0.6em;
+}
 .type {
   border-radius: 4px;
   width: 50px;
