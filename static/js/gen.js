@@ -100,6 +100,7 @@ const pond = FilePond.create(input, {
     server: {
         //url: "http://127.0.0.1:5000/", // Local server configuration
         timeout: 7000,
+        /*
         process: {
             url: "./",
             method: "POST",
@@ -109,13 +110,16 @@ const pond = FilePond.create(input, {
             onload: null,
             onerror: null,
             ondata: null,
-        },/*
+        },
+        */
+        /*
         revert: {
             url: "./",
             method: "POST",
             withCredentials: true,
             headers: {},
-        },*/
+        },
+        */
     },
 
     // Transform Variants
