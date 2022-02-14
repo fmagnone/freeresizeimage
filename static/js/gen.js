@@ -109,13 +109,13 @@ const pond = FilePond.create(input, {
             onload: null,
             onerror: null,
             ondata: null,
-        },
+        },/*
         revert: {
             url: "./",
             method: "POST",
             withCredentials: true,
             headers: {},
-        },
+        },*/
     },
 
     // Transform Variants
