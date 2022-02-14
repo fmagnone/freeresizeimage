@@ -198,6 +198,12 @@ const pond = FilePond.create(input, {
         // Disable download button
         downloadBtn.classList.add("disabled");
         optionsUpdated();
+
+
+        // Temporary location
+        console.log("All functions finished");
+        optionsUpdated();
+        enableDownloadBtn();
     },
 
     // File progress?
@@ -209,13 +215,14 @@ const pond = FilePond.create(input, {
 
     // Call when upload finishes
     onprocessfile(error, file) {
-        //console.log("File Uploaded: ", file);
+        
     },
 
     onprocessfiles() {
-        console.log("All functions finished");
-        optionsUpdated();
-        enableDownloadBtn();
+        // Temporary moved to PrepareFile function:
+        //console.log("All functions finished");
+        //optionsUpdated();
+        //enableDownloadBtn();
     },
 });
 
