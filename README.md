@@ -1,4 +1,4 @@
-# Image Resize
+# Free Resize Image
 
 Flask light-weight App to resize images.
 
