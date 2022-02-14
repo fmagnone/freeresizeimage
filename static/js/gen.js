@@ -178,6 +178,12 @@ const pond = FilePond.create(input, {
             // Prepare output for a SINGLE file
             prepareImgFile(file, output);
         };
+
+
+        // Temporary location
+        console.log("All functions finished");
+        optionsUpdated();
+        enableDownloadBtn();
     },
 
     // File has been removed
@@ -198,12 +204,6 @@ const pond = FilePond.create(input, {
         // Disable download button
         downloadBtn.classList.add("disabled");
         optionsUpdated();
-
-
-        // Temporary location
-        console.log("All functions finished");
-        optionsUpdated();
-        enableDownloadBtn();
     },
 
     // File progress?
