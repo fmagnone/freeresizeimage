@@ -98,7 +98,7 @@ const pond = FilePond.create(input, {
 
     // Server configuration
     server: {
-        url: "http://127.0.0.1:5000/",
+        //url: "http://127.0.0.1:5000/", // Local server configuration
         timeout: 7000,
         process: {
             url: "./",
