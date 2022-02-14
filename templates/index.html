@@ -10,7 +10,7 @@
         <div id="liveAlertPlaceholder"></div>
 
         <!-- Upload & Options container -->
-        <div class="upload-container row p-4">
+        <div class="upload-container row p-3">
             <div class="upload-box col-sm p-2">
                 <!-- FilePond Upload -->
                 <form method="POST" enctype="multipart/form-data">
@@ -20,13 +20,13 @@
             </div>
             <div class="options-box col-sm p-3">
                 <!-- Options and info -->
-                <div class="containerm-0 mb-3">
+                <div class="mb-3">
                     <h6 class="border-bottom border-dark pb-1">Select resize options:</h6>
                     <div class="row py-2">
-                        <div class="col-4">
-                            Max dimension:
+                        <div class="col">
+                            Max size:
                         </div>
-                        <div class="col-8">
+                        <div class="col-md-9">
                             <div class="btn-group btn-100">
                                 <input type="radio" class="btn-check" name="dimension" id="dim1" autocomplete="off" />
                                 <label class="btn btn-outline-secondary " for="dim1">1200px</label>
@@ -65,12 +65,12 @@
                     <h6 class="border-bottom border-dark pb-1">File Info:</h6>
 
                     <div class="row justify-content-center text-small">
-                        <div class="col-3">
+                        <div class="col">
                             <div class="pt-2">Old &rarr;</div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-md-9">
                             <div class="d-flex text-center">
-                                <div class="p-2">
+                                <div class="align-self-center py-2">
                                     <div id="file_type_old" class="type">-</div>
                                 </div>
                                 <div class="align-self-center p-2">
@@ -79,19 +79,19 @@
                                 <div class="align-self-center p-2">
                                     <div id="file_res_old"></div>
                                 </div>
-                                <div class="align-self-center p-2">
+                                <div class="align-self-center py-2">
                                     <div id="file_size_old"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-center text-small">
-                        <div class="col-3">
+                        <div class="col">
                             <div class="pt-2">New &rarr;</div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-md-9">
                             <div class="d-flex text-center">
-                                <div class="p-2">
+                                <div class="align-self-center py-2">
                                     <div id="file_type" class="type">-</div>
                                 </div>
                                 <div class="align-self-center p-2">
@@ -100,7 +100,7 @@
                                 <div class="align-self-center p-2">
                                     <div id="file_res"></div>
                                 </div>
-                                <div class="align-self-center p-2">
+                                <div class="align-self-center py-2">
                                     <div id="file_size"></div>
                                 </div>
                             </div>

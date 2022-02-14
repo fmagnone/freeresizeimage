@@ -25,7 +25,7 @@ body {
 }
 .navbar,
 footer {
-  background-color: #2a3550;
+  background-color: #19233B;
 }
 .nav-link {
   color: white;
@@ -183,4 +183,20 @@ h6 {
     /*margin-top: 0px;*/
     opacity: 1;
   }
+}
+
+
+
+/* Mobile Adjustemnts Portrait */
+@media only screen and (max-width: 600px) {
+  .gr-01 {
+    background-position: -20px -15px;
+    background-size: 330px;
+    width: 80px;
+    height: 90px;
+  }
+  .logo-text {
+    font-size: 1.2em;
+  }
+  
 }
