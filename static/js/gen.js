@@ -179,8 +179,7 @@ const pond = FilePond.create(input, {
             prepareImgFile(file, output);
         };
 
-
-        // Temporary location
+        // Call finish functions
         console.log("All functions finished");
         optionsUpdated();
         enableDownloadBtn();
@@ -251,6 +250,8 @@ function prepareImgFile(file, output, prefix) {
                 console.log(element);
             }
         });
+
+        optionsUpdated();
     }
 
     // Load data in array for main image
@@ -298,14 +299,14 @@ function optionsUpdated() {
         // Old
         imageInfo = uploadedImages[0];
         
-        originalName = imageInfo.name;
+        originalName = stringTruncate(imageInfo.name);
         originalRes = imageInfo.res;
         originalSize = bytesToSize(imageInfo.size);
 
         // New
         imageInfo = uploadedImages[maxResolution];
 
-        downloadName = imageInfo.name;
+        downloadName = stringTruncate(imageInfo.name);
         downloadURL = imageInfo.url;
         downloadType = imageInfo.type.substring(6);
         downloadSize = bytesToSize(imageInfo.size);
@@ -345,3 +346,18 @@ function bytesToSize(bytes) {
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
+// Truncate name of files
+function stringTruncate(str, length) {
+    if (length == null) { 
+        length = 34; 
+    }
+    let separator = ' ... ';
+
+    if (str.length > length) {
+        let str_start = str.substring(0, (length/2 - 3)); 
+        let str_end = str.substring((str.length - length/2), str.length); 
+      return str_start + separator + str_end;
+    } else {
+      return str;
+    }
+};

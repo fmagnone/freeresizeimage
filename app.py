@@ -54,14 +54,11 @@ def index():
         return render_template('index.html')
 
 # Upload?
-
-
 @app.route("/static/uploads", methods=["POST"])
 @cross_origin(supports_credentials=True)
 def upload():
     print()
     return redirect("/")
-
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
@@ -76,13 +73,17 @@ def upload_file():
 def contact_page():
     return render_template('contact.html')
 
+# Terms Page
+@app.route("/terms")
+def terms_page():
+    return render_template('terms.html')
 
+# File save?
 @app.route("/filesave", methods=['POST'])
 def list_files():
     f = request.files['file']
     f.save("static/uploads/" + f.filename)
     return jsonify(files)
-
 
 # Debugger mode
 if __name__ == '__main__':
