@@ -124,7 +124,7 @@ const pond = FilePond.create(input, {
 
     // Transform Variants
     imageTransformVariants: {
-        res_1200_: (transforms) => {
+        r1200_: (transforms) => {
             transforms.resize = {
                 size: {
                     width: 1200,
@@ -133,7 +133,7 @@ const pond = FilePond.create(input, {
             };
             return transforms;
         },
-        res_600_: (transforms) => {
+        r600_: (transforms) => {
             transforms.resize = {
                 size: {
                     width: 600,
@@ -142,7 +142,7 @@ const pond = FilePond.create(input, {
             };
             return transforms;
         },
-        res_300_: (transforms) => {
+        r300_: (transforms) => {
             transforms.resize = {
                 size: {
                     width: 300,
