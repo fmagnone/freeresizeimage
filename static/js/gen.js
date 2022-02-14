@@ -299,9 +299,9 @@ function optionsUpdated() {
         // Old
         imageInfo = uploadedImages[0];
         
-        originalName = stringTruncate(imageInfo.name);
+        originalName = imageInfo.name;
         originalRes = imageInfo.res;
-        originalSize = bytesToSize(imageInfo.size);
+        originalSize = imageInfo.size;
 
         // New
         imageInfo = uploadedImages[maxResolution];
@@ -315,13 +315,13 @@ function optionsUpdated() {
 
     // Old file assign
     infoType_old.innerHTML = downloadType;
-    infoName_old.innerHTML = originalName;
+    infoName_old.innerHTML = stringTruncate(originalName);
     infoRes_old.innerHTML = originalRes;
     infoSize_old.innerHTML = originalSize;
 
     // New file assign
     infoType.innerHTML = downloadType;
-    infoName.innerHTML = downloadName;
+    infoName.innerHTML = stringTruncate(downloadName);
     infoRes.innerHTML = downloadRes;
     infoSize.innerHTML = downloadSize;
 
