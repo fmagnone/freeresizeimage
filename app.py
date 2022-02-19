@@ -6,6 +6,8 @@ import os
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_cors import CORS, cross_origin
+from datetime import datetime, timedelta
+from flask_sitemap import Sitemap
 # from werkzeug import secure_filename
 
 # Global Variables
@@ -17,9 +19,11 @@ app = Flask(__name__)
 CORS(app, support_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Sitemap
+# ext = Sitemap(app=app)
+
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 
 @app.after_request
 def after_request(response):
@@ -36,31 +40,9 @@ def after_request(response):
 
     return response
 
-# Sitemap
-@app.route('/sitemap.xml', methods=['GET'])
-def sitemap():
-    try:
-      """Generate sitemap.xml. Makes a list of urls and date modified."""
-      pages=[]
-      ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
-      # static pages
-      for rule in app.url_map.iter_rules():
-          if "GET" in rule.methods and len(rule.arguments)==0:
-              pages.append(
-                           ["http://pythonprogramming.net"+str(rule.rule),ten_days_ago]
-                           )
-
-      sitemap_xml = render_template('sitemap_template.xml', pages=pages)
-      response= make_response(sitemap_xml)
-      response.headers["Content-Type"] = "application/xml"    
-    
-      return response
-    except Exception as e:
-        return(str(e))	
-
-
 
 # Index Page
+# @ext.register_generator # sitemap
 @app.route("/", methods=["GET", "POST"])
 @cross_origin(supports_credentials=True)
 def index():
@@ -108,5 +90,6 @@ def list_files():
     return jsonify(files)
 
 # Debugger mode
+
 if __name__ == '__main__':
     app.run(debug=True)
