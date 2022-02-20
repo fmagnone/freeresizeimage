@@ -1,14 +1,14 @@
-#### #### #### #### #### ####
 # Profile Image Resize - 2022
 
 # Import Librarys
 import os
 
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, session, request, flash, jsonify, redirect, render_template
 from flask_cors import CORS, cross_origin
 from datetime import datetime, timedelta
 from flask_sitemap import Sitemap
-# from werkzeug import secure_filename
+
+
 
 # Global Variables
 UPLOAD_FOLDER = '/static/uploads'
@@ -20,7 +20,7 @@ CORS(app, support_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Sitemap
-# ext = Sitemap(app=app)
+ext = Sitemap(app=app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -42,19 +42,14 @@ def after_request(response):
 
 
 # Index Page
-# @ext.register_generator # sitemap
 @app.route("/", methods=["GET", "POST"])
-@cross_origin(supports_credentials=True)
 def index():
     if request.method == "POST":
         # POST method
         print("post method called")
-
         return redirect("/")
-
     else:
         # GET method
-
         return render_template('index.html')
 
 # Upload?
@@ -89,7 +84,13 @@ def list_files():
     f.save("static/uploads/" + f.filename)
     return jsonify(files)
 
-# Debugger mode
 
+# Sitemap extension
+@ext.register_generator
+def index_sitemap():
+    yield 'index', {}
+
+
+# Debugger mode
 if __name__ == '__main__':
     app.run(debug=True)
