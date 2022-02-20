@@ -1,8 +1,7 @@
 # Profile Image Resize - 2022
 
 # Import Librarys
-import os
-
+#import os
 from flask import Flask, session, request, flash, jsonify, redirect, render_template
 from flask_cors import CORS, cross_origin
 # from datetime import datetime, timedelta
