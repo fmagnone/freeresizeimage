@@ -87,7 +87,7 @@ def list_files():
 
 # Sitemap extension
 @ext.register_generator
-def index():
+def index_sitemap():
     yield 'index', {}
 
 
