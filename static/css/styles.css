@@ -8,30 +8,37 @@
 :root {
   --border-width: 2px;
   --border-radius: 10px;
+  --color-theme-0: black;
+  --color-theme-1: #242424;
+  --color-theme-2: #48494b;
+  --color-theme-3: #6f6f6f;
+  --color-theme-10: #e1e1e1;
+  --color-theme-10: white;
+  --color-intense-1: #ec4e6e;
 }
 
 /* General Style */
 body {
   font-family: "Lato", Helvetica, sans-serif;
-  background-color: rgb(50, 63, 93);
-  background: rgb(50, 63, 93);
-  background: linear-gradient(
+  background-color: var(--color-theme-0);
+  background: var(--color-theme-0);
+  /*background: linear-gradient(
     156deg,
     rgba(50, 63, 93, 1) 0%,
     rgba(48, 61, 90, 1) 25%,
     rgba(8, 11, 16, 1) 100%
-  );
+  );*/
   min-height: 100vh;
 }
 .navbar,
 footer {
-  background-color: #19233B;
+  background-color: var(--color-theme-1);
 }
 .nav-link {
-  color: white;
+  color: var(--color-theme-10);
 }
 .nav-link:hover {
-  color: grey;
+  color: var(--color-theme-9);
 }
 .navbar-toggler {
   border: none;
@@ -53,18 +60,30 @@ h6 {
 }
 
 /* Upload Box, Dropzone and Upload Buttons */
+.container {
+  color: var(--color-theme-10);
+}
 .upload-container {
-  background-color: white;
-  border-radius: calc(var(--border-radius) * 2);
+  
 }
 .upload-box {
+  background-color: var(--color-theme-2);
+  border-radius: calc(var(--border-radius) * 2);
   z-index: 10;
-  border-radius: var(--border-radius);
-  /*max-width: 450px;*/
   min-height: 200px;
 }
 .options-box {
+  background-color: var(--color-theme-2);
+  border-radius: calc(var(--border-radius) * 2);
   min-height: 200px;
+}
+.show-container {
+  
+}
+.show-box {
+  background-color: var(--color-theme-3);
+  border-radius: calc(var(--border-radius) * 2);
+  min-height: 100px;
 }
 .input-group-text {
   background-color: white;
@@ -77,6 +96,8 @@ h6 {
 .filepond--root .filepond--drop-label {
   /*min-height: 200px !important;*/
   height: 300px;
+  color: var(--color-theme-9);
+  font-size: 1.4em;
 }
 /*
 .filepond--root .filepond--credits {
@@ -87,20 +108,20 @@ h6 {
   cursor: pointer;
 }
 .filepond--panel-root {
-  background-color: white !important;
-  border: var(--border-width) solid #ec4e6e;
+  background-color: var(--color-theme-2) !important;
+  /*border: var(--border-width) solid var(--color-intense-1);*/
 }
 
 /* Buttons */
 .btn-download {
   background-color: #19233b;
-  color: #ec4e6e;
+  color: var(--color-intense-1);
   padding: 10px;
   border-radius: var(--border-radius);
 }
 .btn-download:hover {
   background-color: #071127;
-  color: #ec4e6e;
+  color: var(--color-intense-1);
 }
 .btn-download {
   width: 100%;
@@ -163,8 +184,6 @@ h6 {
   background-position: -300px 0;
 }
 
-/* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
 /* Animations */
 .slide-top-1 {

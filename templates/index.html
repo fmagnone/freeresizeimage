@@ -9,19 +9,18 @@
         <!-- Message box -->
         <div id="liveAlertPlaceholder"></div>
 
-        <!-- Upload & Options container -->
-        <div class="upload-container row p-3">
-            <div class="upload-box col-sm p-2">
+        <div class="upload-container row">
+            <div class="upload-box col-sm m-2">
                 <!-- FilePond Upload -->
                 <form method="POST" enctype="multipart/form-data">
-                    <input id="filePondUpload" type="file" class="filepond" name="filepond" data-max-file-size="3MB"
+                    <input id="filePondUpload" type="file" class="filepond" name="filepond" data-max-file-size="4MB"
                         accept="image/png, image/jpeg, image/gif">
                 </form>
             </div>
-            <div class="options-box col-sm p-3">
-                <!-- Options and info -->
+            <div class="options-box col-sm m-2 p-4">
+                <!-- Resize options -->
                 <div class="mb-3">
-                    <h6 class="border-bottom border-dark pb-1">Select resize options:</h6>
+                    <h4 class="pb-1">Resize options:</h4>
                     <div class="row py-2">
                         <div class="col">
                             Max size:
@@ -114,6 +113,12 @@
                 <a id="downloadFileBtn" class="btn btn-download mt-2 disabled" download="#">Download Resized Image</a>
             </div>
         </div>
+        <div class="show-container row">
+            <div class="show-box col-sm m-2 p-2">
+                <!-- Show images -->
+                Show image content
+            </div>
+        </div>
     </div>
 </section>
 <div class="spacer"></div>
@@ -133,7 +138,8 @@
             <div class="col-md-4 mb-5 slide-top-2">
                 <div class="h-100">
                     <div class="gr-04b mx-auto"></div>
-                    <p class="card-text">Bulk reduces file size and then crops it, contains it, or forces it to desired pixels.
+                    <p class="card-text">Bulk reduces file size and then crops it, contains it, or forces it to desired
+                        pixels.
                     </p>
                 </div>
             </div>
