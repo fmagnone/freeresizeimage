@@ -21,6 +21,69 @@
                 <!-- Resize options -->
                 <div class="mb-3">
                     <h4 class="pb-1">Resize options:</h4>
+
+                    <!-- Resize options: Mode selector -->
+                    <div class="row text-center">
+                        <div class="col-12 col-md-4">
+                            <button class="btn btn-resize-mode btn-resize-mode-selected" type="button"><i
+                                    class="bi bi-badge-sd bi-mr"></i>Standard size</button>
+                            <i class="bi bi-chevron-down btn-resize-mode-arrow"></i>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <button class="btn btn-resize-mode" type="button"><i
+                                    class="bi bi-aspect-ratio bi-mr"></i>Custom size</button>
+                            <i class="bi bi-chevron-down btn-resize-mode-arrow"></i>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <button class="btn btn-resize-mode" type="button"><i
+                                    class="bi bi-percent bi-mr"></i>Percentage</button>
+                            <i class="bi bi-chevron-down btn-resize-mode-arrow"></i>
+                        </div>
+                    </div>
+
+
+                    <!-- Resize options: Options Blocks -->
+                    <div id="options-box-mode">
+                        <hr />
+
+                        <p>Mode: <input id="cropModeCheckbox" type="checkbox" checked> crop
+                            <input id="containModeCheckbox" type="checkbox"> contain
+                            background color:
+                            <input type="color" id="backColorPicker" name="backColorPicker" value="#f5f5f5">
+                        </p>
+
+                        <hr />
+                    </div>
+                    <div id="options-box-preset">
+
+                        <div id="presetListContainer">
+                            Scale to a standard size
+                        </div>
+
+                        <hr />
+                    </div>
+                    <div id="options-box-custom-size">
+
+                        <div id="sizeContainer">
+                            > Scale to a max fixed size: </br>
+                            w: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto">px or
+                            h: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto">px
+                            </br>
+                            auto calc proportions, or check to force: <input id="autoForceWidthHeightCheckbox" type="checkbox">
+                            </form>
+                        </div>
+
+                        <hr />
+                    </div>
+                    <div id="options-box-percentage">
+
+                        percentage
+
+                        <hr />
+                    </div>
+
+
+                    <!--
                     <div class="row py-2">
                         <div class="col">
                             Max size:
@@ -40,24 +103,7 @@
                         </div>
                     </div>
                     <div class="row py-2">
-                        <!--
-                        <div class="col-4">
-                            Compression:
-                        </div>
-                        <div class="col-8">
-                            <div class="btn-group btn-100">
-                                
-                                <input type="radio" class="btn-check" name="resolution" id="res1" autocomplete="off" disabled/>
-                                <label class="btn btn-outline-secondary" for="res1">100%</label>
-
-                                <input type="radio" class="btn-check" name="resolution" id="res2" autocomplete="off" disabled />
-                                <label class="btn btn-outline-secondary" for="res2">75%</label>
-
-                                <input type="radio" class="btn-check" name="resolution" id="res3" autocomplete="off" disabled />
-                                <label class="btn btn-outline-secondary" for="res3">50%</label>
-                            </div>
-                        </div>
-                        -->
+                        
                     </div>
 
 
@@ -107,18 +153,95 @@
 
                         </div>
                     </div>
+                    -->
                 </div>
-
-
-                <a id="downloadFileBtn" class="btn btn-download mt-2 disabled" download="#">Download Resized Image</a>
             </div>
         </div>
-        <div class="show-container row">
-            <div class="show-box col-sm m-2 p-2">
-                <!-- Show images -->
-                Show image content
+        <!-- Example images -->
+        <div id="example-images-container" class="text-center mt-5">
+            <h4>Or select a sample image to try:</h4>
+            <div class="mt-4">
+                <img src="static/img/couple.jpg" alt="Couple" class="example-image">
+                <img src="static/img/paris.jpg" alt="Paris" class="example-image">
+                <img src="static/img/porsche.jpg" alt="Posrche" class="example-image">
             </div>
         </div>
+
+        <!-- Show images -->
+        <div id="show-container" class="show-container row">
+            <div class="show-box col-sm m-2 p-4">
+                <h4 id="show-title" class="pb-1">Your resize image:</h4>
+                <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9 Widescreen.
+                </p>
+                <!-- Show single image -->
+                <div class="row" id="show-single">
+                    <div class="col-sm-8">
+                        <div class="show-single-image">
+                            <!-- <p class="placeholder-glow"><span class="placeholder col-12" style="height:50vh;"></span> -->
+                            <img src="static/img/porsche.jpg" style="width:100%;">
+                            <div class="show-size-tag">10000x10000</div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
+                        <button type="button" id="show-single-download" class="btn btn-download"><i
+                                class="bi bi-download bi-mr"></i>Download</button>
+                    </div>
+                </div>
+                <!-- Show multiple image -->
+                <div id="show-multiple" class="row">
+                    <div class="col-sm-3 my-4">
+                        <div class="show-multiple-image">
+                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
+                            </p>
+                            <div class="show-size-tag">500x500</div>
+                        </div>
+                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
+                        <button type="button" id="show-single-download" class="btn btn-download"><i
+                                class="bi bi-download bi-mr"></i>Download</button>
+                    </div>
+                    <div class="col-sm-3 my-4">
+                        <div class="show-multiple-image">
+                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
+                            </p>
+                            <div class="show-size-tag">500x500</div>
+                        </div>
+                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
+                        <button type="button" id="show-single-download" class="btn btn-download"><i
+                                class="bi bi-download bi-mr"></i>Download</button>
+                    </div>
+                    <div class="col-sm-3 my-4">
+                        <div class="show-multiple-image">
+                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
+                            <div class="show-size-tag">500x500</div>
+                            </p>
+                        </div>
+                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
+                        <button type="button" id="show-single-download" class="btn btn-download"><i
+                                class="bi bi-download bi-mr"></i>Download</button>
+                    </div>
+                    <div class="col-sm-3 my-4">
+                        <div class="show-multiple-image">
+                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
+                            </p>
+                            <div class="show-size-tag">500x500</div>
+                        </div>
+                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
+                        <button type="button" id="show-single-download" class="btn btn-download"><i
+                                class="bi bi-download bi-mr"></i>Download</button>
+                    </div>
+                </div>
+                <!-- Hidden images for system -->
+                <div id="imageResizedContainer">
+                    <h5>Resized image</h5>
+                </div>
+                <div id="imagePrevContainer">
+                    <h5>Prev image</h5>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 <div class="spacer"></div>

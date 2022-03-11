@@ -12,7 +12,8 @@
   --color-theme-1: #242424;
   --color-theme-2: #48494b;
   --color-theme-3: #6f6f6f;
-  --color-theme-10: #e1e1e1;
+  --color-theme-8: #b3b3b3;
+  --color-theme-9: #e1e1e1;
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
 }
@@ -59,12 +60,11 @@ h6 {
   color: #333333;
 }
 
-/* Upload Box, Dropzone and Upload Buttons */
+/* Upload Containers, Box and Upload */
 .container {
   color: var(--color-theme-10);
 }
 .upload-container {
-  
 }
 .upload-box {
   background-color: var(--color-theme-2);
@@ -78,15 +78,53 @@ h6 {
   min-height: 200px;
 }
 .show-container {
-  
+}
+.show-container img,
+.show-container .placeholder {
+  border-radius: var(--border-radius);
 }
 .show-box {
   background-color: var(--color-theme-3);
   border-radius: calc(var(--border-radius) * 2);
   min-height: 100px;
 }
+.show-single-image {
+  position: relative;
+}
+.show-size-tag {
+  position: absolute;
+  text-align: center;
+  top: 12px;
+  left: 12px;
+  padding: 4px 13px 4px 13px;
+  border-radius: var(--border-radius);
+  background-color: var(--color-theme-1);
+  color: var(--color-theme-10);
+  z-index: 100;
+}
+.show-multiple-image {
+  position: relative;
+}
 .input-group-text {
   background-color: white;
+}
+.temp-image {
+  width: 100%;
+}
+.example-image {
+  height: 160px;
+  margin: 6px;
+  cursor: pointer;
+  border: solid 2px var(--color-theme-2);
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+}
+.example-image:hover {
+  border-color: var(--color-intense-1);
+  scale: 1.02;
 }
 
 /* FilePond adaptation */
@@ -113,18 +151,43 @@ h6 {
 }
 
 /* Buttons */
-.btn-download {
-  background-color: #19233b;
+.bi-mr {
+  /* Icons in button */
+  padding-right: 10px;
+}
+.btn-resize-mode-arrow {
   color: var(--color-intense-1);
-  padding: 10px;
+  font-size: 1.4em;
+}
+.btn {
+  cursor: pointer;
+}
+.btn-resize-mode {
+  padding: 7px;
+  width: 100%;
+  border: solid 2px black;
   border-radius: var(--border-radius);
+  background-color: var(--color-theme-0);
+  border-color: var(--color-theme-0);
+  color: var(--color-theme-10);
+  
+}
+.btn-resize-mode:hover, .btn-resize-mode-selected {
+  border-color: var(--color-intense-1);
+  color: var(--color-intense-1);
+}
+.btn-download {
+  padding: 7px;
+  width: 100%;
+  border: solid 2px black;
+  border-radius: var(--border-radius);
+  background-color: var(--color-theme-0);
+  border-color: var(--color-theme-0);
+  color: var(--color-intense-1);
 }
 .btn-download:hover {
-  background-color: #071127;
+  border-color: var(--color-intense-1);
   color: var(--color-intense-1);
-}
-.btn-download {
-  width: 100%;
 }
 .btn-100 {
   width: 100%;
@@ -184,7 +247,6 @@ h6 {
   background-position: -300px 0;
 }
 
-
 /* Animations */
 .slide-top-1 {
   animation-duration: 1s;
@@ -205,8 +267,6 @@ h6 {
   }
 }
 
-
-
 /* Mobile Adjustemnts Portrait */
 @media only screen and (max-width: 600px) {
   .gr-01 {
@@ -218,5 +278,38 @@ h6 {
   .logo-text {
     font-size: 1.2em;
   }
-  
+  .example-image {
+    height: 75px;
+    margin: 3px;
+  }
+  .force-100 {
+    
+  }
+}
+
+
+/* TEMP */
+#show-container {
+}
+#imageResizedContainer,
+#imagePrevContainer {
+  display: none;
+}
+#show-single {
+  display: none;
+}
+#show-multiple {
+}
+#example-images-container {
+  display: none;
+}
+#options-box-mode {
+}
+#options-box-preset {
+  display: none;
+}
+#options-box-custom-size {
+}
+#options-box-percentage {
+  display: none;
 }
