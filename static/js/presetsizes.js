@@ -8,7 +8,7 @@ class presetSizeData {
         this.width = width;
         this.height = height;
     }
-}
+};
 
 // Variables
 var presetSizeDataList = [];

@@ -1,6 +1,7 @@
 // DOM load
 document.addEventListener('DOMContentLoaded', (event) => {
 
+
 	// Elements
 	const imagesDiv = document.getElementById("imagesPreviewContainer");
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const backColorPicker = document.getElementById("backColorPicker");
 	const example_image = document.getElementsByClassName("example_image");
 
+	
 	// Variables
 	var presetSizeCategorySet = new Set();
 	var imageList = [];
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var resizingHeight = 0;
 	var autoUpdate = true;
 	var minSizeValue = 50;
+
 
 	// Image Class Constructor
 	class imageData {
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			this.res_new = res_new;
 		}
 	}
-	saveImageData = function (name, url, size_old, ext_old, id_file) {
+	function saveImageData (name, url, size_old, ext_old, id_file) {
 		// Save image data into the list
 		// Get current ID
 		id = imageList.length;
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		return id;
 	}
-	removeImageData = function (id_file) {
+	function removeImageData (id_file) {
 		for (var id in imageList) {
 			if (imageList[id].id_file == id_file) {
 				imageList[id].valid = false;
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 
 	// Standard sizes options
-	setSelectListOptions = function () {
+	function setSelectListOptions () {
 		// Load categories into set
 		for (i in presetSizeDataList) {
 			presetSizeCategorySet.add(presetSizeDataList[i].category);
@@ -110,12 +113,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Assign info
 		selectList.name = "presetList";
 		presetSizeContainer.name = "presetSizeContainer";
-		loadAllButtonsCategory = function (category) {
+		function loadAllButtonsCategory (category) {
 			// Add category container
 			let cat_container = document.createElement('div');
 			cat_container.name = category;
 			if (c != 0) { cat_container.style.display = "none"; }
-			cat_container.className = "categoryContainer";
+			cat_container.className = "category-container";
 			cat_container.id = "cat_" + category;
 			presetSizeContainer.appendChild(cat_container);
 
@@ -126,14 +129,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					let button = document.createElement('button');
 					let tag_name = document.createElement('span');
 					let tag_size = document.createElement('span');
-					btn_container.className = "sizeButtonContainer";
+					btn_container.className = "preset-size-button-container";
 					button.id = presetSizeDataList[i].name;
-					button.className = "sizeButton";
+					button.className = "preset-size-button";
 					button.innerHTML = presetSizeDataList[i].prop;
 					button.onclick = function () { inputButtonPresetUpdate(this.id) };
 					tag_name.innerHTML = presetSizeDataList[i].tag;
-					tag_name.className = "sizeTag";
+					tag_name.className = "preset-size-tag-name";
 					tag_size.innerHTML = presetSizeDataList[i].width + "x" + presetSizeDataList[i].height;
+					tag_size.className = "preset-size-tag-size";
 					btn_container.appendChild(button);
 					btn_container.appendChild(tag_name);
 					btn_container.appendChild(tag_size);
@@ -176,7 +180,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	if (presetSizeDataList) { setSelectListOptions(); }
 
 	// Listeners and global functions
-	clearValues = function () {
+	function clearValues () {
 		// Clear fixed width and height input and slider input
 		resizingFactor = 0.5;
 		resizingWidth = 0;
@@ -186,7 +190,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		inputHeight.value = "";
 		inputType = "percentage";
 	}
-	clearStyles = function () {
+	function clearStyles () {
 		// Clear style in all selectable elements
 		inputSlider.classList.remove('selected');
 		inputWidth.classList.remove('selected');
@@ -196,7 +200,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			element.classList.remove('selected');
 		};
 	}
-	displayState = function (show) {
+	function displayState (show) {
 		if (show) {
 			// Show image
 			imagesDiv.style.visibility = "visible";
@@ -211,7 +215,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		imagePrevContainer.style.display = "none";
 	}
 	displayState(false);
-	dataDisplay = function () {
+	function dataDisplay () {
 		// Clear
 		dataContainer.innerHTML = "";
 		let empty = true;
@@ -243,7 +247,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		};
 	};
 	dataDisplay();
-	checkAutoUpdateMode = function () {
+	function checkAutoUpdateMode () {
 		// Check defined mode when start app
 		if (autoUpdate == true) {
 			updateCheckbox.checked = true;
@@ -261,7 +265,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			addCustomPond(this.src);
 		}
 	};
-	addDownloadButton = function (id) {
+	function addDownloadButton (id) {
 		// Add button variable
 		let new_button = document.createElement("button");
 		new_button.id = imageList[id].id_btn;
@@ -281,14 +285,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Append element to DOM
 		downloadContainer.appendChild(new_button);
 
-		// Check for data listed and add second button, --temporary
-		/*let data_text = document.getElementById("data_" + imageList[id].id_btn);
-		console.log(data_text);
-		if(data_text) {
-			//data_text.appendChild(new_button);
-		}*/
 	}
-	addResizedImageToDOM = function (fileItem, id) {
+	function addResizedImageToDOM (fileItem, id) {
 		// Add image to DOM
 		var new_img = document.createElement("img");
 		new_img.id = "img_res_" + id;
@@ -296,7 +294,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		new_img.src = URL.createObjectURL(fileItem.file);
 		imageResizedContainer.appendChild(new_img);
 	}
-	addPrevImageToDOM = function (fileItem, id) {
+	function addPrevImageToDOM (fileItem, id) {
 		// Add image to DOM
 		var new_img = document.createElement("img");
 		new_img.id = "img_prev_" + id;
@@ -461,7 +459,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize() };
 	};
-	inputButtonPresetUpdate = function (button_id) {
+	function inputButtonPresetUpdate (button_id) {
 		// Get values
 		let w;
 		let h;
@@ -489,7 +487,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	// --------------------------------------------------- //
 	// Resizer caller
-	resizeImage = function (id) {
+	function resizeImage (id) {
 		console.log("Resize call id " + id, inputType);
 
 		// Assign img to variable
@@ -526,7 +524,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Ensure new resizer call when is loaded
 		img_old.onload = function () { updateImagesResize(); };
 	};
-	updateImagesResize = function () {
+	function updateImagesResize () {
 		for (let i in imageList) {
 			if (imageList[i].valid == true) {
 				let id = parseInt(i);
@@ -598,7 +596,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	});
 	pond.maxFiles = 10;
 
-	addCustomPond = function (src) {
+	function addCustomPond (src) {
 		pond.addFile(src);
 	};
 
@@ -608,6 +606,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	// DOM info
 	console.log('DOM fully loaded and parsed');
+
+	
 });
 
 

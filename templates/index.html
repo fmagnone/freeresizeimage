@@ -13,7 +13,7 @@
             <div class="upload-box col-sm m-2">
                 <!-- FilePond Upload -->
                 <form method="POST" enctype="multipart/form-data">
-                    <input id="filePondUpload" type="file" class="filepond" name="filepond" data-max-file-size="4MB"
+                    <input id="fileUpload" type="file" class="filepond" name="filepond" data-max-file-size="8MB"
                         accept="image/png, image/jpeg, image/gif">
                 </form>
             </div>
@@ -65,9 +65,13 @@
                     <div id="options-box-custom-size">
                         <div id="sizeContainer">
                             <div class="py-2">
+
                                 Width: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto"> px
+
                                 (&btn)
+
                                 Height: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto"> px
+
                             </div>
                             <div class="py-2">
                                 <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to Width & Height
@@ -91,80 +95,15 @@
                         </div>
                         <hr />
                     </div>
-
-
-                    <!--
-                    <div class="row py-2">
-                        <div class="col">
-                            Max size:
-                        </div>
-                        <div class="col-md-9">
-                            <div class="btn-group btn-100">
-                                <input type="radio" class="btn-check" name="dimension" id="dim1" autocomplete="off" />
-                                <label class="btn btn-outline-secondary " for="dim1">1200px</label>
-
-                                <input type="radio" class="btn-check" name="dimension" id="dim2" autocomplete="off"
-                                    checked />
-                                <label class="btn btn-outline-secondary " for="dim2">600px</label>
-
-                                <input type="radio" class="btn-check" name="dimension" id="dim3" autocomplete="off" />
-                                <label class="btn btn-outline-secondary " for="dim3">300px</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row py-2">
-                        
-                    </div>
-
-
-                    <h6 class="border-bottom border-dark pb-1">File Info:</h6>
-
-                    <div class="row justify-content-center text-small">
-                        <div class="col">
-                            <div class="pt-2">Old &rarr;</div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="d-flex text-center">
-                                <div class="align-self-center py-2">
-                                    <div id="file_type_old" class="type">-</div>
-                                </div>
-                                <div class="align-self-center p-2">
-                                    <div id="file_size_old"></div>
-                                </div>
-                                <div class="align-self-center p-2">
-                                    <div id="file_res_old"></div>
-                                </div>
-                                <div class="align-self-center py-2">
-                                    <div id="file_name_old">no-file</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center text-small">
-                        <div class="col">
-                            <div class="pt-2">New &rarr;</div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="d-flex text-center">
-                                <div class="align-self-center py-2">
-                                    <div id="file_type" class="type">-</div>
-                                </div>
-                                <div class="align-self-center p-2">
-                                    <div id="file_size"></div>
-                                </div>
-                                <div class="align-self-center p-2">
-                                    <div id="file_res"></div>
-                                </div>
-                                <div class="align-self-center py-2">
-                                    <div id="file_name">no-file</div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    -->
                 </div>
+
+
+                <h4>Update (TEMP)</h4>
+                <div id="updateModeContainer">
+                    <button id="updateButton">Update</button> or
+                    check for auto-update <input id="updateCheckbox" type="checkbox">
+                </div>
+                </br>
             </div>
         </div>
         <!-- Example images -->
@@ -183,6 +122,7 @@
                 <h4 id="show-title" class="pb-1">Your resize image:</h4>
                 <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9 Widescreen.
                 </p>
+
                 <!-- Show single image -->
                 <div class="row" id="show-single">
                     <div class="col-sm-8">
@@ -242,12 +182,28 @@
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
                 </div>
-                <!-- Hidden images for system -->
-                <div id="imageResizedContainer">
-                    <h5>Resized image</h5>
+
+
+
+                <!-- Download buttons TEMP -->
+                <div id="downloadContainer">
+                    Download Files: (TEMP) </br>
                 </div>
-                <div id="imagePrevContainer">
-                    <h5>Prev image</h5>
+
+                <!-- Data container TEMP -->
+                <h4>Data (TEMP) </h4>
+                <div id="dataContainer"></div>
+                </br>
+
+
+                <!-- Hidden images for system -->
+                <div id="imagesPreviewContainer">
+                    <div id="imageResizedContainer">
+                        <h5>Resized image</h5>
+                    </div>
+                    <div id="imagePrevContainer">
+                        <h5>Prev image</h5>
+                    </div>
                 </div>
             </div>
         </div>
