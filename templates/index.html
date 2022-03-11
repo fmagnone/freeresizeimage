@@ -63,22 +63,32 @@
                         <hr />
                     </div>
                     <div id="options-box-custom-size">
-
                         <div id="sizeContainer">
-                            > Scale to a max fixed size: </br>
-                            w: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto">px or
-                            h: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto">px
-                            </br>
-                            auto calc proportions, or check to force: <input id="autoForceWidthHeightCheckbox" type="checkbox">
-                            </form>
+                            <div class="py-2">
+                                Width: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto"> px
+                                (&btn)
+                                Height: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto"> px
+                            </div>
+                            <div class="py-2">
+                                <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to Width & Height
+                                </form>
+                            </div>
                         </div>
-
                         <hr />
                     </div>
                     <div id="options-box-percentage">
-
-                        percentage
-
+                        <hr />
+                        <div id="sliderContainer">
+                            <div class="py-2">
+                                Select a percentage
+                            </div>
+                            <div class="py-2">
+                                <!-- review style 
+                                https://codepen.io/vsync/pen/mdEJMLv
+                                -->
+                                <input type="range" min="5" max="95" value="50" class="scale-slider" id="range">
+                            </div>
+                        </div>
                         <hr />
                     </div>
 
