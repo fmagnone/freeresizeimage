@@ -3,24 +3,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 	// Elements
-	const imagesDiv = document.getElementById("imagesPreviewContainer");
+	// --> General
+	const imagesContainer = document.getElementById("showContainer");
+	const exampleImageContainer = document.getElementById("exampleImagesContainer");
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
-	const downloadContainer = document.getElementById("downloadContainer");
+	// --> Options
+	const resizeMethod = document.getElementById("resizeMethod");
+	const optionsBoxMode = document.getElementById("options-box-mode");
+	const optionsBoxPreset = document.getElementById("options-box-preset");
+	const optionsBoxCustomSize = document.getElementById("options-box-custom-size");
+	const optionsBoxPrecentage = document.getElementById("options-box-percentage");
 	const presetListContainer = document.getElementById("presetListContainer");
-	const dataContainer = document.getElementById("dataContainer");
 	const inputSlider = document.getElementById("range");
 	const inputWidth = document.getElementById("width");
 	const inputHeight = document.getElementById("height");
-	const updateButton = document.getElementById("updateButton");
-	const updateCheckbox = document.getElementById("updateCheckbox");
 	const cropModeCheckbox = document.getElementById("cropModeCheckbox");
 	const containModeCheckbox = document.getElementById("containModeCheckbox");
 	const autoForceWidthHeightCheckbox = document.getElementById("autoForceWidthHeightCheckbox");
 	const backColorPicker = document.getElementById("backColorPicker");
-	const example_image = document.getElementsByClassName("example_image");
+	// --> Example images
+	const exampleImage = document.getElementsByClassName("example-image");
+	// --> TEMP (to be deleted)
+	const updateButton = document.getElementById("updateButton");
+	const updateCheckbox = document.getElementById("updateCheckbox");
+	const downloadContainer = document.getElementById("downloadContainer");
+	const dataContainer = document.getElementById("dataContainer");
 
-	
+
+
 	// Variables
 	var presetSizeCategorySet = new Set();
 	var imageList = [];
@@ -60,10 +71,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			this.res_new = res_new;
 		}
 	}
-	function saveImageData (name, url, size_old, ext_old, id_file) {
+	function saveImageData(name, url, size_old, ext_old, id_file) {
 		// Save image data into the list
 		// Get current ID
-		id = imageList.length;
+		let id = imageList.length;
 
 		// Assign data
 		var new_image = new imageData();
@@ -86,7 +97,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		return id;
 	}
-	function removeImageData (id_file) {
+	function removeImageData(id_file) {
 		for (var id in imageList) {
 			if (imageList[id].id_file == id_file) {
 				imageList[id].valid = false;
@@ -100,7 +111,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 
 	// Standard sizes options
-	function setSelectListOptions () {
+	function setSelectListOptions() {
 		// Load categories into set
 		for (i in presetSizeDataList) {
 			presetSizeCategorySet.add(presetSizeDataList[i].category);
@@ -112,8 +123,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		// Assign info
 		selectList.name = "presetList";
+		selectList.className = "preset-list";
 		presetSizeContainer.name = "presetSizeContainer";
-		function loadAllButtonsCategory (category) {
+		function loadAllButtonsCategory(category) {
 			// Add category container
 			let cat_container = document.createElement('div');
 			cat_container.name = category;
@@ -180,7 +192,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	if (presetSizeDataList) { setSelectListOptions(); }
 
 	// Listeners and global functions
-	function clearValues () {
+	function clearValues() {
 		// Clear fixed width and height input and slider input
 		resizingFactor = 0.5;
 		resizingWidth = 0;
@@ -190,7 +202,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		inputHeight.value = "";
 		inputType = "percentage";
 	}
-	function clearStyles () {
+	function clearStyles() {
 		// Clear style in all selectable elements
 		inputSlider.classList.remove('selected');
 		inputWidth.classList.remove('selected');
@@ -200,22 +212,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			element.classList.remove('selected');
 		};
 	}
-	function displayState (show) {
+	function displayState(show) {
 		if (show) {
-			// Show image
-			imagesDiv.style.visibility = "visible";
-			downloadContainer.style.visibility = "visible";
+			// Show images
+			imagesContainer.style.display = "block";
+			exampleImageContainer.style.display = "none";
 		}
 		else {
 			// Go to original state
-			imagesDiv.style.visibility = "hidden";
-			downloadContainer.style.visibility = "hidden";
+			imagesContainer.style.display = "none";
+			exampleImageContainer.style.display = "block";
 			clearValues();
 		}
+
+		// Always hide resized and prev images from user
+		imageResizedContainer.style.display = "none";
 		imagePrevContainer.style.display = "none";
 	}
 	displayState(false);
-	function dataDisplay () {
+	function dataDisplay() {
 		// Clear
 		dataContainer.innerHTML = "";
 		let empty = true;
@@ -247,25 +262,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		};
 	};
 	dataDisplay();
-	function checkAutoUpdateMode () {
+	function checkAutoUpdateMode() {
 		// Check defined mode when start app
 		if (autoUpdate == true) {
 			updateCheckbox.checked = true;
-			updateButton.disabled = true;
+			updateButton.style.display = "none";
 		}
 		else {
 			autoUpdate = false;
-			updateButton.disabled = false;
+			updateButton.style.display = "block";
 		}
 	}
 	checkAutoUpdateMode();
-	for (var i = 0; i < example_image.length; i++) {
+	for (var i = 0; i < exampleImage.length; i++) {
 		// Add example image event listeners
-		example_image[i].onclick = function () {
+		exampleImage[i].onclick = function () {
 			addCustomPond(this.src);
 		}
 	};
-	function addDownloadButton (id) {
+	function addDownloadButton(id) {
 		// Add button variable
 		let new_button = document.createElement("button");
 		new_button.id = imageList[id].id_btn;
@@ -286,7 +301,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		downloadContainer.appendChild(new_button);
 
 	}
-	function addResizedImageToDOM (fileItem, id) {
+	function addResizedImageToDOM(fileItem, id) {
 		// Add image to DOM
 		var new_img = document.createElement("img");
 		new_img.id = "img_res_" + id;
@@ -294,7 +309,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		new_img.src = URL.createObjectURL(fileItem.file);
 		imageResizedContainer.appendChild(new_img);
 	}
-	function addPrevImageToDOM (fileItem, id) {
+	function addPrevImageToDOM(fileItem, id) {
 		// Add image to DOM
 		var new_img = document.createElement("img");
 		new_img.id = "img_prev_" + id;
@@ -302,15 +317,66 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		new_img.src = URL.createObjectURL(fileItem.file);
 		imagePrevContainer.appendChild(new_img);
 	}
+	resizeMethod.addEventListener('click', (event) => {
+		let button = event.target.nodeName === 'BUTTON';
+		if (!button) { return; }
+		resizeModeDisplay(event.target.id);
+	})
+	function resizeModeDisplay(mode) {
+		let pre = "btn-mode-";
+		let s = pre + "standard";
+		let c = pre + "custom";
+		let p = pre + "percentage";
+		let sc = "btn-resize-mode-sel";
+		let ac = "arr-resize-mode-sel";
+		function modeClear() {
+			document.getElementById(s).classList.remove(sc);
+			document.getElementById(c).classList.remove(sc);
+			document.getElementById(p).classList.remove(sc);
+			document.getElementById(s+"-ar").classList.remove(ac);
+			document.getElementById(c+"-ar").classList.remove(ac);
+			document.getElementById(p+"-ar").classList.remove(ac);
+		 	optionsBoxMode.style.display = "none";
+			optionsBoxPreset.style.display = "none";
+			optionsBoxCustomSize.style.display = "none";
+			optionsBoxPrecentage.style.display = "none";
+		}
+		modeClear();
+		if (mode == pre + "standard") {
+			// Mode Standard
+			document.getElementById(s).classList.add(sc);
+			document.getElementById(s+"-ar").classList.add(ac);
+			optionsBoxMode.style.display = "block";
+			optionsBoxPreset.style.display = "block";
+		} else if (mode == "btn-mode-custom") {
+			// Mode Custom
+			document.getElementById(c).classList.add(sc);
+			document.getElementById(c+"-ar").classList.add(ac);
+			optionsBoxMode.style.display = "block";
+			optionsBoxCustomSize.style.display = "block";
+		} else if (mode == "btn-mode-percentage") {
+			// Mode Percentage
+			document.getElementById(p).classList.add(sc);
+			document.getElementById(p+"-ar").classList.add(ac);
+			optionsBoxPrecentage.style.display = "block";
+		};
+	}
+	resizeModeDisplay("btn-mode-standard");
+
+
+
+
+
+
 	updateCheckbox.onchange = function () {
 		if (this.checked) {
 			autoUpdate = true;
-			updateButton.disabled = true;
+			updateButton.style.display = "none";
 			updateImagesResize();
 		}
 		else {
 			autoUpdate = false;
-			updateButton.disabled = false;
+			updateButton.style.display = "block";
 		}
 	}
 	cropModeCheckbox.onchange = function () {
@@ -459,7 +525,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize() };
 	};
-	function inputButtonPresetUpdate (button_id) {
+	function inputButtonPresetUpdate(button_id) {
 		// Get values
 		let w;
 		let h;
@@ -487,7 +553,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	// --------------------------------------------------- //
 	// Resizer caller
-	function resizeImage (id) {
+	function resizeImage(id) {
 		console.log("Resize call id " + id, inputType);
 
 		// Assign img to variable
@@ -511,7 +577,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Update imagelist data and reload data displayed
 		img_new.onload = function () {
 			imageList[id].res_old = img_old.width + " x " + img_old.height;
-			imageList[id].res_new = img_new.width + " x " + img_new.height + " (not correct) ";
+			imageList[id].res_new = img_new.width + " x " + img_new.height;
 			//console.log(img_new.size);
 			//console.log("new", img_new.width, img_new.height); // img new tiene max width 100% y no carga el tamaño real
 			// Update data displayed
@@ -524,7 +590,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Ensure new resizer call when is loaded
 		img_old.onload = function () { updateImagesResize(); };
 	};
-	function updateImagesResize () {
+	function updateImagesResize() {
 		for (let i in imageList) {
 			if (imageList[i].valid == true) {
 				let id = parseInt(i);
@@ -551,19 +617,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		dropOnPage: true,
 		labelIdle: 'Drag & drop your image<br/><span class="filepond--label-action">or browse to upload</span>',
 
+		server: {
+			//url: "http://127.0.0.1:5000/", // Local server configuration
+		},
+
 
 		// FUNCTIONS ------------
 		// Call back when image is added
 		onaddfile: (err, fileItem) => {
-			//console.log("FP Add File Function called");
+			console.log("FP Add File Function called");
+
 
 			// Assign image to list
-			id = saveImageData(
-				fileItem.file.name,
-				URL.createObjectURL(fileItem.file),
-				fileItem.fileSize,
-				fileItem.fileExtension,
-				fileItem.id);
+			let id = saveImageData(fileItem.file.name, URL.createObjectURL(fileItem.file), fileItem.fileSize, fileItem.fileExtension, fileItem.id);
 
 			// Add images to DOM
 			addPrevImageToDOM(fileItem, id);
@@ -577,10 +643,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 			// Update show status
 			displayState(true);
+
 		},
 		// File has been removed
 		onremovefile: function (error, fileItem) {
-			//console.log("FP Remove File Function called");
+			console.log("FP Remove File Function called");
+
 
 			// Remove item from list and remove download button
 			removeImageData(fileItem.id);
@@ -592,22 +660,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 			// Update data display
 			dataDisplay();
+
 		},
 	});
+
 	pond.maxFiles = 10;
 
-	function addCustomPond (src) {
+	function addCustomPond(src) {
 		pond.addFile(src);
 	};
 
 	// TEMP auto testing
-	//pond.addFile("img/porsche.jpg");
-	//pond.addFile("img/couple.jpg");
+	//pond.addFile("static/img/porsche.jpg");
+	//pond.addFile("static/img/couple.jpg");
 
 	// DOM info
 	console.log('DOM fully loaded and parsed');
 
-	
+
 });
 
 

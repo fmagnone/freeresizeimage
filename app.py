@@ -8,15 +8,9 @@ from flask_cors import CORS, cross_origin
 from flask_sitemap import Sitemap
 
 
-
-# Global Variables
-UPLOAD_FOLDER = '/static/uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-
 # Configure application
 app = Flask(__name__)
 CORS(app, support_credentials=True)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Sitemap
 ext = Sitemap(app=app)
@@ -45,25 +39,11 @@ def after_request(response):
 def index():
     if request.method == "POST":
         # POST method
-        print("post method called")
+        print("Post method called")
         return redirect("/")
     else:
         # GET method
         return render_template('index.html')
-
-# Upload?
-@app.route("/static/uploads", methods=["POST"])
-@cross_origin(supports_credentials=True)
-def upload():
-    print()
-    return redirect("/")
-
-@app.route('/uploader', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        f = request.files['file']
-        f.save("static/uploads/" + f.filename)
-        return 'file uploaded successfully'
 
 
 # Contact Page
@@ -71,17 +51,11 @@ def upload_file():
 def contact_page():
     return render_template('contact.html')
 
+
 # Terms Page
 @app.route("/terms")
 def terms_page():
     return render_template('terms.html')
-
-# File save?
-@app.route("/filesave", methods=['POST'])
-def list_files():
-    f = request.files['file']
-    f.save("static/uploads/" + f.filename)
-    return jsonify(files)
 
 
 # Sitemap extension
