@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*!
 * Image Resize 
 * Copyright 2022
@@ -8,15 +9,38 @@
 :root {
   --border-width: 2px;
   --border-radius: 10px;
+  /* Black */
+  --gr-05: url("static/assets/gr05.svg");
+  --gr-06: url("static/assets/gr06.svg");
   --color-theme-0: black;
-  --color-theme-1: #242424;
-  --color-theme-2: #48494b;
-  --color-theme-3: #6f6f6f;
-  --color-theme-4: #7e7e7e;
-  --color-theme-8: #b3b3b3;
-  --color-theme-9: #e1e1e1;
+  --color-theme-1: hsl(0, 0%, 10%);
+  --color-theme-2: hsl(0, 0%, 20%);
+  --color-theme-3: hsl(0, 0%, 30%);
+  --color-theme-4: hsl(0, 0%, 40%);
+  --color-theme-5: hsl(0, 0%, 50%);
+  --color-theme-6: hsl(0, 0%, 60%);
+  --color-theme-7: hsl(0, 0%, 70%);
+  --color-theme-8: hsl(0, 0%, 80%);
+  --color-theme-9: hsl(0, 0%, 90%);
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
+  /* White */
+  /**/
+  --gr-05: url("static/assets/gr05_black.svg");
+  --gr-06: url("static/assets/gr06_black.svg");
+  --color-theme-0: white;
+  --color-theme-1: hsl(0, 0%, 95%);
+  --color-theme-2: hsl(0, 0%, 90%);
+  --color-theme-3: hsl(0, 0%, 85%);
+  --color-theme-4: hsl(0, 0%, 70%);
+  --color-theme-5: hsl(0, 0%, 50%);
+  --color-theme-6: hsl(0, 0%, 40%);
+  --color-theme-7: hsl(0, 0%, 30%);
+  --color-theme-8: hsl(0, 0%, 20%);
+  --color-theme-9: hsl(0, 0%, 10%);
+  --color-theme-10: black;
+  --color-intense-1: #ec4e6e;
+  
 }
 
 /* General Style */
@@ -24,17 +48,12 @@ body {
   font-family: "Lato", Helvetica, sans-serif;
   background-color: var(--color-theme-0);
   background: var(--color-theme-0);
-  /*background: linear-gradient(
-    156deg,
-    rgba(50, 63, 93, 1) 0%,
-    rgba(48, 61, 90, 1) 25%,
-    rgba(8, 11, 16, 1) 100%
-  );*/
   min-height: 100vh;
+  color: var(--color-theme-10);
 }
 .navbar,
 footer {
-  background-color: var(--color-theme-1);
+  background-color: var(--color-theme-2);
 }
 .nav-link {
   color: var(--color-theme-10);
@@ -48,17 +67,11 @@ footer {
 .spacer {
   height: 30px;
 }
-.transp-backgr {
-  background-color: rgba(255, 255, 255, 0.15);
-}
 h6 {
   font-weight: 700;
 }
-.text-gray {
-  color: #999999;
-}
-.text-gray:hover {
-  color: #333333;
+hr {
+  margin: 0.4em;
 }
 
 /* Upload Containers, Box and Upload */
@@ -71,12 +84,10 @@ h6 {
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
   z-index: 10;
-  min-height: 200px;
 }
 .options-box {
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
-  min-height: 200px;
 }
 .show-container {
 }
@@ -161,36 +172,22 @@ h6 {
   color: var(--color-intense-1);
 }
 
-/* FilePond adaptation */
-.filepond--root {
-  height: 300px;
-}
-.filepond--root .filepond--drop-label {
-  height: 300px;
-  color: var(--color-theme-9);
-  font-size: 1.4em;
-}
-/*
-.filepond--root .filepond--credits {
-  display: none;
-}
-*/
-.filepond--file-action-button {
-  cursor: pointer;
-}
-.filepond--panel-root {
-  background-color: var(--color-theme-2) !important;
-  /*border: var(--border-width) solid var(--color-intense-1);*/
-}
 
 /* Buttons and options */
+.bi {
+  pointer-events:none;
+}
 .bi-mr {
   /* Icons in button */
   padding-right: 10px;
 }
-.btn-resize-mode-arrow {
+.arr-resize-mode {
   color: var(--color-intense-1);
+  opacity: 0;
   font-size: 1.4em;
+}
+.arr-resize-mode-sel {
+  opacity: 1;
 }
 .btn {
   cursor: pointer;
@@ -198,14 +195,13 @@ h6 {
 .btn-resize-mode {
   padding: 7px;
   width: 100%;
-  border: solid 2px black;
+  border: solid 2px var(--color-theme-1);
   border-radius: var(--border-radius);
-  background-color: var(--color-theme-0);
-  border-color: var(--color-theme-0);
+  background-color: var(--color-theme-1);
   color: var(--color-theme-10);
   
 }
-.btn-resize-mode:hover, .btn-resize-mode-selected {
+.btn-resize-mode:hover, .btn-resize-mode-sel {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
@@ -222,8 +218,22 @@ h6 {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
+.btn-update {
+  padding: 7px;
+  width: 100%;
+  border: solid 2px black;
+  border-radius: var(--border-radius);
+  background-color: var(--color-theme-0);
+  color: var(--color-theme-10);
+}
+.btn-update:hover {
+  color: var(--color-intense-1);
+}
 .btn-100 {
   width: 100%;
+}
+.preset-list {
+  
 }
 .text-small {
   font-size: 0.85em;
@@ -262,13 +272,13 @@ h6 {
 .gr-04a,
 .gr-04b,
 .gr-04c {
-  background-image: url("../assets/gr06.svg");
+  background-image: var(--gr-06);
   background-repeat: no-repeat;
   height: 150px;
   width: 150px;
 }
 .gr-01 {
-  background-image: url("../assets/gr05.svg");
+  background-image: var(--gr-05);
   background-repeat: no-repeat;
   background-position: -32px -10px;
   width: 110px;
@@ -320,6 +330,35 @@ h6 {
   }
 }
 
+
+/* FilePond adaptation */
+.filepond--root {
+  /*height: 500px;*/
+}
+.filepond--root .filepond--drop-label {
+  color: var(--color-theme-9);
+  font-size: 1.4em;
+}
+.filepond--file-action-button {
+  cursor: pointer;
+}
+.filepond--panel-root {
+  background-color: var(--color-theme-2) !important;
+  border: var(--border-width) solid var(--color-theme-3);
+}
+/* 
+.filepond--root .filepond--drop-label {
+  height: 500px;<<<<< CODE NOT WORKING ??
+  color: var(--color-theme-9);
+  font-size: 1.4em;
+}*/
+/*
+.filepond--root .filepond--credits {
+  display: none;
+}
+*/
+
+
 /* Mobile Adjustemnts Portrait */
 @media only screen and (max-width: 600px) {
   .gr-01 {
@@ -335,30 +374,7 @@ h6 {
     height: 75px;
     margin: 3px;
   }
-  .force-100 {
-    
+  .arr-resize-mode {
+    display: none;
   }
-}
-
-
-/* TEMP */
-#show-container {
-}
-#imageResizedContainer,
-#imagePrevContainer {
-}
-#show-single {
-}
-#show-multiple {
-}
-#example-images-container {
-}
-
-#options-box-mode {
-}
-#options-box-preset {
-}
-#options-box-custom-size {
-}
-#options-box-percentage {
 }
