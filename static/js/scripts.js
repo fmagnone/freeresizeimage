@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const containModeCheckbox = document.getElementById("containModeCheckbox");
 	const autoForceWidthHeightCheckbox = document.getElementById("autoForceWidthHeightCheckbox");
 	const backColorPicker = document.getElementById("backColorPicker");
+	const updateCheckbox = document.getElementById("updateCheckbox");
+	const updateButton = document.getElementById("updateButton");
 	// --> Example images
 	const exampleImage = document.getElementsByClassName("example-image");
 	// --> Show
@@ -29,9 +31,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const showDescription = document.getElementById("show-description");
 	const showSingleBox = document.getElementById("show-single");
 	const showMultipleBox = document.getElementById("show-multiple");
-	// --> TEMP (to be deleted)
-	const updateButton = document.getElementById("updateButton");
-	const updateCheckbox = document.getElementById("updateCheckbox");
 
 
 	// Variables
@@ -44,9 +43,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var resizingFactor = 0.5;
 	var resizingWidth = 0;
 	var resizingHeight = 0;
-	var autoUpdate = true;
+	var description = " ";
 	var minSizeValue = 50;
-	var description = " " // "All auto resized and croped to a standard size of 16:9 Widescreen."
+	var maxSizeValue = 3000; // TODO --> Assign a max size for user input
+	var autoUpdate = true;
 
 
 	// Image Class Constructor
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// Show single or multiple
 			if (validLenght == 1) {
 				// Update Description
-				showTitle.innerHTML = "Your resized image"; 
+				showTitle.innerHTML = "Your resized image";
 				// Show single image only
 				showSingleBox.style.display = "flex";
 				showMultipleBox.style.display = "none";
@@ -259,26 +259,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	function dataDisplay() {
 		// General Description
 		
-		//var imageList = [];
-		//inputType = "percentage";
-		//cropMode = true;
-		//forceMode = false;
-		//var resizingFactor = 0.5;
-		//var resizingWidth = 0;
-		//var resizingHeight = 0;
-		
-		// "All auto resized and croped to a standard size of 16:9 Widescreen."
-
-		
-		description = "All images auto resized and croped to a standard size of 16:9 Widescreen." 
-			+ "</br> Input Type: " + inputType 
-			+ "</br> crop mode: " + cropMode 
+		// Base data not defined
+		description = "All images auto resized."
+			+ "</br> Input Type: " + inputType
+			+ "</br> crop mode: " + cropMode
 			+ "</br> resizing factor: " + resizingFactor * 100 + "%"
 			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
-			+ "</br> force mode: " + forceMode;
-
+			+ "</br> force mode: " + forceMode; // TODO --> To be removed
+		if (inputType == "percentage") {
+			description = "All images auto resized and croped to " + parseInt(resizingFactor * 100) + "% of it original percentage."
+		}; 
+		if (inputType == "fixed") {
+			let txt1, txt2;
+			if (cropMode) { txt1 = "croped to" } else { txt1 = "contained in" };
+			if (cropMode) { txt1 = "croped to" } else { txt1 = "contained in" };
+			description = "All images are auto resized and " + txt1 + " a standard or custom size."
+			// "All auto resized and croped to a standard size of 16:9 Widescreen."
+			// TODO --> Complete all descriptions
+		};
+		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0 ) {
+			description = "All images are <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + "."
+		};
 		showDescription.innerHTML = description;
-		
+
 
 		// Images size tag and description
 		for (i in imageList) {
@@ -437,7 +440,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		m_siz.innerHTML = "0x0";
 		m_img.id = "m_img_" + id;
 		m_img.className = "singleImage";
-		m_img.src = URL.createObjectURL(fileItem.file);		
+		m_img.src = URL.createObjectURL(fileItem.file);
 		m_txt.innerHTML = "Image description";
 		m_txt.id = "m_txt_" + id;
 		m_btn.innerHTML = "<i class='bi bi-download bi-mr'></i> Download";
@@ -563,12 +566,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 	autoForceWidthHeightCheckbox.onchange = function () {
 		if (this.checked) {
+			inputType = "forced";
 			forceMode = true;
 		}
 		else {
+			inputType = "fixed";
 			forceMode = false;
-			clearValues();
-			clearStyles();
+			//clearValues();
+			//clearStyles();
 		}
 		if (updateCheckbox.checked) { updateImagesResize() };
 	}
@@ -593,16 +598,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	};
 	inputWidth.onchange = function () {
 		// Check user input
-		if (this.value < minSizeValue) {
-			console.log("Width min value: " + minSizeValue);
-			this.value = "";
-			//return;
-		}
-		if (isNaN(this.value)) {
-			console.log("Width should be a numeric value");
-			this.value = "";
-		}
-
+		this.value = preventUserMinMax(this.value, "Width");
+		
 		// Update values
 		let i = this.value;
 		let z = inputHeight.value;
@@ -632,15 +629,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	};
 	inputHeight.onchange = function () {
 		// Check user input
-		if (this.value < minSizeValue) {
-			console.log("Height min value: " + minSizeValue);
-			this.value = "";
-			//return;
-		}
-		if (isNaN(this.value)) {
-			console.log("Height should be a numeric value");
-			this.value = "";
-		}
+		this.value = preventUserMinMax(this.value, "Height");
 
 		// Update values
 		let i = this.value;
@@ -693,6 +682,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize() };
 	}
+	function preventUserMinMax(value, text) {
+		if (isNaN(value)) {
+			console.warn(text + " should be a numeric value."); // TODO --> Tell to the user
+			return "";
+		}
+		if (value < minSizeValue) {
+			console.warn(text + " of " + value + " px is too small, min value is " + minSizeValue + " px."); // TODO --> Tell to the user
+			return "";
+		}
+		if (value > maxSizeValue) {
+			console.warn(text + " of " + value + " px is too big, max value is " + maxSizeValue + " px."); // TODO --> Tell to the user
+			return "";
+		}
+		return value;
+	}
 
 
 	// --------------------------------------------------- //
@@ -707,6 +711,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		let img_m = document.getElementById("m_img_" + id);
 
 		// Call the resizer
+		console.log("Resizing with:....", inputType, cropMode)
 		let canvas = downScaleImage(img_old, inputType, cropMode, backColor, resizingFactor, resizingWidth, resizingHeight);
 
 		// Prevent from error in downsampling
@@ -728,7 +733,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// Update imagelist data and reload data displayed
 			imageList[id].res_old = img_old.width + " x " + img_old.height;
 			imageList[id].res_new = img_new.width + " x " + img_new.height;
-			
+
 			// Update data displayed
 			dataDisplay();
 
@@ -748,6 +753,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		for (let i in imageList) {
 			if (imageList[i].valid == true) {
 				let id = parseInt(i);
+				//console.log("CALL", id)
 				resizeImage(id);
 			}
 		}
@@ -810,8 +816,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// Update show status
 			let off = true;
 			for (let i in imageList) { if (imageList[i].valid == true) { off = false; } }
-			if (off) { 
-				displayState(false) 
+			if (off) {
+				displayState(false)
 			} else {
 				displayState(true);
 			}
@@ -828,8 +834,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	};
 
 	// TEMP auto testing
-	pond.addFile("static/img/porsche.jpg");
-	pond.addFile("static/img/couple.jpg");
+	//pond.addFile("static/img/porsche.jpg");
+	//pond.addFile("static/img/couple.jpg");
 
 	// DOM info
 	console.log('DOM fully loaded and parsed');
