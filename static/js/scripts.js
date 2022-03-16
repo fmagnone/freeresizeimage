@@ -1,7 +1,6 @@
 // DOM load
 document.addEventListener('DOMContentLoaded', (event) => {
 
-
 	// Elements
 	// --> General
 	const imagesContainer = document.getElementById("showContainer");
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// Variables
 	var presetSizeCategorySet = new Set();
 	var imageList = [];
-	var inputType = "percentage";
+	var inputType = "";
 	var cropMode = true;
 	var forceMode = false;
 	var backColor = "#f5f5f5";
@@ -45,9 +44,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var resizingHeight = 0;
 	var description = " ";
 	var minSizeValue = 50;
-	var maxSizeValue = 3000; // TODO --> Assign a max size for user input
-	var autoUpdate = true;
-
+	var maxSizeValue = 3000;
+	
 
 	// Image Class Constructor
 	class imageData {
@@ -201,13 +199,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// Listeners and global functions
 	function clearValues() {
 		// Clear fixed width and height input and slider input
+		// Initialize
 		resizingFactor = 0.5;
 		resizingWidth = 0;
 		resizingHeight = 0;
 		inputSlider.value = 50;
 		inputWidth.value = "";
 		inputHeight.value = "";
-		inputType = "percentage";
+		inputType = "fixed";
 	}
 	function clearStyles() {
 		// Clear style in all selectable elements
@@ -255,7 +254,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			clearValues();
 		}
 	}
-	displayState(false);
 	function dataDisplay() {
 		// General Description
 		
@@ -267,7 +265,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
 			+ "</br> force mode: " + forceMode; // TODO --> To be removed
 		if (inputType == "percentage") {
-			description = "All images auto resized and croped to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original percentage."
+			description = "All images auto resized and croped to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size."
 		}; 
 		if (inputType == "fixed") {
 			let txt1, txt2;
@@ -286,12 +284,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Images size tag and description
 		for (i in imageList) {
 			if (imageList[i].valid) {
+				let n = parseInt(i) + 1;
 				let s_text = document.getElementById("s_txt_" + i);
 				let s_size = document.getElementById("s_siz_" + i);
 				let m_text = document.getElementById("m_txt_" + i);
 				let m_size = document.getElementById("m_siz_" + i);
-				s_text.innerHTML = "Resized image No. " + i + " [" + imageList[i].ext_old + "]";
-				m_text.innerHTML = "Resized image No. " + i + " (" + imageList[i].ext_old + ")";
+				s_text.innerHTML = "Resized image No. " + n + " in " + imageList[i].ext_old + ".";
+				m_text.innerHTML = "Resized image No. " + n + " in " + imageList[i].ext_old + ".";
 				s_size.innerHTML = imageList[i].res_new;
 				m_size.innerHTML = imageList[i].res_new;
 
@@ -343,7 +342,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		};
 		*/
 	};
-	dataDisplay();
 	function checkAutoUpdateMode() {
 		// Check defined mode when start app
 		if (autoUpdate == true) {
@@ -355,7 +353,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			updateButton.style.display = "block";
 		}
 	}
-	checkAutoUpdateMode();
 	for (var i = 0; i < exampleImage.length; i++) {
 		// Add example image event listeners
 		exampleImage[i].onclick = function () {
@@ -520,8 +517,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			optionsBoxPrecentage.style.display = "block";
 		};
 	}
-	resizeModeDisplay("btn-mode-standard");
-
 	updateCheckbox.onchange = function () {
 		if (this.checked) {
 			autoUpdate = true;
@@ -837,10 +832,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	//pond.addFile("static/img/porsche.jpg");
 	//pond.addFile("static/img/couple.jpg");
 
+
+	// Initialize main functions and variables
+	var autoUpdate = true;
+	displayState(false);
+	dataDisplay();
+	resizingWidth = 900;
+	resizingHeight = 600;
+	checkAutoUpdateMode();
+	resizeModeDisplay("btn-mode-standard"); // TODO --> ??? what is this for
+
+	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
+
+
 	// DOM info
-	console.log('DOM fully loaded and parsed');
-
-
+	//console.log('DOM fully loaded and parsed');
 });
 
 

@@ -8,7 +8,7 @@ function downScaleImage(img, inputType, cropMode, backColor, scalePercentage, fi
     sw = img.width;
     sh = img.height;
     dx = 0, dy = 0;
-    cw = 150, ch = 100;
+    cw = 600, ch = 400;
 
     // Define canvas width and height depending on type
     if (inputType == "percentage") {
