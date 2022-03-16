@@ -24,12 +24,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	const backColorPicker = document.getElementById("backColorPicker");
 	// --> Example images
 	const exampleImage = document.getElementsByClassName("example-image");
+	// --> Show
+	const showTitle = document.getElementById("show-title");
+	const showDescription = document.getElementById("show-description");
+	const showSingleBox = document.getElementById("show-single");
+	const showMultipleBox = document.getElementById("show-multiple");
 	// --> TEMP (to be deleted)
 	const updateButton = document.getElementById("updateButton");
 	const updateCheckbox = document.getElementById("updateCheckbox");
-	const downloadContainer = document.getElementById("downloadContainer");
-	const dataContainer = document.getElementById("dataContainer");
-
 
 
 	// Variables
@@ -44,23 +46,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var resizingHeight = 0;
 	var autoUpdate = true;
 	var minSizeValue = 50;
+	var description = " " // "All auto resized and croped to a standard size of 16:9 Widescreen."
 
 
 	// Image Class Constructor
 	class imageData {
 		constructor(
+			//id, 
 			name, url,
 			id_btn, id_file,
 			size_old, size_new,
-			id_img_old, id_img_new,
 			ext_old, ext_new,
 			res_old, res_new,
 		) {
 			this.valid = true;
 			this.name = name;
 			this.url = url;
-			this.id_img_old = id_img_old;
-			this.id_img_new = id_img_new;
 			this.id_btn = id_btn;
 			this.id_file = id_file;
 			this.ext_old = ext_old;
@@ -81,15 +82,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		new_image.name = name;
 		new_image.url = url;
 		new_image.size_old = size_old;
-		new_image.ext_old = ext_old;
+		new_image.ext_old = ext_old.toUpperCase();
+		new_image.ext_new = "-";
 		new_image.id_file = id_file;
-		new_image.id_img_new = "img_res_" + id;
-		new_image.id_img_old = "img_prev_" + id;
-		new_image.id_btn = "download_" + id;
-		new_image.ext_new = "ext new undefined";
-		new_image.size_new = "? (not calculated)";
-		new_image.res_old = "res old undefined";
-		new_image.res_new = "res new undefined";
+		//new_image.id_btn = "download_" + id;
+		new_image.size_new = "? (not calculated yet)";
+		new_image.res_old = "0x0";
+		new_image.res_new = "0x0";
 
 		// Push data
 		imageList.push(new_image);
@@ -98,12 +97,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		return id;
 	}
 	function removeImageData(id_file) {
-		for (var id in imageList) {
+		for (let id in imageList) {
 			if (imageList[id].id_file == id_file) {
 				imageList[id].valid = false;
-				document.getElementById(imageList[id].id_img_old).remove();
-				document.getElementById(imageList[id].id_img_new).remove();
-				document.getElementById(imageList[id].id_btn).remove();
+
+				let img_pre = document.getElementById("img_pre_" + id);
+				let img_res = document.getElementById("img_res_" + id);
+				let s_div = document.getElementById("s_div_" + id);
+				let m_div = document.getElementById("m_div_" + id);
+
+				if (isNaN(img_pre)) { s_div.remove() };
+				if (isNaN(img_res)) { s_div.remove() };
+				if (isNaN(s_div)) { s_div.remove() };
+				if (isNaN(m_div)) { m_div.remove() };
+
 				return;
 			}
 		}
@@ -204,17 +211,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 	function clearStyles() {
 		// Clear style in all selectable elements
-		inputSlider.classList.remove('selected');
-		inputWidth.classList.remove('selected');
-		inputHeight.classList.remove('selected');
+		inputSlider.classList.remove('selected'); // TODO --> Update to css
+		inputWidth.classList.remove('selected');  // TODO --> Update to css
+		inputHeight.classList.remove('selected');  // TODO --> Update to css
 		for (i in presetSizeDataList) {
 			let element = document.getElementById(presetSizeDataList[i].name);
-			element.classList.remove('selected');
+			element.classList.remove("preset-size-selected");
 		};
 	}
 	function displayState(show) {
 		if (show) {
-			// Show images
+			// Hide resized and prev images from user
+			imageResizedContainer.style.display = "none";
+			imagePrevContainer.style.display = "none";
+
+			// Check valid lenght count
+			let validLenght = 0;
+			for (i in imageList) { if (imageList[i].valid) { validLenght += 1 } };
+
+			// Show single or multiple
+			if (validLenght == 1) {
+				// Update Description
+				showTitle.innerHTML = "Your resized image"; 
+				// Show single image only
+				showSingleBox.style.display = "flex";
+				showMultipleBox.style.display = "none";
+			} else if (validLenght > 1) {
+				// Update Description
+				showTitle.innerHTML = "Your " + validLenght + " resized images";
+				// Show multiple images only
+				showSingleBox.style.display = "none";
+				showMultipleBox.style.display = "flex";
+			};
+
+			// Show image container
 			imagesContainer.style.display = "block";
 			exampleImageContainer.style.display = "none";
 		}
@@ -224,14 +254,62 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			exampleImageContainer.style.display = "block";
 			clearValues();
 		}
-
-		// Always hide resized and prev images from user
-		imageResizedContainer.style.display = "none";
-		imagePrevContainer.style.display = "none";
 	}
 	displayState(false);
 	function dataDisplay() {
+		// General Description
+		
+		//var imageList = [];
+		//inputType = "percentage";
+		//cropMode = true;
+		//forceMode = false;
+		//var resizingFactor = 0.5;
+		//var resizingWidth = 0;
+		//var resizingHeight = 0;
+		
+		// "All auto resized and croped to a standard size of 16:9 Widescreen."
+
+		
+		description = "All images auto resized and croped to a standard size of 16:9 Widescreen." 
+			+ "</br> Input Type: " + inputType 
+			+ "</br> crop mode: " + cropMode 
+			+ "</br> resizing factor: " + resizingFactor * 100 + "%"
+			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
+			+ "</br> force mode: " + forceMode;
+
+		showDescription.innerHTML = description;
+		
+
+		// Images size tag and description
+		for (i in imageList) {
+			if (imageList[i].valid) {
+				let s_text = document.getElementById("s_txt_" + i);
+				let s_size = document.getElementById("s_siz_" + i);
+				let m_text = document.getElementById("m_txt_" + i);
+				let m_size = document.getElementById("m_siz_" + i);
+				s_text.innerHTML = "Resized image No. " + i + " [" + imageList[i].ext_old + "]";
+				m_text.innerHTML = "Resized image No. " + i + " (" + imageList[i].ext_old + ")";
+				s_size.innerHTML = imageList[i].res_new;
+				m_size.innerHTML = imageList[i].res_new;
+
+
+				/*
+				img_data.innerHTML = "IMAGE " + i + " </br>";
+				img_data.innerHTML += "File name: " + imageList[i].name + " </br>";
+				img_data.innerHTML += "File extension: " + imageList[i].ext_old + " </br>";
+				img_data.innerHTML += "Size original: " + imageList[i].size_old + " bytes </br>";
+				img_data.innerHTML += "Size new: " + imageList[i].size_new + " bytes </br>";
+				img_data.innerHTML += "Resolution original: " + imageList[i].res_old + " px </br>";
+				img_data.innerHTML += "Resolution new: " + imageList[i].res_new + " px </br>";
+				img_data.innerHTML += "</br></br>"
+				*/
+			}
+		};
+
+
+		// TODO --> NEXT ___ TO BE REMOVED
 		// Clear
+		/*
 		dataContainer.innerHTML = "";
 		let empty = true;
 
@@ -252,7 +330,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				//console.log(imageList[i]);
 				empty = false;
 			}
-		}
+		};
 
 		// No valid images, delete all data
 		if (empty) {
@@ -260,6 +338,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			no_data.innerHTML = "No data to be displayed"
 			dataContainer.appendChild(no_data);
 		};
+		*/
 	};
 	dataDisplay();
 	function checkAutoUpdateMode() {
@@ -280,39 +359,116 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			addCustomPond(this.src);
 		}
 	};
-	function addDownloadButton(id) {
-		// Add button variable
-		let new_button = document.createElement("button");
-		new_button.id = imageList[id].id_btn;
-		new_button.innerHTML = "Download " + imageList[id].id_img_old + " [" + imageList[id].name + "]";
-		// Add listener
-		new_button.onclick = function () {
-			//filename = "freeimageresizer_" + resizingWidth + "x" + resizingHeight + "_" + imageList[id].name;
-			filename = "freeimageresizer_" + imageList[id].name;
+	function addResizedImageToDOM(fileItem, id) {
+		// Add hidden images to DOM
+		var new_res = document.createElement("img");
+		new_res.id = "img_res_" + id;
+		new_res.className = "singleImage";
+		new_res.src = URL.createObjectURL(fileItem.file);
+		imageResizedContainer.appendChild(new_res);
+	}
+	function addResizedImageToDOM_ShowSingle(fileItem, id) {
+		// Add all images to single
+		var s_container = document.createElement("div");
+		var s_column1 = document.createElement("div");
+		var s_column2 = document.createElement("div");
+		var s_show = document.createElement("div");
+		//var s_plh = document.createElement("span");
+		var s_siz = document.createElement("div");
+		var s_img = document.createElement("img");
+		var s_txt = document.createElement("p");
+		var s_btn = document.createElement("button");
+		s_container.id = "s_div_" + id;
+		s_container.classList.add("row");
+		s_column1.classList.add("col-sm-8");
+		s_column2.classList.add("col-sm");
+		s_show.classList.add("show-single-image");
+		//s_plh.classList.add("placeholder");
+		//s_plh.classList.add("col-12");
+		//s_plh.style.height = "60vh";
+		s_siz.id = "s_siz_" + id;
+		s_siz.classList.add("show-size-tag");
+		s_siz.innerHTML = "0x0";
+		s_img.id = "s_img_" + id;
+		s_img.className = "singleImage";
+		s_img.src = URL.createObjectURL(fileItem.file);
+		s_txt.innerHTML = "Image description";
+		s_txt.id = "s_txt_" + id;
+		s_btn.innerHTML = "<i class='bi bi-download bi-mr'></i> Download";
+		s_btn.type = "button";
+		s_btn.id = "s_btn_" + id;
+		s_btn.onclick = function () {
+			// TODO --> review download for iphone, should open image?
+			let filename = "freeimageresizer_" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
 			element.setAttribute('href', url);
 			element.setAttribute('download', filename);
 			document.body.appendChild(element);
 			element.click();
-			//console.log("Downloaded: ", new_button.id);
+			console.log("Download with name: ", filename);
 		}
-		// Append element to DOM
-		downloadContainer.appendChild(new_button);
-
+		s_btn.classList.add("btn");
+		s_btn.classList.add("btn-download");
+		s_show.appendChild(s_img);
+		//s_show.appendChild(s_plh);
+		s_show.appendChild(s_siz);
+		s_column1.appendChild(s_show);
+		s_column2.appendChild(s_txt);
+		s_column2.appendChild(s_btn);
+		s_container.appendChild(s_column1);
+		s_container.appendChild(s_column2);
+		showSingleBox.appendChild(s_container);
 	}
-	function addResizedImageToDOM(fileItem, id) {
-		// Add image to DOM
-		var new_img = document.createElement("img");
-		new_img.id = "img_res_" + id;
-		new_img.className = "singleImage";
-		new_img.src = URL.createObjectURL(fileItem.file);
-		imageResizedContainer.appendChild(new_img);
+	function addResizedImageToDOM_ShowMultiple(fileItem, id) {
+		// Add to multiple
+		var m_container = document.createElement("div");
+		var m_show = document.createElement("div");
+		var m_siz = document.createElement("div");
+		var m_img = document.createElement("img");
+		var m_txt = document.createElement("p");
+		var m_btn = document.createElement("button");
+		m_container.classList.add("col-sm-3");
+		m_container.classList.add("my-4");
+		m_container.id = "m_div_" + id;
+		m_show.classList.add("show-multiple-image");
+		m_siz.id = "m_siz_" + id;
+		m_siz.classList.add("show-size-tag");
+		m_siz.innerHTML = "0x0";
+		m_img.id = "m_img_" + id;
+		m_img.className = "singleImage";
+		m_img.src = URL.createObjectURL(fileItem.file);		
+		m_txt.innerHTML = "Image description";
+		m_txt.id = "m_txt_" + id;
+		m_btn.innerHTML = "<i class='bi bi-download bi-mr'></i> Download";
+		m_btn.type = "button";
+		m_btn.id = "m_btn_" + id;
+		m_btn.onclick = function () {
+			// TODO --> review download for iphone, should open image?
+			let filename = "freeimageresizer_" + imageList[id].name;
+			let url = imageList[id].url;
+			var element = document.createElement('a');
+			element.setAttribute('href', url);
+			element.setAttribute('download', filename);
+			document.body.appendChild(element);
+			element.click();
+			console.log("Download with name: ", filename);
+		}
+		m_btn.classList.add("btn");
+		m_btn.classList.add("btn-download");
+		m_show.appendChild(m_img);
+		m_show.appendChild(m_siz);
+		m_container.appendChild(m_show);
+		m_container.appendChild(m_txt);
+		m_container.appendChild(m_btn);
+		showMultipleBox.appendChild(m_container);
+		// TODO --> CONFIG TEXT
+		// TODO --> CONFIG BUTTON
 	}
 	function addPrevImageToDOM(fileItem, id) {
-		// Add image to DOM
+		// Add hidden images to DOM
 		var new_img = document.createElement("img");
-		new_img.id = "img_prev_" + id;
+		new_img.id = "img_pre_" + id;
 		new_img.className = "singleImage";
 		new_img.src = URL.createObjectURL(fileItem.file);
 		imagePrevContainer.appendChild(new_img);
@@ -333,10 +489,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			document.getElementById(s).classList.remove(sc);
 			document.getElementById(c).classList.remove(sc);
 			document.getElementById(p).classList.remove(sc);
-			document.getElementById(s+"-ar").classList.remove(ac);
-			document.getElementById(c+"-ar").classList.remove(ac);
-			document.getElementById(p+"-ar").classList.remove(ac);
-		 	optionsBoxMode.style.display = "none";
+			document.getElementById(s + "-ar").classList.remove(ac);
+			document.getElementById(c + "-ar").classList.remove(ac);
+			document.getElementById(p + "-ar").classList.remove(ac);
+			optionsBoxMode.style.display = "none";
 			optionsBoxPreset.style.display = "none";
 			optionsBoxCustomSize.style.display = "none";
 			optionsBoxPrecentage.style.display = "none";
@@ -345,28 +501,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		if (mode == pre + "standard") {
 			// Mode Standard
 			document.getElementById(s).classList.add(sc);
-			document.getElementById(s+"-ar").classList.add(ac);
+			document.getElementById(s + "-ar").classList.add(ac);
 			optionsBoxMode.style.display = "block";
 			optionsBoxPreset.style.display = "block";
 		} else if (mode == "btn-mode-custom") {
 			// Mode Custom
 			document.getElementById(c).classList.add(sc);
-			document.getElementById(c+"-ar").classList.add(ac);
+			document.getElementById(c + "-ar").classList.add(ac);
 			optionsBoxMode.style.display = "block";
 			optionsBoxCustomSize.style.display = "block";
 		} else if (mode == "btn-mode-percentage") {
 			// Mode Percentage
 			document.getElementById(p).classList.add(sc);
-			document.getElementById(p+"-ar").classList.add(ac);
+			document.getElementById(p + "-ar").classList.add(ac);
 			optionsBoxPrecentage.style.display = "block";
 		};
 	}
 	resizeModeDisplay("btn-mode-standard");
-
-
-
-
-
 
 	updateCheckbox.onchange = function () {
 		if (this.checked) {
@@ -413,26 +564,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	autoForceWidthHeightCheckbox.onchange = function () {
 		if (this.checked) {
 			forceMode = true;
-			//cropModeCheckbox.checked = false;
-			//containModeCheckbox.checked = false;
 		}
 		else {
 			forceMode = false;
 			clearValues();
 			clearStyles();
-			//updateImagesResize();
-			//forceModeCheckbox.checked = false;
-			//cropMode = "crop";
-			//cropModeCheckbox.checked = true;
 		}
-
 		if (updateCheckbox.checked) { updateImagesResize() };
 	}
 	updateButton.onclick = function () {
 		// Resize all images when update button is clicked
 		updateImagesResize();
 	}
-	inputSlider.oninput = function () {
+	inputSlider.onchange = function () {
 		// Update values
 		let i = this.value;
 		clearValues();
@@ -442,7 +586,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected");
+		this.classList.add("selected"); // TODO --> Add to new style css
 
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize() };
@@ -475,7 +619,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected");
+		this.classList.add("selected"); // TODO --> Update to css new style
 		inputHeight.classList.add("selected");
 
 		// Update values and styles if forced
@@ -514,7 +658,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected");
+		this.classList.add("selected"); // TODO --> Update to new css style
 		inputWidth.classList.add("selected");
 
 		// Update values and styles if forced
@@ -544,7 +688,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// Update styles
 		clearStyles();
 		let element = document.getElementById(button_id);
-		element.classList.add("selected");
+		element.classList.add("preset-size-selected");
 
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize() };
@@ -554,11 +698,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// --------------------------------------------------- //
 	// Resizer caller
 	function resizeImage(id) {
-		console.log("Resize call id " + id, inputType);
+		//console.log("Resize call id " + id, inputType);
 
 		// Assign img to variable
-		let img_old = document.getElementById(imageList[id].id_img_old);
-		let img_new = document.getElementById(imageList[id].id_img_new);
+		let img_old = document.getElementById("img_pre_" + id);
+		let img_new = document.getElementById("img_res_" + id);
+		let img_s = document.getElementById("s_img_" + id);
+		let img_m = document.getElementById("m_img_" + id);
 
 		// Call the resizer
 		let canvas = downScaleImage(img_old, inputType, cropMode, backColor, resizingFactor, resizingWidth, resizingHeight);
@@ -571,17 +717,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		// Assign the image
 		let type = "image/" + imageList[id].ext_old;
-		img_new.src = canvas.toDataURL(type);
+		let canvasData = canvas.toDataURL(type);
+		img_new.src = canvasData;
+		if (isNaN(img_s)) { img_s.src = canvasData };
+		img_m.src = canvasData;
 		imageList[id].url = img_new.src;
 
 		// Update imagelist data and reload data displayed
 		img_new.onload = function () {
+			// Update imagelist data and reload data displayed
 			imageList[id].res_old = img_old.width + " x " + img_old.height;
 			imageList[id].res_new = img_new.width + " x " + img_new.height;
-			//console.log(img_new.size);
-			//console.log("new", img_new.width, img_new.height); // img new tiene max width 100% y no carga el tamaño real
+			
 			// Update data displayed
 			dataDisplay();
+
+			// Placeholder
+			let placeholder = img_s.parentElement.getElementsByClassName("placeholder");
+			if (!placeholder) { placeholder.hidden = true };
+			//console.log(placeholder);
 		}
 
 		// Update data displayed
@@ -627,28 +781,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		onaddfile: (err, fileItem) => {
 			console.log("FP Add File Function called");
 
-
 			// Assign image to list
 			let id = saveImageData(fileItem.file.name, URL.createObjectURL(fileItem.file), fileItem.fileSize, fileItem.fileExtension, fileItem.id);
 
 			// Add images to DOM
 			addPrevImageToDOM(fileItem, id);
 			addResizedImageToDOM(fileItem, id);
+			addResizedImageToDOM_ShowSingle(fileItem, id)
+			addResizedImageToDOM_ShowMultiple(fileItem, id);
+			//if (imageList.length == 1) { addResizedImageToDOM_ShowSingle(fileItem, id) };
 
 			// Resize image and add to the list
 			if (autoUpdate) { resizeImage(id); }
 
 			// Add download button
-			addDownloadButton(id);
+			//addDownloadButton(id);
 
 			// Update show status
 			displayState(true);
-
 		},
 		// File has been removed
 		onremovefile: function (error, fileItem) {
 			console.log("FP Remove File Function called");
-
 
 			// Remove item from list and remove download button
 			removeImageData(fileItem.id);
@@ -656,11 +810,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// Update show status
 			let off = true;
 			for (let i in imageList) { if (imageList[i].valid == true) { off = false; } }
-			if (off) { displayState(false) }
+			if (off) { 
+				displayState(false) 
+			} else {
+				displayState(true);
+			}
 
 			// Update data display
 			dataDisplay();
-
 		},
 	});
 
@@ -671,8 +828,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	};
 
 	// TEMP auto testing
-	//pond.addFile("static/img/porsche.jpg");
-	//pond.addFile("static/img/couple.jpg");
+	pond.addFile("static/img/porsche.jpg");
+	pond.addFile("static/img/couple.jpg");
 
 	// DOM info
 	console.log('DOM fully loaded and parsed');

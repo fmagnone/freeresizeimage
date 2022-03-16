@@ -94,6 +94,7 @@ hr {
 .show-container img,
 .show-container .placeholder {
   border-radius: var(--border-radius);
+  max-width: 100%;
 }
 .show-box {
   background-color: var(--color-theme-3);
@@ -116,6 +117,7 @@ hr {
 }
 .show-multiple-image {
   position: relative;
+  margin-bottom: 10px;
 }
 .input-group-text {
   background-color: white;

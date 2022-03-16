@@ -13,8 +13,8 @@
             <div class="upload-box col-sm m-2">
                 <!-- FilePond Upload -->
                 <form method="POST">
-                    <input id="fileUpload" type="file" class="filepond" name="filepond" multiple data-allow-reorder="true"
-                        data-max-file-size="8MB" data-max-files="10">
+                    <input id="fileUpload" type="file" class="filepond" name="filepond" multiple
+                        data-allow-reorder="true" data-max-file-size="8MB" data-max-files="10">
                 </form>
             </div>
             <div class="options-box col-sm m-2 p-4">
@@ -25,9 +25,10 @@
                     <!-- Resize options: Mode selector -->
                     <div id="resizeMethod" class="row text-center">
                         <div class="col-12 col-md-4 my-1">
-                            <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel" type="button"><i
-                                    class="bi bi-badge-sd bi-mr"></i>Standard size</button>
-                            <i id="btn-mode-standard-ar" class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
+                            <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel"
+                                type="button"><i class="bi bi-badge-sd bi-mr"></i>Standard size</button>
+                            <i id="btn-mode-standard-ar"
+                                class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
                         </div>
                         <div class="col-12 col-md-4 my-1">
                             <button id="btn-mode-custom" class="btn btn-resize-mode" type="button"><i
@@ -95,7 +96,7 @@
                 </div>
 
                 <div id="updateModeContainer">
-                    Update mode: 
+                    Update mode:
                     <input id="updateCheckbox" type="checkbox"> auto-update
                     <button id="updateButton" class="btn btn-update">Update</button>
                 </div>
@@ -121,10 +122,10 @@
 
                 <!-- Show single image -->
                 <div class="row" id="show-single">
+                    <!--
                     <div class="col-sm-8">
                         <div class="show-single-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:50vh;"></span>
-                            <!-- <img src="static/img/porsche.jpg" style="width:100%;"> -->
                             <div class="show-size-tag">10000x10000</div>
                             </p>
                         </div>
@@ -134,9 +135,11 @@
                         <button type="button" id="show-single-download" class="btn btn-download"><i
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
+                    -->
                 </div>
                 <!-- Show multiple image -->
                 <div id="show-multiple" class="row">
+                    <!--
                     <div class="col-sm-3 my-4">
                         <div class="show-multiple-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
@@ -147,49 +150,8 @@
                         <button type="button" id="show-single-download" class="btn btn-download"><i
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
-                    <div class="col-sm-3 my-4">
-                        <div class="show-multiple-image">
-                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
-                            </p>
-                            <div class="show-size-tag">500x500</div>
-                        </div>
-                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
-                        <button type="button" id="show-single-download" class="btn btn-download"><i
-                                class="bi bi-download bi-mr"></i>Download</button>
-                    </div>
-                    <div class="col-sm-3 my-4">
-                        <div class="show-multiple-image">
-                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
-                            <div class="show-size-tag">500x500</div>
-                            </p>
-                        </div>
-                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
-                        <button type="button" id="show-single-download" class="btn btn-download"><i
-                                class="bi bi-download bi-mr"></i>Download</button>
-                    </div>
-                    <div class="col-sm-3 my-4">
-                        <div class="show-multiple-image">
-                            <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
-                            </p>
-                            <div class="show-size-tag">500x500</div>
-                        </div>
-                        <p id="show-single-description">Resized image No. 1 (JPG)</p>
-                        <button type="button" id="show-single-download" class="btn btn-download"><i
-                                class="bi bi-download bi-mr"></i>Download</button>
-                    </div>
+                    -->
                 </div>
-
-
-
-                <!-- Download buttons TEMP -->
-                <div id="downloadContainer">
-                    Download Files: (TEMP) </br>
-                </div>
-
-                <!-- Data container TEMP -->
-                <h4>Data (TEMP) </h4>
-                <div id="dataContainer"></div>
-                </br>
 
 
                 <!-- Hidden images for system -->
