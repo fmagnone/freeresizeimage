@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
 			+ "</br> force mode: " + forceMode; // TODO --> To be removed
 		if (inputType == "percentage") {
-			description = "All images auto resized and croped to " + parseInt(resizingFactor * 100) + "% of it original percentage."
+			description = "All images auto resized and croped to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original percentage."
 		}; 
 		if (inputType == "fixed") {
 			let txt1, txt2;
