@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			element.setAttribute('download', filename);
 			document.body.appendChild(element);
 			element.click();
-			
+
 			// Open in new window (mobile)
 			//var image = new Image();
 			//image.src = imageList[id].url;
@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// open in a new browser button?
 
 			console.log("Download with name: ", filename);
-			
+
 		}
 		s_btn.classList.add("btn");
 		s_btn.classList.add("btn-download");
@@ -867,9 +867,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// TODO --> HTML change sample images to thumb image (smaller)
 	// TODO --> Filepond order invert
 
-
+	
 	// DOM info
 	//console.log('DOM fully loaded and parsed');
 });
-
-

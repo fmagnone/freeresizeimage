@@ -38,7 +38,6 @@
     </script>
 
     <!-- Begin Inspectlet Asynchronous Code -->
-    <!--
     <script type="text/javascript">
         (function () {
             window.__insp = window.__insp || [];
@@ -49,7 +48,6 @@
             setTimeout(ldinsp, 0);
         })();
     </script>
-    -->
 
     <!-- Title -->
     <title>Resize your image for free online</title>
@@ -57,7 +55,7 @@
 
 <body>
     <!-- Responsive navbar-->
-    <nav class="navbar navbar-expand-lg shadow-sm sticky-sm-top navbar-dark">
+    <nav class="navbar navbar-expand-lg shadow-sm sticky-sm-top">
         <div class="container-fluid px-3">
             <a class="navbar-brand nav-link" href="/">Free Image Resizer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -73,6 +71,14 @@
                     </li>
                     <li class="nav-item ms-3">
                         <a class="nav-link {{ 'active' if active_page == '/contact'}}" href="contact">Contact Us</a>
+                    </li>
+                    <!-- Dark/Light toggle mode -->
+                    <li class="nav-item ms-3">
+                        <div class="mode-toggle noselect nav-link">
+                            <span class="label-dark">Dark</span> 
+                            <div class="toggle-switch"></div> 
+                            <span class="label-light">Light</span>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -119,6 +125,7 @@
     </footer>
 
     <!-- Core theme JS -->
+    <script src="static/js/colortheme.js"></script>
     <script src="static/js/presetsizes.js"></script>
     <script src="static/js/downsample.js"></script>
     <script type="module" src="static/js/scripts.js"></script>
