@@ -828,10 +828,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		pond.addFile(src);
 	};
 
-	// TEMP auto testing
-	//pond.addFile("static/img/porsche.jpg");
-	//pond.addFile("static/img/couple.jpg");
-
 
 	// Initialize main functions and variables
 	var autoUpdate = true;
@@ -841,6 +837,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	resizingHeight = 600;
 	checkAutoUpdateMode();
 	resizeModeDisplay("btn-mode-standard"); // TODO --> ??? what is this for
+
+	// TEMP auto testing
+	addCustomPond("static/img/porsche.jpg");
+	//pond.addFile("static/img/couple.jpg");
+
 
 	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
 
