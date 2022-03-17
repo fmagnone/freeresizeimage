@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		}
 		else {
 			// Go to original state
-			//resizeOptionsContainer.style.display = "none";
+			resizeOptionsContainer.style.display = "none";
 			imagesContainer.style.display = "none";
 			exampleImageContainer.style.display = "block";
 			clearValues();
@@ -858,7 +858,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 	// TEMP auto testing
-	uploadCustomFile("static/img/porsche.jpg");
+	//uploadCustomFile("static/img/porsche.jpg");
 	//uploadCustomFile("static/img/couple.jpg");
 
 
