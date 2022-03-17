@@ -40,9 +40,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // TODO --> Organize Code
 
-    // Button
+    // Get dark mode info from system or storage
     var darkmodeactive = localStorage.getItem("darkmode");
-    console.log("Dark mode is: " + darkmodeactive); // TODO --> Delete
+    if(!darkmodeactive) {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // System Dark Mode
+            darkmodeactive = true;
+            goDark()
+        }
+    }
+    //console.log("Dark mode is: " + darkmodeactive);
 
     function labelDark() {
         $(".toggle-switch").attr("alt", "Go light");
