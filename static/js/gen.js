@@ -4,7 +4,12 @@
  * General Scripts
  */
 
+
+// TODO --> OLD FILE TO BE REMOVED
+
+
 // General variables
+/*
 var uploadedImages = [];
 var fileIsAvailable = false;
 var maxResolution = 2;
@@ -100,7 +105,7 @@ const pond = FilePond.create(input, {
     server: {
         //url: "http://127.0.0.1:5000/", // Local server configuration
         timeout: 7000,
-        /*
+        *//*
         process: {
             url: "./",
             method: "POST",
@@ -119,7 +124,7 @@ const pond = FilePond.create(input, {
             withCredentials: true,
             headers: {},
         },
-        */
+        *//*
     },
 
     // Transform Variants
@@ -361,3 +366,5 @@ function stringTruncate(str, length) {
       return str;
     }
 };
+
+*/
