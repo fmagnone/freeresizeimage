@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	for (var i = 0; i < exampleImage.length; i++) {
 		// Add example image event listeners
 		exampleImage[i].onclick = function () {
-			addCustomPond(this.src);
+			uploadCustomFile(this.src);
 		}
 	};
 	function addResizedImageToDOM(fileItem, id) {
@@ -824,7 +824,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	pond.maxFiles = 10;
 
-	function addCustomPond(src) {
+	function uploadCustomFile(src) {
 		pond.addFile(src);
 	};
 
@@ -839,8 +839,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	resizeModeDisplay("btn-mode-standard"); // TODO --> ??? what is this for
 
 	// TEMP auto testing
-	addCustomPond("static/img/porsche.jpg");
-	//pond.addFile("static/img/couple.jpg");
+	//uploadCustomFile("static/img/porsche.jpg");
+	//uploadCustomFile("static/img/couple.jpg");
 
 
 	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
