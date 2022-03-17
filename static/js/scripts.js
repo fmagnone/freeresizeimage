@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// Elements
 	// --> General
 	const imagesContainer = document.getElementById("showContainer");
+	const resizeOptionsContainer = document.getElementById("resizeOptionsContainer");
 	const exampleImageContainer = document.getElementById("exampleImagesContainer");
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
@@ -221,6 +222,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	function displayState(show) {
 		if (show) {
 			// Hide resized and prev images from user
+			resizeOptionsContainer.style.display = "block";
 			imageResizedContainer.style.display = "none";
 			imagePrevContainer.style.display = "none";
 
@@ -249,6 +251,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		}
 		else {
 			// Go to original state
+			//resizeOptionsContainer.style.display = "none";
 			imagesContainer.style.display = "none";
 			exampleImageContainer.style.display = "block";
 			clearValues();
@@ -837,6 +840,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	});
 
 	pond.maxFiles = 10;
+	pond.allowReorder = false;
 
 	function uploadCustomFile(src) {
 		pond.addFile(src);
@@ -845,20 +849,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	// Initialize main functions and variables
 	var autoUpdate = true;
+	checkAutoUpdateMode();
 	displayState(false);
 	dataDisplay();
 	resizingWidth = 900;
 	resizingHeight = 600;
-	checkAutoUpdateMode();
-	resizeModeDisplay("btn-mode-standard"); // TODO --> ??? what is this for
+	resizeModeDisplay("btn-mode-standard"); // Define Resize Options first window
+
 
 	// TEMP auto testing
-	//uploadCustomFile("static/img/porsche.jpg");
+	uploadCustomFile("static/img/porsche.jpg");
 	//uploadCustomFile("static/img/couple.jpg");
 
 
 	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
 	// TODO --> Check metadata of the image in mobile and desktop
+	// TODO --> HTML change sample images to thumb image (smaller)
+	// TODO --> Filepond order invert
+
 
 	// DOM info
 	//console.log('DOM fully loaded and parsed');

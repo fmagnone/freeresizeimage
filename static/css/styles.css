@@ -25,8 +25,8 @@
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
   /* White */
-  /**/
-  
+  /*
+  */
   --gr-05: url("static/assets/gr05_black.svg");
   --gr-06: url("static/assets/gr06_black.svg");
   --color-theme-0: white;
@@ -57,14 +57,15 @@ body {
 footer {
   background-color: var(--color-theme-2);
 }
-.nav-link {
+.nav-link, .navbar-dark, .navbar-dark .navbar-brand {
   color: var(--color-theme-10);
 }
-.nav-link:hover {
+.nav-link:hover, .navbar-dark:hover, .navbar-dark .navbar-brand:hover {
   color: var(--color-theme-9);
 }
 .navbar-toggler {
-  border: none;
+  border: none ;
+  background-color: black;
 }
 .spacer {
   height: 30px;
@@ -83,6 +84,7 @@ hr {
 .upload-container {
 }
 .upload-box {
+  width: 100%;
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
   z-index: 10;
@@ -340,8 +342,11 @@ hr {
 
 
 /* FilePond adaptation */
+.filepond-container {
+  width: 100%;
+}
 .filepond--root {
-  /*height: 500px;*/
+  margin-bottom: 0 !important;
 }
 .filepond--root .filepond--drop-label {
   color: var(--color-theme-9);
@@ -352,7 +357,7 @@ hr {
 }
 .filepond--panel-root {
   background-color: var(--color-theme-2) !important;
-  border: var(--border-width) solid var(--color-theme-3);
+  /*border: var(--border-width) solid var(--color-theme-3);*/
 }
 /* 
 .filepond--root .filepond--drop-label {

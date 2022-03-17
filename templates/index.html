@@ -9,96 +9,107 @@
         <!-- Message box -->
         <div id="liveAlertPlaceholder"></div>
 
-        <div class="upload-container row">
-            <div class="upload-box col-sm m-2">
-                <!-- FilePond Upload -->
-                <form method="POST">
-                    <input id="fileUpload" type="file" class="filepond" name="filepond" multiple
-                        data-allow-reorder="true" data-max-file-size="8MB" data-max-files="10">
-                </form>
-            </div>
-            <div class="options-box col-sm m-2 p-4">
-                <!-- Resize options -->
-                <div class="mb-3">
-                    <h4 class="pb-1">Resize options:</h4>
-
-                    <!-- Resize options: Mode selector -->
-                    <div id="resizeMethod" class="row text-center">
-                        <div class="col-12 col-md-4 my-1">
-                            <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel"
-                                type="button"><i class="bi bi-badge-sd bi-mr"></i>Standard size</button>
-                            <i id="btn-mode-standard-ar"
-                                class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
+        <div class="upload-container row h-100">
+            <div class="col-sm p-0 mb-3">
+                <div class="row h-100 m-2">
+                    <div class="upload-box d-flex flex-row align-items-center">
+                        <div class="filepond-container">
+                            <!-- FilePond Upload -->
+                            <form method="POST">
+                                <input id="fileUpload" type="file" class="filepond" name="filepond" multiple
+                                    data-allow-reorder="true" data-max-file-size="8MB" data-max-files="10">
+                            </form>
                         </div>
-                        <div class="col-12 col-md-4 my-1">
-                            <button id="btn-mode-custom" class="btn btn-resize-mode" type="button"><i
-                                    class="bi bi-aspect-ratio bi-mr"></i>Custom size</button>
-                            <i id="btn-mode-custom-ar" class="bi bi-chevron-down arr-resize-mode"></i>
-                        </div>
-                        <div class="col-12 col-md-4 my-1">
-                            <button id="btn-mode-percentage" class="btn btn-resize-mode" type="button"><i
-                                    class="bi bi-percent bi-mr"></i>Percentage</button>
-                            <i id="btn-mode-percentage-ar" class="bi bi-chevron-down arr-resize-mode"></i>
-                        </div>
-                    </div>
-                    <!-- Resize options: Options Blocks -->
-                    <div id="options-box-mode">
-                        <hr />
-                        <p>Crop Mode: <input id="cropModeCheckbox" type="checkbox" checked> crop
-                            <input id="containModeCheckbox" type="checkbox"> contain
-                            background color:
-                            <input type="color" id="backColorPicker" name="backColorPicker" value="#f5f5f5">
-                        </p>
-
-                        <hr />
-                    </div>
-                    <div id="options-box-preset">
-
-                        <div id="presetListContainer">
-                            Scale to a standard size
-                        </div>
-
-                        <hr />
-                    </div>
-                    <div id="options-box-custom-size">
-                        <div id="sizeContainer">
-                            <div class="py-2">
-
-                                Width: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto"> px
-
-                                (&btn)
-
-                                Height: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto"> px
-
-                            </div>
-                            <div class="py-2">
-                                <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to custom width and height
-                                </form>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div id="options-box-percentage">
-                        <hr />
-                        <div id="sliderContainer">
-                            <div class="py-2">
-                                Select a percentage
-                            </div>
-                            <div class="py-2">
-                                <!-- review style 
-                                https://codepen.io/vsync/pen/mdEJMLv
-                                -->
-                                <input type="range" min="5" max="95" value="50" class="scale-slider" id="range">
-                            </div>
-                        </div>
-                        <hr />
                     </div>
                 </div>
+            </div>
+            <div class="col-sm p-0">
+                <div id="resizeOptionsContainer" class="options-box m-2 p-4">
+                    <!-- Resize options -->
+                    <div class="mb-3">
+                        <h4 class="pb-1">Resize options:</h4>
 
-                <div id="updateModeContainer">
-                    Update mode:
-                    <input id="updateCheckbox" type="checkbox"> auto-update
-                    <button id="updateButton" class="btn btn-update">Update</button>
+                        <!-- Resize options: Mode selector -->
+                        <div id="resizeMethod" class="row text-center">
+                            <div class="col-12 col-md-4 my-1">
+                                <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel"
+                                    type="button"><i class="bi bi-badge-sd bi-mr"></i>Standard size</button>
+                                <i id="btn-mode-standard-ar"
+                                    class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
+                            </div>
+                            <div class="col-12 col-md-4 my-1">
+                                <button id="btn-mode-custom" class="btn btn-resize-mode" type="button"><i
+                                        class="bi bi-aspect-ratio bi-mr"></i>Custom size</button>
+                                <i id="btn-mode-custom-ar" class="bi bi-chevron-down arr-resize-mode"></i>
+                            </div>
+                            <div class="col-12 col-md-4 my-1">
+                                <button id="btn-mode-percentage" class="btn btn-resize-mode" type="button"><i
+                                        class="bi bi-percent bi-mr"></i>Percentage</button>
+                                <i id="btn-mode-percentage-ar" class="bi bi-chevron-down arr-resize-mode"></i>
+                            </div>
+                        </div>
+                        <!-- Resize options: Options Blocks -->
+                        <div id="options-box-mode">
+                            <hr />
+                            <p>Crop Mode: <input id="cropModeCheckbox" type="checkbox" checked> crop
+                                <input id="containModeCheckbox" type="checkbox"> contain
+                                background color:
+                                <input type="color" id="backColorPicker" name="backColorPicker" value="#f5f5f5">
+                            </p>
+
+                            <hr />
+                        </div>
+                        <div id="options-box-preset">
+
+                            <div id="presetListContainer">
+                                Scale to a standard size
+                            </div>
+
+                            <hr />
+                        </div>
+                        <div id="options-box-custom-size">
+                            <div id="sizeContainer">
+                                <div class="py-2">
+
+                                    Width: <input min="0" max="2500" class="inputValue" id="width" placeholder="auto">
+                                    px
+
+                                    (&btn)
+
+                                    Height: <input min="0" max="2500" class="inputValue" id="height" placeholder="auto">
+                                    px
+
+                                </div>
+                                <div class="py-2">
+                                    <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to custom width and
+                                    height
+                                    </form>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div id="options-box-percentage">
+                            <hr />
+                            <div id="sliderContainer">
+                                <div class="py-2">
+                                    Select a percentage
+                                </div>
+                                <div class="py-2">
+                                    <!-- review style 
+                                https://codepen.io/vsync/pen/mdEJMLv
+                                -->
+                                    <input type="range" min="5" max="95" value="50" class="scale-slider" id="range">
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div id="updateModeContainer">
+                        Update mode:
+                        <input id="updateCheckbox" type="checkbox"> auto-update
+                        <button id="updateButton" class="btn btn-update">Update</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,14 +126,17 @@
 
         <!-- Show images -->
         <div id="showContainer" class="show-container row">
-            <div class="show-box col-sm m-2 p-4">
-                <h4 id="show-title" class="pb-1">Your resize image:</h4>
-                <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9 Widescreen.
-                </p>
+            <div class="col p-0">
+                <div class="show-box m-2 p-4">
 
-                <!-- Show single image -->
-                <div class="row" id="show-single">
-                    <!--
+                    <h4 id="show-title" class="pb-1">Your resize image:</h4>
+                    <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9
+                        Widescreen.
+                    </p>
+
+                    <!-- Show single image -->
+                    <div class="row" id="show-single">
+                        <!--
                     <div class="col-sm-8">
                         <div class="show-single-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:50vh;"></span>
@@ -136,10 +150,10 @@
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
                     -->
-                </div>
-                <!-- Show multiple image -->
-                <div id="show-multiple" class="row">
-                    <!--
+                    </div>
+                    <!-- Show multiple image -->
+                    <div id="show-multiple" class="row">
+                        <!--
                     <div class="col-sm-3 my-4">
                         <div class="show-multiple-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
@@ -151,16 +165,17 @@
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
                     -->
-                </div>
-
-
-                <!-- Hidden images for system -->
-                <div id="imagesPreviewContainer">
-                    <div id="imageResizedContainer">
-                        <h5>Resized image</h5>
                     </div>
-                    <div id="imagePrevContainer">
-                        <h5>Prev image</h5>
+
+
+                    <!-- Hidden images for system -->
+                    <div id="imagesPreviewContainer">
+                        <div id="imageResizedContainer">
+                            <h5>Resized image</h5>
+                        </div>
+                        <div id="imagePrevContainer">
+                            <h5>Prev image</h5>
+                        </div>
                     </div>
                 </div>
             </div>
