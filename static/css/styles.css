@@ -11,6 +11,7 @@
   --border-radius: 10px;
   
   /* Black */
+  /*
   --gr-05: url("static/assets/gr05.svg");
   --gr-06: url("static/assets/gr06.svg");
   --color-theme-0: black;
@@ -25,11 +26,11 @@
   --color-theme-9: hsl(0, 0%, 90%);
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
-
+  */
+  
   /* White */
   --gr-05: url("static/assets/gr05_black.svg");
   --gr-06: url("static/assets/gr06_black.svg");
-  /*
   --color-theme-0: white;
   --color-theme-1: hsl(0, 0%, 95%);
   --color-theme-2: hsl(0, 0%, 90%);
@@ -42,7 +43,6 @@
   --color-theme-9: hsl(0, 0%, 10%);
   --color-theme-10: black;
   --color-intense-1: #ec4e6e;
-  */
   
 }
 
