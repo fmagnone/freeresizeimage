@@ -53,6 +53,7 @@ body {
   background: var(--color-theme-0);
   min-height: 100vh;
   color: var(--color-theme-10);
+  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
 }
 .navbar,
 footer {
@@ -60,6 +61,7 @@ footer {
 }
 .nav-link, .navbar-dark, .navbar-dark .navbar-brand {
   color: var(--color-theme-10);
+  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
 }
 .nav-link:hover, .navbar-dark:hover, .navbar-dark .navbar-brand:hover {
   color: var(--color-theme-9);
@@ -80,9 +82,12 @@ hr {
 
 /* Upload Containers, Box and Upload */
 .container {
-  color: var(--color-theme-10);
+  color: var(--color-theme-10); 
 }
 .upload-container {
+}
+.animate {
+  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
 }
 .upload-box {
   width: 100%;
@@ -357,7 +362,7 @@ hr {
   cursor: pointer;
 }
 .filepond--panel-root {
-  background-color: var(--color-theme-2) !important;
+  background-color: transparent !important;
   /*border: var(--border-width) solid var(--color-theme-3);*/
 }
 /* 
