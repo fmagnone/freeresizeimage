@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var description = " ";
 	var minSizeValue = 50;
 	var maxSizeValue = 3000;
-	
+
 
 	// Image Class Constructor
 	class imageData {
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 	function dataDisplay() {
 		// General Description
-		
+
 		// Base data not defined
 		description = "All images auto resized."
 			+ "</br> Input Type: " + inputType
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			+ "</br> force mode: " + forceMode; // TODO --> To be removed
 		if (inputType == "percentage") {
 			description = "All images auto resized and croped to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size."
-		}; 
+		};
 		if (inputType == "fixed") {
 			let txt1, txt2;
 			if (cropMode) { txt1 = "croped to" } else { txt1 = "contained in" };
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// "All auto resized and croped to a standard size of 16:9 Widescreen."
 			// TODO --> Complete all descriptions
 		};
-		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0 ) {
+		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0) {
 			description = "All images are <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + "."
 		};
 		showDescription.innerHTML = description;
@@ -399,6 +399,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		s_btn.id = "s_btn_" + id;
 		s_btn.onclick = function () {
 			// TODO --> review download for iphone, should open image?
+			// For desktop, download
 			let filename = "freeimageresizer_" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
@@ -406,7 +407,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			element.setAttribute('download', filename);
 			document.body.appendChild(element);
 			element.click();
+			
+			// For mobile, open in new window
+			var image = new Image();
+			image.src = imageList[id].url;
+			var w = window.open("");
+			w.document.write(image.outerHTML);
+
 			console.log("Download with name: ", filename);
+			
 		}
 		s_btn.classList.add("btn");
 		s_btn.classList.add("btn-download");
@@ -594,7 +603,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	inputWidth.onchange = function () {
 		// Check user input
 		this.value = preventUserMinMax(this.value, "Width");
-		
+
 		// Update values
 		let i = this.value;
 		let z = inputHeight.value;
