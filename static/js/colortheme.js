@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Elements
     var root = document.querySelector(':root');
 
+    // Basic color pallette
     function assignColor(theme) {
         if (theme == "dark") {
             // Color theme Black
@@ -36,11 +37,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             root.style.setProperty('--color-theme-10', 'black');
         }
     }
-
-
-    // TODO --> Organize Code
-
-    // Get dark mode info from system or storage
+    
+    // Get dark mode info from System or from Storage
     var darkmodeactive = localStorage.getItem("darkmode");
     if(!darkmodeactive) {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -50,7 +48,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
     //console.log("Dark mode is: " + darkmodeactive);
-
+    
+    // OTHER
+    // TODO --> Organize Code
     function labelDark() {
         $(".toggle-switch").attr("alt", "Go light");
         $(".toggle-switch").attr("title", "Go light");
