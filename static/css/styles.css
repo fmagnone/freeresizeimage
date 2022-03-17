@@ -25,7 +25,8 @@
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
   /* White */
-  /*
+  /**/
+  
   --gr-05: url("static/assets/gr05_black.svg");
   --gr-06: url("static/assets/gr06_black.svg");
   --color-theme-0: white;
@@ -40,7 +41,7 @@
   --color-theme-9: hsl(0, 0%, 10%);
   --color-theme-10: black;
   --color-intense-1: #ec4e6e;
-  */
+  
   
 }
 
