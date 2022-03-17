@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		s_btn.id = "s_btn_" + id;
 		s_btn.onclick = function () {
 			// TODO --> review download for iphone, should open image?
-			// For desktop, download
+			// Download (desktop)
 			let filename = "freeimageresizer_" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
@@ -408,11 +408,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			document.body.appendChild(element);
 			element.click();
 			
-			// For mobile, open in new window
-			var image = new Image();
-			image.src = imageList[id].url;
-			var w = window.open("");
-			w.document.write(image.outerHTML);
+			// Open in new window (mobile)
+			//var image = new Image();
+			//image.src = imageList[id].url;
+			//var w = window.open("");
+			//w.document.write(image.outerHTML);
+
+			// TODO --> Mobile download
+			// Add a tag for user to save: click on image and save it, (icon iphone [^])
+			// hide "download?"
+			// open in a new browser button?
 
 			console.log("Download with name: ", filename);
 			
@@ -853,7 +858,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
-
+	// TODO --> Check metadata of the image in mobile and desktop
 
 	// DOM info
 	//console.log('DOM fully loaded and parsed');
