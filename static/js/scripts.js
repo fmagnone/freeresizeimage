@@ -359,7 +359,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	for (var i = 0; i < exampleImage.length; i++) {
 		// Add example image event listeners
 		exampleImage[i].onclick = function () {
-			uploadCustomFile(this.src);
+			let url = this.src.replace("-thumb", "");
+			uploadCustomFile(url);
 		}
 	};
 	function addResizedImageToDOM(fileItem, id) {
