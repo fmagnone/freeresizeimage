@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				s_size.innerHTML = imageList[i].res_new;
 				m_size.innerHTML = imageList[i].res_new;
 
-
+				// TODO --> remove? or what?
 				/*
 				img_data.innerHTML = "IMAGE " + i + " </br>";
 				img_data.innerHTML += "File name: " + imageList[i].name + " </br>";
@@ -310,40 +310,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				*/
 			}
 		};
-
-
-		// TODO --> NEXT ___ TO BE REMOVED
-		// Clear
-		/*
-		dataContainer.innerHTML = "";
-		let empty = true;
-
-		// If there is valid images, return info
-		for (i in imageList) {
-			if (imageList[i].valid) {
-				let img_data = document.createElement("div");
-				img_data.id = "data_" + imageList[i].id_btn;
-				img_data.innerHTML = "IMAGE " + i + " </br>";
-				img_data.innerHTML += "File name: " + imageList[i].name + " </br>";
-				img_data.innerHTML += "File extension: " + imageList[i].ext_old + " </br>";
-				img_data.innerHTML += "Size original: " + imageList[i].size_old + " bytes </br>";
-				img_data.innerHTML += "Size new: " + imageList[i].size_new + " bytes </br>";
-				img_data.innerHTML += "Resolution original: " + imageList[i].res_old + " px </br>";
-				img_data.innerHTML += "Resolution new: " + imageList[i].res_new + " px </br>";
-				img_data.innerHTML += "</br></br>"
-				dataContainer.appendChild(img_data);
-				//console.log(imageList[i]);
-				empty = false;
-			}
-		};
-
-		// No valid images, delete all data
-		if (empty) {
-			let no_data = document.createElement("span");
-			no_data.innerHTML = "No data to be displayed"
-			dataContainer.appendChild(no_data);
-		};
-		*/
 	};
 	function checkAutoUpdateMode() {
 		// Check defined mode when start app
