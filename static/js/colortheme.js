@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Elements
     var root = document.querySelector(':root');
+    let navbar = document.getElementById("navbar");
 
     // Basic color pallette
     function assignColor(theme) {
         if (theme == "dark") {
             // Color theme Black
+            navbar.classList.remove("navbar-light");
+            navbar.classList.add("navbar-dark");
             root.style.setProperty('--gr-05', "url('static/assets/gr05.svg')");
             root.style.setProperty('--gr-06', "url('static/assets/gr06.svg')");
             root.style.setProperty('--color-theme-0', 'black');
@@ -22,6 +25,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             root.style.setProperty('--color-theme-10', 'white');
         } else if (theme == "light") {
             // Color theme White
+            navbar.classList.remove("navbar-dark");
+            navbar.classList.add("navbar-light");
             root.style.setProperty('--gr-05', "url('static/assets/gr05_black.svg')");
             root.style.setProperty('--gr-06', "url('static/assets/gr06_black.svg')");
             root.style.setProperty('--color-theme-0', 'white');

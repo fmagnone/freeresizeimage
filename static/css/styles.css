@@ -67,8 +67,7 @@ footer {
   color: var(--color-theme-9);
 }
 .navbar-toggler {
-  border: none ;
-  background-color: black;
+  border: none;
 }
 .spacer {
   height: 30px;
