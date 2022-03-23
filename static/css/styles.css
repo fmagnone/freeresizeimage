@@ -9,7 +9,7 @@
 :root {
   --border-width: 2px;
   --border-radius: 10px;
-  
+
   /* Black */
   /*
   --gr-05: url("static/assets/gr05.svg");
@@ -27,7 +27,7 @@
   --color-theme-10: white;
   --color-intense-1: #ec4e6e;
   */
-  
+
   /* White */
   --gr-05: url("static/assets/gr05_black.svg");
   --gr-06: url("static/assets/gr06_black.svg");
@@ -43,7 +43,6 @@
   --color-theme-9: hsl(0, 0%, 10%);
   --color-theme-10: black;
   --color-intense-1: #ec4e6e;
-  
 }
 
 /* General Style */
@@ -53,17 +52,23 @@ body {
   background: var(--color-theme-0);
   min-height: 100vh;
   color: var(--color-theme-10);
-  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
+  transition: color var(--animate) ease-in-out,
+    background var(--animate) ease-in-out;
 }
 .navbar,
 footer {
   background-color: var(--color-theme-2);
 }
-.nav-link, .navbar-dark, .navbar-dark .navbar-brand {
+.nav-link,
+.navbar-dark,
+.navbar-dark .navbar-brand {
   color: var(--color-theme-10);
-  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
+  transition: color var(--animate) ease-in-out,
+    background var(--animate) ease-in-out;
 }
-.nav-link:hover, .navbar-dark:hover, .navbar-dark .navbar-brand:hover {
+.nav-link:hover,
+.navbar-dark:hover,
+.navbar-dark .navbar-brand:hover {
   color: var(--color-theme-9);
 }
 .navbar-toggler {
@@ -79,23 +84,24 @@ hr {
   margin: 0.4em;
 }
 a {
-  color: var(--color-intense-1); 
+  color: var(--color-intense-1);
 }
 a:hover {
-  color: var(--color-theme-6); 
+  color: var(--color-theme-6);
 }
 .link-soft {
-  color: var(--color-theme-10); 
+  color: var(--color-theme-10);
 }
 
 /* Upload Containers, Box and Upload */
 .container {
-  color: var(--color-theme-10); 
+  color: var(--color-theme-10);
 }
 .upload-container {
 }
 .animate {
-  transition: color var(--animate) ease-in-out, background var(--animate) ease-in-out;
+  transition: color var(--animate) ease-in-out,
+    background var(--animate) ease-in-out;
 }
 .upload-box {
   width: 100%;
@@ -143,7 +149,8 @@ a:hover {
 .temp-image {
   width: 100%;
 }
-.example-image { /* TODO --> To be removed */
+.example-image {
+  /* TODO --> To be removed */
   height: 160px;
   margin: 6px;
   cursor: pointer;
@@ -173,7 +180,7 @@ a:hover {
   color: var(--color-theme-10);
   background-color: var(--color-theme-1);
   border: 1px solid var(--color-theme-5);
-  
+
   border-radius: 3px;
   text-align: center;
 }
@@ -185,21 +192,20 @@ a:hover {
 .preset-size-tag-name {
   display: block;
   font-size: 0.9em;
-  color: var(--color-theme-10)
+  color: var(--color-theme-10);
 }
 .preset-size-tag-size {
   font-size: 0.7em;
-  color: var(--color-theme-6)
+  color: var(--color-theme-6);
 }
 .preset-size-selected {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
 
-
 /* Buttons and options */
 .bi {
-  pointer-events:none;
+  pointer-events: none;
 }
 .bi-mr {
   /* Icons in button */
@@ -223,9 +229,9 @@ a:hover {
   border-radius: var(--border-radius);
   background-color: var(--color-theme-1);
   color: var(--color-theme-10);
-  
 }
-.btn-resize-mode:hover, .btn-resize-mode-sel {
+.btn-resize-mode:hover,
+.btn-resize-mode-sel {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
@@ -257,7 +263,6 @@ a:hover {
   width: 100%;
 }
 .preset-list {
-  
 }
 .text-small {
   font-size: 0.85em;
@@ -282,7 +287,7 @@ a:hover {
 .inputValue {
   text-align: center;
   padding: 5px;
-  margin:3px;
+  margin: 3px;
   max-width: 120px;
   border: solid 2px black;
   border-radius: var(--border-radius);
@@ -290,7 +295,6 @@ a:hover {
   border-color: var(--color-theme-1);
   color: var(--color-intense-10);
 }
-
 
 /* Sprites and Images */
 .gr-04a,
@@ -354,7 +358,6 @@ a:hover {
   }
 }
 
-
 /* FilePond adaptation */
 .filepond-container {
   width: 100%;
@@ -385,7 +388,6 @@ a:hover {
 }
 */
 
-
 /* Mobile Adjustemnts Portrait */
 @media only screen and (max-width: 600px) {
   .gr-01 {
@@ -406,123 +408,120 @@ a:hover {
   }
 }
 
-
-/* TEMP Light Dark Toggle mode testing <<<< TODO --> Organize CSS */ 
+/* TEMP Light Dark Toggle mode testing <<<< TODO --> Organize CSS */
 :root {
-	--gray-5:#010101; /*dark*/
-	--gray-10:#040404;
-	--gray-15:#070808;
-	--gray-20:#0D0D0E;
-	--gray-25:#141516;
-	--gray-30:#1E2022;
-	--gray-35:#2D2F31;
-	--gray-40:#404346;
-	--gray-45:#5B5E62;
-	--gray-50:#7C8084;
-	--gray-55:#9DA1A5;
-	--gray-60:#B9BDC1;
-	--gray-65:#CDD1D5;
-	--gray-70:#DCE0E3;
-	--gray-75:#E7EAED;
-	--gray-80:#EFF2F5;
-	--gray-85:#F4F7FA;
-	--gray-90:#F7FAFD;
-	--gray-95:#FCFEFE; /*light*/
-	--animate:200ms;
+  --gray-5: #010101; /*dark*/
+  --gray-10: #040404;
+  --gray-15: #070808;
+  --gray-20: #0d0d0e;
+  --gray-25: #141516;
+  --gray-30: #1e2022;
+  --gray-35: #2d2f31;
+  --gray-40: #404346;
+  --gray-45: #5b5e62;
+  --gray-50: #7c8084;
+  --gray-55: #9da1a5;
+  --gray-60: #b9bdc1;
+  --gray-65: #cdd1d5;
+  --gray-70: #dce0e3;
+  --gray-75: #e7eaed;
+  --gray-80: #eff2f5;
+  --gray-85: #f4f7fa;
+  --gray-90: #f7fafd;
+  --gray-95: #fcfefe; /*light*/
+  --animate: 200ms;
 }
 .mode-toggle {
-	display:inline-flex;
-	flex-direction:row;
-	align-items:center;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
   padding: 0.4rem;
 }
-/*
 .label-dark {
   padding-right: 0.5rem;
 }
 .label-light {
   padding-left: 0.5rem;
 }
-*/
 .toggle-switch {
-	margin:0;
-	padding:0;
-	width:48px;
-	height:28px;
-	border:none;
-	outline:none;
-	overflow:hidden;
-	position:relative;
-	border-radius:14px;
-	display:inline-block;
-	background:var(--gray-40);
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  height: 28px;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  border-radius: 14px;
+  display: inline-block;
+  background: var(--gray-40);
 }
 body.dark .toggle-switch {
-	width:48px;
+  width: 48px;
 }
 .toggle-switch,
 .toggle-switch:before,
 .toggle-switch:after {
-	transition:all var(--animate) ease-in-out;
+  transition: all var(--animate) ease-in-out;
 }
 body.dark .toggle-switch {
-	background:var(--gray-70);
+  background: var(--gray-70);
 }
 .toggle-switch:before {
-	top:4px;
-	left:24px;
-	content:"";
-	width:20px;
-	height:20px;
-	display:block;
-	position:absolute;
-	border-radius:12px;
-	background:var(--gray-70);
+  top: 4px;
+  left: 24px;
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  border-radius: 12px;
+  background: var(--gray-70);
 }
 body.dark .toggle-switch:before {
-	left:4px;
-	background:var(--gray-35);
+  left: 4px;
+  background: var(--gray-35);
 }
 .toggle-switch:after {
-	content:"";
-	top:14px;
-	right:2px;
-	width:1px;
-	height:1px;
-	display:block;
-	position:absolute;
-	border-radius:0.5px;
-	background:var(--gray-40);
+  content: "";
+  top: 14px;
+  right: 2px;
+  width: 1px;
+  height: 1px;
+  display: block;
+  position: absolute;
+  border-radius: 0.5px;
+  background: var(--gray-40);
 }
 body.dark .toggle-switch:after {
-	top:-2px;
-	right:2px;
-	width:32px;
-	height:32px;
-	border-radius:16px;
-	background:var(--gray-70);
+  top: -2px;
+  right: 2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--gray-70);
 }
 .toggle-switch:hover,
 .toggle-switch:hover:after {
-	background:var(--gray-35);
+  background: var(--gray-35);
 }
 .toggle-switch:focus,
 .toggle-switch:active,
 .toggle-switch:active:after {
-	background:var(--gray-25);
+  background: var(--gray-25);
 }
 body.dark .toggle-switch:hover,
 body.dark .toggle-switch:hover:after {
-	background:var(--gray-95);
+  background: var(--gray-95);
 }
 body.dark .toggle-switch:focus,
 body.dark .toggle-switch:active,
 body.dark .toggle-switch:active:after {
-	background:var(--gray-65);
+  background: var(--gray-65);
 }
 .noselect {
-	user-select:none;
-	-ms-user-select:none;
-	-moz-user-select:none;
-	-webkit-user-select:none;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
