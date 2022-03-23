@@ -79,23 +79,26 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- Language -->
                     <li class="nav-item ms-3">
                         <a class="nav-link dropdown-toggle disabled" href="#!">English</a>
                     </li>
+                    <!-- Dark/Light toggle mode -->
+                    <li class="nav-item ms-3">
+                        <div class="mode-toggle noselect nav-link">
+                            <span class="label-dark">N</span>
+                            <div class="toggle-switch"></div>
+                            <span class="label-light">D</span>
+                        </div>
+                    </li>
+                    <!-- Main Menu -->
                     <li class="nav-item ms-3">
                         <a class="nav-link {{ 'active' if active_page == '/'}}" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item ms-3">
                         <a class="nav-link {{ 'active' if active_page == '/contact'}}" href="contact">Contact Us</a>
                     </li>
-                    <!-- Dark/Light toggle mode -->
-                    <li class="nav-item ms-3">
-                        <div class="mode-toggle noselect nav-link">
-                            <!--<span class="label-dark"></span>-->
-                            <div class="toggle-switch"></div>
-                            <!--<span class="label-light"></span>-->
-                        </div>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -105,7 +108,8 @@
     <section>
         <div class="container px-3 px-lg-5 pt-3 pb-4">
             <div class="d-flex align-items-center">
-                <div class="gr-01"></div>
+                <div class="graphic-light gr-logo-light"></div>
+                <div class="graphic-dark gr-logo-dark"></div>
                 <h1 class="logo-text">Free Image Resizer</h1>
             </div>
             <h5>A simple and free bulk resizer app for image and files.</h5>
@@ -116,10 +120,10 @@
     {% block content %} {% endblock %}
 
     <!-- Footer -->
-    <footer class="py-4">
+    <footer class="py-4 animate">
         <!-- Footer nav -->
         <nav class="nav mb-2">
-            <div class="container-fluid ">
+            <div class="container-fluid">
                 <ul class="nav ms-auto justify-content-center mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>

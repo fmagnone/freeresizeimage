@@ -3,15 +3,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Elements
     var root = document.querySelector(':root');
     let navbar = document.getElementById("navbar");
+    let graphicsLight = document.getElementsByClassName("graphic-light");
+    let graphicsDark = document.getElementsByClassName("graphic-dark");
 
     // Basic color pallette
     function assignColor(theme) {
         if (theme == "dark") {
             // Color theme Black
-            navbar.classList.remove("navbar-light");
-            navbar.classList.add("navbar-dark");
-            root.style.setProperty('--gr-05', "url('static/assets/gr05.svg')");
-            root.style.setProperty('--gr-06', "url('static/assets/gr06.svg')");
             root.style.setProperty('--color-theme-0', 'black');
             root.style.setProperty('--color-theme-1', 'hsl(0, 0%, 10%)');
             root.style.setProperty('--color-theme-2', 'hsl(0, 0%, 20%)');
@@ -23,12 +21,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             root.style.setProperty('--color-theme-8', 'hsl(0, 0%, 80%)');
             root.style.setProperty('--color-theme-9', 'hsl(0, 0%, 90%)');
             root.style.setProperty('--color-theme-10', 'white');
+            navbar.classList.remove("navbar-light");
+            navbar.classList.add("navbar-dark");
+            for (let e of graphicsLight ) { e.style.opacity = 0 };
+            for (let e of graphicsDark ) { e.style.opacity = 1 };
         } else if (theme == "light") {
             // Color theme White
-            navbar.classList.remove("navbar-dark");
-            navbar.classList.add("navbar-light");
-            root.style.setProperty('--gr-05', "url('static/assets/gr05_black.svg')");
-            root.style.setProperty('--gr-06', "url('static/assets/gr06_black.svg')");
             root.style.setProperty('--color-theme-0', 'white');
             root.style.setProperty('--color-theme-1', 'hsl(0, 0%, 95%)');
             root.style.setProperty('--color-theme-2', 'hsl(0, 0%, 90%)');
@@ -40,6 +38,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             root.style.setProperty('--color-theme-8', 'hsl(0, 0%, 20%)');
             root.style.setProperty('--color-theme-9', 'hsl(0, 0%, 10%)');
             root.style.setProperty('--color-theme-10', 'black');
+            navbar.classList.remove("navbar-dark");
+            navbar.classList.add("navbar-light");
+            for (let e of graphicsLight ) { e.style.opacity = 1 };
+            for (let e of graphicsDark ) { e.style.opacity = 0 };
         }
     }
     

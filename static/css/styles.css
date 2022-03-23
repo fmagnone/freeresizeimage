@@ -12,8 +12,6 @@
 
   /* Black */
   /*
-  --gr-05: url("static/assets/gr05.svg");
-  --gr-06: url("static/assets/gr06.svg");
   --color-theme-0: black;
   --color-theme-1: hsl(0, 0%, 10%);
   --color-theme-2: hsl(0, 0%, 20%);
@@ -29,8 +27,6 @@
   */
 
   /* White */
-  --gr-05: url("static/assets/gr05_black.svg");
-  --gr-06: url("static/assets/gr06_black.svg");
   --color-theme-0: white;
   --color-theme-1: hsl(0, 0%, 95%);
   --color-theme-2: hsl(0, 0%, 90%);
@@ -297,21 +293,63 @@ a:hover {
 }
 
 /* Sprites and Images */
-.gr-04a,
-.gr-04b,
-.gr-04c {
-  background-image: var(--gr-06);
-  background-repeat: no-repeat;
-  height: 150px;
-  width: 150px;
+.gr-light {
+  z-index: 5;
 }
-.gr-01 {
-  background-image: var(--gr-05);
+.gr-logo-light {
+  background-image: url("/static/assets/grLogo-b.svg");
   background-repeat: no-repeat;
   background-position: -32px -10px;
   width: 110px;
   height: 130px;
 }
+.gr-logo-dark {
+  background-image: url("/static/assets/grLogo-w.svg");
+  background-repeat: no-repeat;
+  background-position: -32px -10px;
+  width: 110px;
+  height: 130px;
+  opacity: 0;
+  position: absolute;
+}
+.gr-desc-container {
+  height: 150px;
+  width: 150px;
+}
+.gr-desc {
+  background-repeat: no-repeat;
+  height: 150px;
+  width: 150px;
+}
+.gr-desc1-light {
+  background-image: url("/static/assets/grDesc-b.svg");
+  background-position: 0 0;
+  position: absolute;
+  margin: auto;
+}
+.gr-desc1-dark {
+  background-image: url("/static/assets/grDesc-w.svg");
+  background-position: 0 0;
+}
+.gr-desc2-light {
+  background-image: url("/static/assets/grDesc-b.svg");
+  background-position: -150px 0;
+  position: absolute;
+}
+.gr-desc2-dark {
+  background-image: url("/static/assets/grDesc-w.svg");
+  background-position: -150px 0;
+}
+.gr-desc3-light {
+  background-image: url("/static/assets/grDesc-b.svg");
+  background-position: -300px 0;
+  position: absolute;
+}
+.gr-desc3-dark {
+  background-image: url("/static/assets/grDesc-w.svg");
+  background-position: -300px 0;
+}
+
 .gr-02 {
   background-image: url("../assets/gr02.svg");
   background-repeat: no-repeat;
@@ -327,16 +365,7 @@ a:hover {
   height: 22px;
   background-size: contain;
 }
-.gr-04a {
-  background-position: 0 0;
-}
-.gr-04b {
-  background-position: -150px 0;
-}
-.gr-04c {
-  height: 150px;
-  background-position: -300px 0;
-}
+
 
 /* Animations */
 .slide-top-1 {
