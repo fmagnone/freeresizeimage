@@ -85,6 +85,9 @@ a {
 a:hover {
   color: var(--color-theme-6); 
 }
+.link-soft {
+  color: var(--color-theme-10); 
+}
 
 /* Upload Containers, Box and Upload */
 .container {
@@ -396,7 +399,7 @@ a:hover {
     font-size: 1.2em;
   }
   .example-image {
-    height: 75px;
+    height: 70px;
     margin: 3px;
   }
   .arr-resize-mode {

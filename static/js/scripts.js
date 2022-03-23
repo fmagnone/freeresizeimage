@@ -219,6 +219,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			element.classList.remove("preset-size-selected");
 		};
 	}
+	function loadRandomExampleImages() {
+		let ex1 = document.getElementById("example-1");
+		let ex2 = document.getElementById("example-2");
+		let ex3 = document.getElementById("example-3");
+		let ex4 = document.getElementById("example-4");
+		let ex5 = document.getElementById("example-5");
+		let ex6 = document.getElementById("example-6");
+		let imgA = [ex1, ex2];
+		let imgB = [ex3, ex4];
+		let imgC = [ex5, ex6];
+		// Hide 3 images per set
+		imgA[Math.floor(Math.random() * imgA.length)].style.display = "none";
+		imgB[Math.floor(Math.random() * imgB.length)].style.display = "none";
+		imgC[Math.floor(Math.random() * imgC.length)].style.display = "none";
+	}
 	function displayState(show) {
 		if (show) {
 			// Hide resized and prev images from user
@@ -816,6 +831,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	// Initialize main functions and variables
 	var autoUpdate = true;
+	loadRandomExampleImages();
 	checkAutoUpdateMode();
 	displayState(false);
 	dataDisplay();
