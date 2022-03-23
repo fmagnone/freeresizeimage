@@ -10,6 +10,14 @@
   --border-width: 2px;
   --border-radius: 10px;
 
+  --animate-speed: 200ms;
+
+  --toggle-g30: #1e2022;
+  --toggle-g35: #2d2f31;
+  --toggle-g40: #404346;
+  --toggle-g50: #7c8084;
+  --toggle-g70: #dce0e3;
+
   /* Black */
   /*
   --color-theme-0: black;
@@ -48,8 +56,8 @@ body {
   background: var(--color-theme-0);
   min-height: 100vh;
   color: var(--color-theme-10);
-  transition: color var(--animate) ease-in-out,
-    background var(--animate) ease-in-out;
+  transition: color var(--animate-speed) ease-in-out,
+    background var(--animate-speed) ease-in-out;
 }
 .navbar,
 footer {
@@ -59,8 +67,8 @@ footer {
 .navbar-dark,
 .navbar-dark .navbar-brand {
   color: var(--color-theme-10);
-  transition: color var(--animate) ease-in-out,
-    background var(--animate) ease-in-out;
+  transition: color var(--animate-speed) ease-in-out,
+    background var(--animate-speed) ease-in-out;
 }
 .nav-link:hover,
 .navbar-dark:hover,
@@ -96,8 +104,8 @@ a:hover {
 .upload-container {
 }
 .animate {
-  transition: color var(--animate) ease-in-out,
-    background var(--animate) ease-in-out;
+  transition: color var(--animate-speed) ease-in-out,
+    background var(--animate-speed) ease-in-out;
 }
 .upload-box {
   width: 100%;
@@ -437,29 +445,7 @@ a:hover {
   }
 }
 
-/* TEMP Light Dark Toggle mode testing <<<< TODO --> Organize CSS */
-:root {
-  --gray-5: #010101; /*dark*/
-  --gray-10: #040404;
-  --gray-15: #070808;
-  --gray-20: #0d0d0e;
-  --gray-25: #141516;
-  --gray-30: #1e2022;
-  --gray-35: #2d2f31;
-  --gray-40: #404346;
-  --gray-45: #5b5e62;
-  --gray-50: #7c8084;
-  --gray-55: #9da1a5;
-  --gray-60: #b9bdc1;
-  --gray-65: #cdd1d5;
-  --gray-70: #dce0e3;
-  --gray-75: #e7eaed;
-  --gray-80: #eff2f5;
-  --gray-85: #f4f7fa;
-  --gray-90: #f7fafd;
-  --gray-95: #fcfefe; /*light*/
-  --animate: 200ms;
-}
+/* Toggle Light Dark mode */
 .mode-toggle {
   display: inline-flex;
   flex-direction: row;
@@ -468,9 +454,11 @@ a:hover {
 }
 .label-dark {
   padding-right: 0.5rem;
+  cursor: pointer;
 }
 .label-light {
   padding-left: 0.5rem;
+  cursor: pointer;
 }
 .toggle-switch {
   margin: 0;
@@ -483,7 +471,8 @@ a:hover {
   position: relative;
   border-radius: 14px;
   display: inline-block;
-  background: var(--gray-40);
+  background: var(--toggle-g30);
+  cursor:pointer;
 }
 body.dark .toggle-switch {
   width: 48px;
@@ -491,10 +480,10 @@ body.dark .toggle-switch {
 .toggle-switch,
 .toggle-switch:before,
 .toggle-switch:after {
-  transition: all var(--animate) ease-in-out;
+  transition: all var(--animate-speed) ease-in-out;
 }
 body.dark .toggle-switch {
-  background: var(--gray-70);
+  background: var(--toggle-g70);
 }
 .toggle-switch:before {
   top: 4px;
@@ -505,11 +494,11 @@ body.dark .toggle-switch {
   display: block;
   position: absolute;
   border-radius: 12px;
-  background: var(--gray-70);
+  background: var(--toggle-g70);
 }
 body.dark .toggle-switch:before {
   left: 4px;
-  background: var(--gray-35);
+  background: var(--toggle-g30);
 }
 .toggle-switch:after {
   content: "";
@@ -520,7 +509,7 @@ body.dark .toggle-switch:before {
   display: block;
   position: absolute;
   border-radius: 0.5px;
-  background: var(--gray-40);
+  background: var(--toggle-g30);
 }
 body.dark .toggle-switch:after {
   top: -2px;
@@ -528,29 +517,38 @@ body.dark .toggle-switch:after {
   width: 32px;
   height: 32px;
   border-radius: 16px;
-  background: var(--gray-70);
+  background: var(--toggle-g70);
 }
 .toggle-switch:hover,
 .toggle-switch:hover:after {
-  background: var(--gray-35);
-}
-.toggle-switch:focus,
-.toggle-switch:active,
-.toggle-switch:active:after {
-  background: var(--gray-25);
+  background: var(--toggle-g50);
 }
 body.dark .toggle-switch:hover,
 body.dark .toggle-switch:hover:after {
-  background: var(--gray-95);
-}
-body.dark .toggle-switch:focus,
-body.dark .toggle-switch:active,
-body.dark .toggle-switch:active:after {
-  background: var(--gray-65);
+  background: var(--toggle-g50);
 }
 .noselect {
   user-select: none;
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+.disableEasingTemporarily,
+.disableEasingTemporarily:after,
+.disableEasingTemporarily:before {
+  -o-transition-property:none!important;
+  -moz-transition-property:none!important;
+  -ms-transition-property:none!important;
+  -webkit-transition-property:none!important;
+  transition-property:none!important;
+  -o-transform:none!important;
+  -moz-transform:none!important;
+  -ms-transform:none!important;
+  -webkit-transform:none!important;
+  transform:none!important;
+  -webkit-animation:none!important;
+  -moz-animation:none!important;
+  -o-animation:none!important;
+  -ms-animation:none!important;
+  animation:none!important;
 }
