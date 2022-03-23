@@ -1,7 +1,6 @@
 @charset "UTF-8";
-
 /*!
-* Image Resize 
+* Image Resize App
 * Copyright 2022
 */
 
@@ -167,7 +166,8 @@ a:hover {
 }
 .example-image:hover {
   border-color: var(--color-intense-1);
-  scale: 1.02;
+  /*scale: 1.02;*/
+  transform: scale(1.02);
 }
 .category-container {
 }
