@@ -153,7 +153,6 @@ a:hover {
   width: 100%;
 }
 .example-image {
-  /* TODO --> To be removed */
   height: 160px;
   margin: 6px;
   cursor: pointer;
@@ -166,7 +165,6 @@ a:hover {
 }
 .example-image:hover {
   border-color: var(--color-intense-1);
-  /*scale: 1.02;*/
   transform: scale(1.02);
 }
 .category-container {

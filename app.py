@@ -43,19 +43,22 @@ def index():
         return redirect("/")
     else:
         # GET method
-        return render_template('index.html')
+        title = ""
+        return render_template('index.html', title=title)
 
 
 # Contact Page
 @app.route("/contact")
 def contact_page():
-    return render_template('contact.html')
+    title = "Contact - "
+    return render_template('contact.html', title=title)
 
 
 # Terms Page
 @app.route("/terms")
 def terms_page():
-    return render_template('terms.html')
+    title = "Terms - "
+    return render_template('terms.html', title=title)
 
 
 # Sitemap extension

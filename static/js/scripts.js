@@ -466,8 +466,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		m_container.appendChild(m_txt);
 		m_container.appendChild(m_btn);
 		showMultipleBox.appendChild(m_container);
-		// TODO --> CONFIG TEXT
-		// TODO --> CONFIG BUTTON
 	}
 	function addPrevImageToDOM(fileItem, id) {
 		// Add hidden images to DOM
