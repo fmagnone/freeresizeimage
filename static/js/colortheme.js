@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
 
     // Elements
     var root = document.querySelector(':root');
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             navbar.classList.remove("navbar-light");
             navbar.classList.add("navbar-dark");
             // Graphics Dark
-            for (let e of graphicsLight ) { e.style.opacity = 0 };
-            for (let e of graphicsDark ) { e.style.opacity = 1 };
+            for (let e of graphicsLight ) { e.style.opacity = 0; }
+            for (let e of graphicsDark ) { e.style.opacity = 1; }
         } else if (theme == "light") {
             // Color theme Light
             root.style.setProperty('--color-theme-0', 'white');
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             navbar.classList.remove("navbar-dark");
             navbar.classList.add("navbar-light");
             // Graphics Light
-            for (let e of graphicsLight ) { e.style.opacity = 1 };
-            for (let e of graphicsDark ) { e.style.opacity = 0 };
+            for (let e of graphicsLight ) { e.style.opacity = 1; }
+            for (let e of graphicsDark ) { e.style.opacity = 0; }
         }
     }
     
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             // System Dark Mode
             darkmodeactive = true;
-            goDark()
+            goDark();
         }
     }
 
@@ -155,14 +155,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Icon animated update
     function refreshFavicon() {
+        let link;
         if (matchMedia('(prefers-color-scheme: dark)').matches) {
-            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link = document.querySelector("link[rel*='icon']") || document.createElement('link');
             link.type = 'image/x-icon';
             link.rel = 'icon';
             link.href = 'static/assets/favicon-dark.svg';
             document.getElementsByTagName('head')[0].appendChild(link);
         } else {
-            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link = document.querySelector("link[rel*='icon']") || document.createElement('link');
             link.type = 'image/x-icon';
             link.rel = 'icon';
             link.href = 'static/assets/favicon.svg';

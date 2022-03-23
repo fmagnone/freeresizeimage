@@ -1,5 +1,5 @@
 // DOM load
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
 
 	// Elements
 	// --> General
@@ -51,13 +51,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// Image Class Constructor
 	class imageData {
 		constructor(
-			//id, 
-			name, url,
-			id_btn, id_file,
-			size_old, size_new,
-			ext_old, ext_new,
-			res_old, res_new,
-		) {
+			name, 
+			url,
+			id_btn, 
+			id_file,
+			size_old, 
+			size_new,
+			ext_old, 
+			ext_new,
+			res_old, 
+			res_new
+			) {
 			this.valid = true;
 			this.name = name;
 			this.url = url;
@@ -96,7 +100,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		return id;
 	}
 	function removeImageData(id_file) {
-		for (let id in imageList) {
+		for (let i = 0; i < imageList.length; i++) {
+			let id = i;
 			if (imageList[id].id_file == id_file) {
 				imageList[id].valid = false;
 
@@ -105,10 +110,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				let s_div = document.getElementById("s_div_" + id);
 				let m_div = document.getElementById("m_div_" + id);
 
-				if (isNaN(img_pre)) { s_div.remove() };
-				if (isNaN(img_res)) { s_div.remove() };
-				if (isNaN(s_div)) { s_div.remove() };
-				if (isNaN(m_div)) { m_div.remove() };
+				if (isNaN(img_pre)) { s_div.remove(); }
+				if (isNaN(img_res)) { s_div.remove(); }
+				if (isNaN(s_div)) { s_div.remove(); }
+				if (isNaN(m_div)) { m_div.remove(); }
 
 				return;
 			}
@@ -119,7 +124,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	// Standard sizes options
 	function setSelectListOptions() {
 		// Load categories into set
-		for (i in presetSizeDataList) {
+		for (var i = 0; i < presetSizeDataList.length; i++) {
 			presetSizeCategorySet.add(presetSizeDataList[i].category);
 		}
 
@@ -141,7 +146,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			presetSizeContainer.appendChild(cat_container);
 
 			// Add buttons
-			for (i in presetSizeDataList) {
+			for	(let i = 0; i < presetSizeDataList.length; i++) {
 				if (presetSizeDataList[i].category == category) {
 					let btn_container = document.createElement('div');
 					let button = document.createElement('button');
@@ -151,7 +156,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					button.id = presetSizeDataList[i].name;
 					button.className = "preset-size-button";
 					button.innerHTML = presetSizeDataList[i].prop;
-					button.onclick = function () { inputButtonPresetUpdate(this.id) };
+					button.onclick = function () { inputButtonPresetUpdate(this.id); };
 					tag_name.innerHTML = presetSizeDataList[i].tag;
 					tag_name.className = "preset-size-tag-name";
 					tag_size.innerHTML = presetSizeDataList[i].width + "x" + presetSizeDataList[i].height;
@@ -171,7 +176,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			selectList.options[c] = new Option(category, category);
 			loadAllButtonsCategory(category);
 			c += 1;
-		};
+		}
 
 		// Add List changer listener
 		selectList.addEventListener("change", function () {
@@ -187,14 +192,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				else {
 					element.style.display = "none";
 				}
-			};
+			}
 		});
 
 		// Append to DOM
 		presetListContainer.appendChild(selectList);
 		presetListContainer.appendChild(presetSizeContainer);
-
-	};
+	}
 	if (presetSizeDataList) { setSelectListOptions(); }
 
 	// Listeners and global functions
@@ -214,10 +218,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		inputSlider.classList.remove('selected'); // TODO --> Update to css
 		inputWidth.classList.remove('selected');  // TODO --> Update to css
 		inputHeight.classList.remove('selected');  // TODO --> Update to css
-		for (i in presetSizeDataList) {
+		for	(let i = 0; i < presetSizeDataList.length; i++) {
 			let element = document.getElementById(presetSizeDataList[i].name);
 			element.classList.remove("preset-size-selected");
-		};
+		}
 	}
 	function loadRandomExampleImages() {
 		let ex1 = document.getElementById("example-1");
@@ -243,7 +247,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 			// Check valid lenght count
 			let validLenght = 0;
-			for (i in imageList) { if (imageList[i].valid) { validLenght += 1 } };
+			
+			for	(let i = 0; i < imageList.length; i++) { if (imageList[i].valid) { validLenght += 1; } }
 
 			// Show single or multiple
 			if (validLenght == 1) {
@@ -258,7 +263,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				// Show multiple images only
 				showSingleBox.style.display = "none";
 				showMultipleBox.style.display = "flex";
-			};
+			}
 
 			// Show image container
 			imagesContainer.style.display = "block";
@@ -276,31 +281,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// General Description
 
 		// Base data not defined
-		description = "All images were resized."
-			+ "</br> Input Type: " + inputType
-			+ "</br> crop mode: " + cropMode
-			+ "</br> resizing factor: " + resizingFactor * 100 + "%"
-			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
-			+ "</br> force mode: " + forceMode; // TODO --> To be removed
+		description = "All images were resized." + 
+			"<br> Input Type: " + inputType +
+			"<br> crop mode: " + cropMode +
+			"<br> resizing factor: " + resizingFactor * 100 + "%" +
+			"<br> width height: " + resizingWidth + " x " + resizingHeight +
+			"<br> force mode: " + forceMode; 
+		// TODO --> To be removed
 		if (inputType == "percentage") {
-			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size."
-		};
+			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size.";
+		}
 		if (inputType == "fixed") {
-			let txt1, txt2;
-			if (cropMode) { txt1 = "<b>croped</b> to" } else { txt1 = "<b>contained</b> in" };
-			if (cropMode) { txt1 = "<b>croped</b> to" } else { txt1 = "<b>contained</b> in" };
-			description = "All images were auto resize and " + txt1 + " a standard or custom size."
+			let txt1;
+			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
+			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
+			description = "All images were auto resize and " + txt1 + " a standard or custom size.";
 			// "All auto resized and croped to a standard size of 16:9 Widescreen."
 			// TODO --> Complete all descriptions
-		};
+		}
 		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0) {
-			description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + "."
-		};
+			description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + ".";
+		}
 		showDescription.innerHTML = description;
 
 
 		// Images size tag and description
-		for (i in imageList) {
+		for (let i = 0; i < imageList.length; i++) {
 			if (imageList[i].valid) {
 				let n = parseInt(i) + 1;
 				let s_text = document.getElementById("s_txt_" + i);
@@ -314,18 +320,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 				// TODO --> remove? or what?
 				/*
-				img_data.innerHTML = "IMAGE " + i + " </br>";
-				img_data.innerHTML += "File name: " + imageList[i].name + " </br>";
-				img_data.innerHTML += "File extension: " + imageList[i].ext_old + " </br>";
-				img_data.innerHTML += "Size original: " + imageList[i].size_old + " bytes </br>";
-				img_data.innerHTML += "Size new: " + imageList[i].size_new + " bytes </br>";
-				img_data.innerHTML += "Resolution original: " + imageList[i].res_old + " px </br>";
-				img_data.innerHTML += "Resolution new: " + imageList[i].res_new + " px </br>";
-				img_data.innerHTML += "</br></br>"
+				img_data.innerHTML = "IMAGE " + i + " <br>";
+				img_data.innerHTML += "File name: " + imageList[i].name + " <br>";
+				img_data.innerHTML += "File extension: " + imageList[i].ext_old + " <br>";
+				img_data.innerHTML += "Size original: " + imageList[i].size_old + " bytes <br>";
+				img_data.innerHTML += "Size new: " + imageList[i].size_new + " bytes <br>";
+				img_data.innerHTML += "Resolution original: " + imageList[i].res_old + " px <br>";
+				img_data.innerHTML += "Resolution new: " + imageList[i].res_new + " px <br>";
+				img_data.innerHTML += "<br><br>"
 				*/
 			}
-		};
-	};
+		}
+	}
 	function checkAutoUpdateMode() {
 		// Check defined mode when start app
 		if (autoUpdate == true) {
@@ -342,8 +348,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		exampleImage[i].onclick = function () {
 			let url = this.src.replace("-thumb", "");
 			uploadCustomFile(url);
-		}
-	};
+		};
+	}
 	function addResizedImageToDOM(fileItem, id) {
 		// Add hidden images to DOM
 		var new_res = document.createElement("img");
@@ -405,8 +411,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// open in a new browser button?
 
 			console.log("Download with name: ", filename);
-
-		}
+		};
 		s_btn.classList.add("btn");
 		s_btn.classList.add("btn-download");
 		s_show.appendChild(s_img);
@@ -452,7 +457,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			document.body.appendChild(element);
 			element.click();
 			console.log("Download with name: ", filename);
-		}
+		};
 		m_btn.classList.add("btn");
 		m_btn.classList.add("btn-download");
 		m_show.appendChild(m_img);
@@ -476,7 +481,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		let button = event.target.nodeName === 'BUTTON';
 		if (!button) { return; }
 		resizeModeDisplay(event.target.id);
-	})
+	});
 	function resizeModeDisplay(mode) {
 		let pre = "btn-mode-";
 		let s = pre + "standard";
@@ -514,7 +519,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			document.getElementById(p).classList.add(sc);
 			document.getElementById(p + "-ar").classList.add(ac);
 			optionsBoxPrecentage.style.display = "block";
-		};
+		}
 	}
 	updateCheckbox.onchange = function () {
 		if (this.checked) {
@@ -526,38 +531,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			autoUpdate = false;
 			updateButton.style.display = "block";
 		}
-	}
+	};
 	cropModeCheckbox.onchange = function () {
 		if (this.checked) {
 			cropMode = true;
 			containModeCheckbox.checked = false;
 
 			// Resize images update
-			if (updateCheckbox.checked) { updateImagesResize() };
+			if (updateCheckbox.checked) { updateImagesResize(); }
 		}
 		else {
 			cropMode = false;
 			containModeCheckbox.checked = true;
 		}
-	}
+	};
 	containModeCheckbox.onchange = function () {
 		if (this.checked) {
 			cropMode = false;
 			cropModeCheckbox.checked = false;
 
 			// Resize images update
-			if (updateCheckbox.checked) { updateImagesResize() };
+			if (updateCheckbox.checked) { updateImagesResize(); }
 		}
 		else {
 			cropMode = true;
 			cropModeCheckbox.checked = true;
 		}
-	}
+	};
 	backColorPicker.onchange = function () {
 		backColor = this.value;
 		// Resize images update
-		if (updateCheckbox.checked) { updateImagesResize() };
-	}
+		if (updateCheckbox.checked) { updateImagesResize(); }
+	};
 	autoForceWidthHeightCheckbox.onchange = function () {
 		if (this.checked) {
 			inputType = "forced";
@@ -569,12 +574,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			//clearValues();
 			//clearStyles();
 		}
-		if (updateCheckbox.checked) { updateImagesResize() };
-	}
+		if (updateCheckbox.checked) { updateImagesResize(); }
+	};
 	updateButton.onclick = function () {
 		// Resize all images when update button is clicked
 		updateImagesResize();
-	}
+	};
 	inputSlider.onchange = function () {
 		// Update values
 		let i = this.value;
@@ -588,7 +593,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		this.classList.add("selected"); // TODO --> Add to new style css
 
 		// Resize images update
-		if (updateCheckbox.checked) { updateImagesResize() };
+		if (updateCheckbox.checked) { updateImagesResize(); }
 	};
 	inputWidth.onchange = function () {
 		// Check user input
@@ -605,7 +610,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		inputType = "fixed";
 
 		// Prevent from empty field
-		if (isNaN(resizingWidth)) { resizingWidth = 0; };
+		if (isNaN(resizingWidth)) { resizingWidth = 0; }
 		if (isNaN(resizingHeight)) { resizingHeight = 0; }
 
 		// Update styles
@@ -619,7 +624,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		}
 
 		// Resize images update
-		if (updateCheckbox.checked) { updateImagesResize() };
+		if (updateCheckbox.checked) { updateImagesResize(); }
 	};
 	inputHeight.onchange = function () {
 		// Check user input
@@ -636,7 +641,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		inputType = "fixed";
 
 		// Prevent from empty field
-		if (isNaN(resizingWidth)) { resizingWidth = 0; };
+		if (isNaN(resizingWidth)) { resizingWidth = 0; }
 		if (isNaN(resizingHeight)) { resizingHeight = 0; }
 
 		// Update styles
@@ -650,13 +655,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		}
 
 		// Resize images update
-		if (updateCheckbox.checked) { updateImagesResize() };
+		if (updateCheckbox.checked) { updateImagesResize(); }
 	};
 	function inputButtonPresetUpdate(button_id) {
 		// Get values
 		let w;
 		let h;
-		for (i in presetSizeDataList) {
+		for (let i = 0; i < presetSizeDataList.length; i++) {
 			if (button_id == presetSizeDataList[i].name) {
 				w = presetSizeDataList[i].width;
 				h = presetSizeDataList[i].height;
@@ -674,7 +679,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		element.classList.add("preset-size-selected");
 
 		// Resize images update
-		if (updateCheckbox.checked) { updateImagesResize() };
+		if (updateCheckbox.checked) { updateImagesResize(); }
 	}
 	function preventUserMinMax(value, text) {
 		if (isNaN(value)) {
@@ -705,12 +710,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		let img_m = document.getElementById("m_img_" + id);
 
 		// Call the resizer
-		console.log("Resizing with:....", inputType, cropMode)
+		console.log("Resizing with:....", inputType, cropMode);
 		let canvas = downScaleImage(img_old, inputType, cropMode, backColor, resizingFactor, resizingWidth, resizingHeight);
 
 		// Prevent from error in downsampling
 		if (canvas == undefined) {
-			console.error("Downsample not possible, canvas undefined")
+			console.error("Downsample not possible, canvas undefined");
 			return;
 		}
 
@@ -718,7 +723,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		let type = "image/" + imageList[id].ext_old;
 		let canvasData = canvas.toDataURL(type);
 		img_new.src = canvasData;
-		if (isNaN(img_s)) { img_s.src = canvasData };
+		if (isNaN(img_s)) { img_s.src = canvasData; }
 		img_m.src = canvasData;
 		imageList[id].url = img_new.src;
 
@@ -733,18 +738,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 			// Placeholder
 			let placeholder = img_s.parentElement.getElementsByClassName("placeholder");
-			if (!placeholder) { placeholder.hidden = true };
+			if (!placeholder) { placeholder.hidden = true; }
 			//console.log(placeholder);
-		}
+		};
 
 		// Update data displayed
 		dataDisplay();
 
 		// Ensure new resizer call when is loaded
 		img_old.onload = function () { updateImagesResize(); };
-	};
+	}
 	function updateImagesResize() {
-		for (let i in imageList) {
+		for (let i = 0; i < imageList.length; i++) {
 			if (imageList[i].valid == true) {
 				let id = parseInt(i);
 				//console.log("CALL", id)
@@ -787,7 +792,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			// Add images to DOM
 			addPrevImageToDOM(fileItem, id);
 			addResizedImageToDOM(fileItem, id);
-			addResizedImageToDOM_ShowSingle(fileItem, id)
+			addResizedImageToDOM_ShowSingle(fileItem, id);
 			addResizedImageToDOM_ShowMultiple(fileItem, id);
 			//if (imageList.length == 1) { addResizedImageToDOM_ShowSingle(fileItem, id) };
 
@@ -809,9 +814,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 			// Update show status
 			let off = true;
-			for (let i in imageList) { if (imageList[i].valid == true) { off = false; } }
+			for (let i = 0; i < imageList.length; i++) { if (imageList[i].valid == true) { off = false; } }
 			if (off) {
-				displayState(false)
+				displayState(false);
 			} else {
 				displayState(true);
 			}
@@ -826,7 +831,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 	function uploadCustomFile(src) {
 		pond.addFile(src);
-	};
+	}
 
 
 	// Initialize main functions and variables
