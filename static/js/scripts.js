@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const exampleImageContainer = document.getElementById("exampleImagesContainer");
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
+	const uploadBox = document.getElementById("upload-box");
 	// --> Options
 	const resizeMethod = document.getElementById("resizeMethod");
 	const optionsBoxMode = document.getElementById("options-box-mode");
@@ -244,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			resizeOptionsContainer.style.display = "block";
 			imageResizedContainer.style.display = "none";
 			imagePrevContainer.style.display = "none";
+			uploadBox.classList.remove("border-intense");
 
 			// Check valid lenght count
 			let validLenght = 0;
@@ -253,13 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Show single or multiple
 			if (validLenght == 1) {
 				// Update Description
-				showTitle.innerHTML = "Your resized image";
+				showTitle.innerHTML = "Your resize image";
 				// Show single image only
 				showSingleBox.style.display = "flex";
 				showMultipleBox.style.display = "none";
 			} else if (validLenght > 1) {
 				// Update Description
-				showTitle.innerHTML = "Your " + validLenght + " resized images";
+				showTitle.innerHTML = "Your " + validLenght + " resize images";
 				// Show multiple images only
 				showSingleBox.style.display = "none";
 				showMultipleBox.style.display = "flex";
@@ -271,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		else {
 			// Go to original state
+			uploadBox.classList.add("border-intense");
 			resizeOptionsContainer.style.display = "none";
 			imagesContainer.style.display = "none";
 			exampleImageContainer.style.display = "block";

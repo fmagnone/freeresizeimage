@@ -204,6 +204,9 @@ a:hover {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
+.border-intense {
+  border: var(--color-intense-1) solid;
+}
 
 /* Buttons and options */
 .bi {
