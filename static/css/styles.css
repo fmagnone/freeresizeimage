@@ -79,6 +79,12 @@ h6 {
 hr {
   margin: 0.4em;
 }
+a {
+  color: var(--color-intense-1); 
+}
+a:hover {
+  color: var(--color-theme-6); 
+}
 
 /* Upload Containers, Box and Upload */
 .container {

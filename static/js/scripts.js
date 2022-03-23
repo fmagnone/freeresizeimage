@@ -261,25 +261,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		// General Description
 
 		// Base data not defined
-		description = "All images auto resized."
+		description = "All images were resized."
 			+ "</br> Input Type: " + inputType
 			+ "</br> crop mode: " + cropMode
 			+ "</br> resizing factor: " + resizingFactor * 100 + "%"
 			+ "</br> width height: " + resizingWidth + " x " + resizingHeight
 			+ "</br> force mode: " + forceMode; // TODO --> To be removed
 		if (inputType == "percentage") {
-			description = "All images auto resized and croped to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size."
+			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size."
 		};
 		if (inputType == "fixed") {
 			let txt1, txt2;
-			if (cropMode) { txt1 = "croped to" } else { txt1 = "contained in" };
-			if (cropMode) { txt1 = "croped to" } else { txt1 = "contained in" };
-			description = "All images are auto resized and " + txt1 + " a standard or custom size."
+			if (cropMode) { txt1 = "<b>croped</b> to" } else { txt1 = "<b>contained</b> in" };
+			if (cropMode) { txt1 = "<b>croped</b> to" } else { txt1 = "<b>contained</b> in" };
+			description = "All images were auto resize and " + txt1 + " a standard or custom size."
 			// "All auto resized and croped to a standard size of 16:9 Widescreen."
 			// TODO --> Complete all descriptions
 		};
 		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0) {
-			description = "All images are <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + "."
+			description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + "."
 		};
 		showDescription.innerHTML = description;
 
