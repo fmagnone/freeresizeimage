@@ -18,20 +18,20 @@ ext = Sitemap(app=app)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-@app.after_request
-def after_request(response):
-    """Ensure responses aren't cached"""
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    response.headers["Expires"] = 0
-    response.headers["Pragma"] = "no-cache"
+#@app.after_request
+#def after_request(response):
+    #"""Ensure responses aren't cached"""
+    #response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    #response.headers["Expires"] = 0
+    #response.headers["Pragma"] = "no-cache"
 
-    response.headers["Access-Control-Expose-Headers"] = "Content-Disposition, Content-Length, X-Content-Transfer-Id"
+    #response.headers["Access-Control-Expose-Headers"] = "Content-Disposition, Content-Length, X-Content-Transfer-Id"
     #response.headers["Content-Type"] = "image/jpeg"
     #response.headers["Content-Length"] = "3965123"
     #response.headers["Content-Disposition"] = "inline; filename='my-file.jpg'"
     #response.headers["X-Content-Transfer-Id"] = "12345"
 
-    return response
+    #return response
 
 
 # Index Page
