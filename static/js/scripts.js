@@ -138,12 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		selectList.name = "presetList";
 		selectList.className = "preset-list";
 		presetSizeContainer.name = "presetSizeContainer";
+		presetSizeContainer.classList.add("py-2");
 		function loadAllButtonsCategory(category) {
 			// Add category container
 			let cat_container = document.createElement('div');
 			cat_container.name = category;
 			if (c != 0) { cat_container.style.display = "none"; }
-			cat_container.className = "category-container";
+			cat_container.classList.add("category-container");
 			cat_container.id = "cat_" + category;
 			presetSizeContainer.appendChild(cat_container);
 
