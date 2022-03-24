@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var presetSizeCategorySet = new Set();
 	var imageList = [];
 	var inputType = "";
+	let initInputType = "";
 	var cropMode = true;
 	var forceMode = false;
 	var backColor = "#f5f5f5";
@@ -169,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		}
-
+		
 		// Iterate through each category
 		let c = 0;
 		for (let category of presetSizeCategorySet) {
@@ -212,32 +213,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		inputSlider.value = 50;
 		inputWidth.value = "";
 		inputHeight.value = "";
-		inputType = "fixed";
+		inputType = initInputType;
 	}
 	function clearStyles() {
 		// Clear style in all selectable elements
-		inputSlider.classList.remove('selected'); // TODO --> Update to css
-		inputWidth.classList.remove('selected');  // TODO --> Update to css
-		inputHeight.classList.remove('selected');  // TODO --> Update to css
+		inputSlider.classList.remove('scale-slider-selected');
+		inputWidth.classList.remove('input-value-selected');
+		inputHeight.classList.remove('input-value-selected');
 		for	(let i = 0; i < presetSizeDataList.length; i++) {
 			let element = document.getElementById(presetSizeDataList[i].name);
 			element.classList.remove("preset-size-selected");
 		}
-	}
-	function loadRandomExampleImages() {
-		/*let ex1 = document.getElementById("example-1");
-		let ex2 = document.getElementById("example-2");
-		let ex3 = document.getElementById("example-3");
-		let ex4 = document.getElementById("example-4");
-		let ex5 = document.getElementById("example-5");
-		let ex6 = document.getElementById("example-6");
-		let imgA = [ex1, ex2];
-		let imgB = [ex3, ex4];
-		let imgC = [ex5, ex6];
-		// Hide 3 images per set
-		imgA[Math.floor(Math.random() * imgA.length)].style.display = "none";
-		imgB[Math.floor(Math.random() * imgB.length)].style.display = "none";
-		imgC[Math.floor(Math.random() * imgC.length)].style.display = "none";*/
 	}
 	function displayState(show) {
 		if (show) {
@@ -249,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// Check valid lenght count
 			let validLenght = 0;
-			
 			for	(let i = 0; i < imageList.length; i++) { if (imageList[i].valid) { validLenght += 1; } }
 
 			// Show single or multiple
@@ -277,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			resizeOptionsContainer.style.display = "none";
 			imagesContainer.style.display = "none";
 			exampleImageContainer.style.display = "block";
-			clearValues();
+			//clearValues();
 		}
 	}
 	function dataDisplay() {
@@ -289,8 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			"<br> crop mode: " + cropMode +
 			"<br> resizing factor: " + resizingFactor * 100 + "%" +
 			"<br> width height: " + resizingWidth + " x " + resizingHeight +
-			"<br> force mode: " + forceMode; 
-		// TODO --> To be removed
+			"<br> force mode: " + forceMode;  // TODO --> To be removed
+		
 		if (inputType == "percentage") {
 			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size.";
 		}
@@ -321,16 +306,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				s_size.innerHTML = imageList[i].res_new;
 				m_size.innerHTML = imageList[i].res_new;
 
-				// TODO --> remove? or what?
+				// TODO --> add image size in description (asyncronic load...)
+				// console.log(imageList[i].size_new)
 				/*
-				img_data.innerHTML = "IMAGE " + i + " <br>";
-				img_data.innerHTML += "File name: " + imageList[i].name + " <br>";
-				img_data.innerHTML += "File extension: " + imageList[i].ext_old + " <br>";
 				img_data.innerHTML += "Size original: " + imageList[i].size_old + " bytes <br>";
 				img_data.innerHTML += "Size new: " + imageList[i].size_new + " bytes <br>";
 				img_data.innerHTML += "Resolution original: " + imageList[i].res_old + " px <br>";
 				img_data.innerHTML += "Resolution new: " + imageList[i].res_new + " px <br>";
-				img_data.innerHTML += "<br><br>"
 				*/
 			}
 		}
@@ -591,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected"); // TODO --> Add to new style css
+		this.classList.add("scale-slider-selected");
 
 		// Resize images update
 		if (updateCheckbox.checked) { updateImagesResize(); }
@@ -616,8 +598,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected"); // TODO --> Update to css new style
-		inputHeight.classList.add("selected");
+		this.classList.add("input-value-selected");
+		inputHeight.classList.add("input-value-selected");
 
 		// Update values and styles if forced
 		if (forceMode) {
@@ -647,8 +629,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Update styles
 		clearStyles();
-		this.classList.add("selected"); // TODO --> Update to new css style
-		inputWidth.classList.add("selected");
+		this.classList.add("input-value-selected");
+		inputWidth.classList.add("input-value-selected");
 
 		// Update values and styles if forced
 		if (forceMode) {
@@ -702,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// --------------------------------------------------- //
 	// Resizer caller
 	function resizeImage(id) {
-		//console.log("Resize call id " + id, inputType);
+		//console.log("Resize call id " + id);
 
 		// Assign img to variable
 		let img_old = document.getElementById("img_pre_" + id);
@@ -711,7 +693,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		let img_m = document.getElementById("m_img_" + id);
 
 		// Call the resizer
-		console.log("Resizing with:....", inputType, cropMode);
+		//console.log("Resizing with:....", inputType, cropMode);
 		let canvas = downScaleImage(img_old, inputType, cropMode, backColor, resizingFactor, resizingWidth, resizingHeight);
 
 		// Prevent from error in downsampling
@@ -785,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// FUNCTIONS ------------
 		// Call back when image is added
 		onaddfile: (err, fileItem) => {
-			console.log("FP Add File Function called");
+			//console.log("FP Add File Function called");
 
 			// Assign image to list
 			let id = saveImageData(fileItem.file.name, URL.createObjectURL(fileItem.file), fileItem.fileSize, fileItem.fileExtension, fileItem.id);
@@ -837,26 +819,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Initialize main functions and variables
 	var autoUpdate = true;
-	loadRandomExampleImages();
 	checkAutoUpdateMode();
 	displayState(false);
 	dataDisplay();
 	resizingWidth = 900;
 	resizingHeight = 600;
-	resizeModeDisplay("btn-mode-standard"); // Define Resize Options first window
-
+	resizeModeDisplay("btn-mode-standard"); // Define init Resize Options
+	initInputType = "fixed"; // Define init Input Type
+	let presetSizeFirstButton = document.getElementsByClassName("preset-size-button");
+	if (presetSizeFirstButton[0]) { presetSizeFirstButton[0].click(); } // Click init first button
+	
 
 	// TEMP auto testing
-	//uploadCustomFile("static/img/porsche.jpg");
-	//uploadCustomFile("static/img/couple.jpg");
-
-
-	// TODO --> General bug: when delete all image, for some reason user lost selected size (1x1 for example)
-	// TODO --> Check metadata of the image in mobile and desktop
-	// TODO --> HTML change sample images to thumb image (smaller)
-	// TODO --> Filepond order invert
-
+	//uploadCustomFile("static/img/Example-Porsche.jpg");
 	
+
 	// DOM info
 	//console.log('DOM fully loaded and parsed');
 });

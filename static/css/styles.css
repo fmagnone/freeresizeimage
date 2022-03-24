@@ -154,8 +154,6 @@ a:hover {
   width: 100%;
 }
 .example-image {
-  /*height: 190px;
-  width: auto;*/
   margin: 6px;
   cursor: pointer;
   border: solid 2px var(--color-theme-2);
@@ -291,6 +289,30 @@ a:hover {
   height: 4px;
   background: var(--color-theme-1);
 }
+
+.scale-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  background: var(--color-theme-4);
+  border: var(--border-width) solid var(--color-intense-1);
+  overflow: visible;
+  cursor: pointer;
+}
+.scale-slider::-moz-range-thumb { 
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  background: var(--color-theme-4);
+  border: var(--border-width) solid var(--color-intense-1);
+  overflow: visible;
+  cursor: pointer;
+}
+.scale-slider-selected {
+  
+}
 .inputValue {
   text-align: center;
   padding: 5px;
@@ -301,6 +323,9 @@ a:hover {
   background-color: var(--color-theme-3);
   border-color: var(--color-theme-1);
   color: var(--color-intense-10);
+}
+.input-value-selected {
+  border-color: var(--color-intense-1);
 }
 
 /* Sprites and Images */
@@ -428,33 +453,7 @@ a:hover {
 }
 */
 
-/* Mobile Adjustemnts Portrait */
-@media only screen and (max-width: 600px) {
-  .gr-01 {
-    background-position: -23px -15px;
-    background-size: 115px;
-    width: 80px;
-    height: 90px;
-  }
-  .logo-text {
-    font-size: 1.2em;
-  }
-  .example-image {
-    width: auto;
-    height: 150px;
-    margin: 3px;
-  }
-  .arr-resize-mode {
-    display: none;
-  }
-}
-@media only screen and (max-width: 320px) {
-  .example-image {
-    width: auto;
-    height: 110px;
-    margin: 3px;
-  }
-}
+
 
 /* Toggle Light Dark mode */
 .mode-toggle {
@@ -562,4 +561,51 @@ body.dark .toggle-switch:hover:after {
   -o-animation:none!important;
   -ms-animation:none!important;
   animation:none!important;
+}
+
+/* Mobile Adjustemnts Portrait */
+@media only screen and (max-width: 600px) {
+  h5 {
+    font-size: 1.5em;
+  }
+  h4 {
+    font-size: 1.3em;
+  }
+  .filepond--root .filepond--drop-label {
+    font-size: 1.3em;
+  }
+  .gr-01 {
+    background-position: -23px -15px;
+    background-size: 115px;
+    width: 80px;
+    height: 90px;
+  }
+  .logo-text {
+    font-size: 1.2em;
+  }
+  .example-image {
+    width: auto;
+    height: 140px;
+    margin: 3px;
+  }
+  .arr-resize-mode {
+    display: none;
+  }
+}
+@media only screen and (max-width: 320px) {
+  h5 {
+    font-size: 1.3em;
+  }
+  h4 {
+    font-size: 1.1em;
+  }
+  .main-header {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .example-image {
+    width: auto;
+    height: 110px;
+    margin: 3px;
+  }
 }

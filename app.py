@@ -21,12 +21,12 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 @app.after_request
 def after_request(response):
     """ Cache 200 """
-    response.headers["Cache-Control"] = "max-age=200"
+    #response.headers["Cache-Control"] = "max-age=200"
 
-    #"""Ensure responses aren't cached"""
-    #response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    #response.headers["Expires"] = 0
-    #response.headers["Pragma"] = "no-cache"
+    """Ensure responses aren't cached"""
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
 
     #response.headers["Access-Control-Expose-Headers"] = "Content-Disposition, Content-Length, X-Content-Transfer-Id"
     #response.headers["Content-Type"] = "image/jpeg"

@@ -16,6 +16,20 @@ var presetSizeDataList = [];
 // Add data
 presetSizeDataList.push(new presetSizeData(
     "Instagram", 
+    "instagram_landscape", 
+    "Landscape",  
+    "1.91:1", 
+    1080, 566
+));
+presetSizeDataList.push(new presetSizeData(
+    "Instagram", 
+    "instagram_portrait", 
+    "Portrait",  
+    "4:5", 
+    1080, 1350
+));
+presetSizeDataList.push(new presetSizeData(
+    "Instagram", 
     "instagram_story", 
     "Story", 
     "9:16", 
@@ -27,20 +41,6 @@ presetSizeDataList.push(new presetSizeData(
     "Square", 
     "1:1", 
     1080, 1080
-));
-presetSizeDataList.push(new presetSizeData(
-    "Instagram", 
-    "instagram_portrait", 
-    "Portrait",  
-    "4:5", 
-    1080, 1350
-));
-presetSizeDataList.push(new presetSizeData(
-    "Instagram", 
-    "instagram_landscape", 
-    "Landscape",  
-    "1.91:1", 
-    1080, 566
 ));
 presetSizeDataList.push(new presetSizeData(
     "Facebook", 
