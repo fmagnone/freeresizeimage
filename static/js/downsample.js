@@ -12,7 +12,6 @@ function downScaleImage(img, inputType, cropMode, backColor, scalePercentage, fi
     dy = 0;
     cw = 600; 
     ch = 400;
-
     // Define canvas width and height depending on type
     if (inputType == "percentage") {
         // Scale image auto to a defined percentage
@@ -24,7 +23,6 @@ function downScaleImage(img, inputType, cropMode, backColor, scalePercentage, fi
         ch = fixedHeight;
         dw = fixedWidth;
         dh = fixedHeight;
-
         // Prevent from cw canvas width or ch canvas height to be 0
         if (fixedWidth == 0) { 
             cw = Math.ceil(sw / (sh / fixedHeight)); 
@@ -53,7 +51,6 @@ function downScaleImage(img, inputType, cropMode, backColor, scalePercentage, fi
             ch = sh;
         }
     }
-
     // If type is not forced, crop or contain image
     if (inputType != "forced") {
         // Calculate Scale Factor and scale size
@@ -96,24 +93,20 @@ function downScaleImage(img, inputType, cropMode, backColor, scalePercentage, fi
             }
         }
     }
-
     // Print analysis
     //console.log("S: ", sx, sy, sw, sh);
     //console.log("D: ", dx, dy, dw, dh);
     //console.log("C: ", cw, ch);
-
     // Create a new canvas
     let canvas = document.createElement('canvas');
     canvas.width = cw;
     canvas.height = ch;
     let ctx = canvas.getContext("2d");
-
     // Define Background Color
     ctx.fillStyle = backColor;
     ctx.fillRect(0, 0, cw, ch);
-
     // Draw scaled image inside canvas
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
-
+    // Return final canvas
     return canvas;
 }

@@ -154,7 +154,8 @@ a:hover {
   width: 100%;
 }
 .example-image {
-  height: 190px;
+  /*height: 190px;
+  width: auto;*/
   margin: 6px;
   cursor: pointer;
   border: solid 2px var(--color-theme-2);
@@ -439,6 +440,7 @@ a:hover {
     font-size: 1.2em;
   }
   .example-image {
+    width: auto;
     height: 150px;
     margin: 3px;
   }
@@ -448,6 +450,7 @@ a:hover {
 }
 @media only screen and (max-width: 320px) {
   .example-image {
+    width: auto;
     height: 110px;
     margin: 3px;
   }
