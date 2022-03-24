@@ -16,6 +16,7 @@
   --toggle-g40: #404346;
   --toggle-g50: #7c8084;
   --toggle-g70: #dce0e3;
+  --toggle-g90: #ffffff;
 
   /* Black */
   /*
@@ -153,7 +154,7 @@ a:hover {
   width: 100%;
 }
 .example-image {
-  height: 160px;
+  height: 190px;
   margin: 6px;
   cursor: pointer;
   border: solid 2px var(--color-theme-2);
@@ -438,11 +439,17 @@ a:hover {
     font-size: 1.2em;
   }
   .example-image {
-    height: 70px;
+    height: 150px;
     margin: 3px;
   }
   .arr-resize-mode {
     display: none;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .example-image {
+    height: 110px;
+    margin: 3px;
   }
 }
 
@@ -472,7 +479,7 @@ a:hover {
   position: relative;
   border-radius: 14px;
   display: inline-block;
-  background: var(--toggle-g30);
+  background: var(--toggle-g50);
   cursor:pointer;
 }
 body.dark .toggle-switch {
@@ -522,11 +529,11 @@ body.dark .toggle-switch:after {
 }
 .toggle-switch:hover,
 .toggle-switch:hover:after {
-  background: var(--toggle-g50);
+  background: var(--toggle-g40);
 }
 body.dark .toggle-switch:hover,
 body.dark .toggle-switch:hover:after {
-  background: var(--toggle-g50);
+  background: var(--toggle-g90);
 }
 .noselect {
   user-select: none;

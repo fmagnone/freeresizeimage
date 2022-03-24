@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 	function loadRandomExampleImages() {
-		let ex1 = document.getElementById("example-1");
+		/*let ex1 = document.getElementById("example-1");
 		let ex2 = document.getElementById("example-2");
 		let ex3 = document.getElementById("example-3");
 		let ex4 = document.getElementById("example-4");
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Hide 3 images per set
 		imgA[Math.floor(Math.random() * imgA.length)].style.display = "none";
 		imgB[Math.floor(Math.random() * imgB.length)].style.display = "none";
-		imgC[Math.floor(Math.random() * imgC.length)].style.display = "none";
+		imgC[Math.floor(Math.random() * imgC.length)].style.display = "none";*/
 	}
 	function displayState(show) {
 		if (show) {
