@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		s_container.id = "s_div_" + id;
 		s_container.classList.add("row");
 		s_column1.classList.add("col-sm-8");
-		s_column2.classList.add("col-sm");
+		s_column2.classList.add("col");
 		s_show.classList.add("show-single-image");
 		//s_plh.classList.add("placeholder");
 		//s_plh.classList.add("col-12");
