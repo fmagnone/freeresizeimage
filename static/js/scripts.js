@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
 	const uploadBox = document.getElementById("upload-box");
+	const liveAlertPlaceholder = document.getElementById("live-alert-placeholder");
+	
 	// --> Options
 	const resizeMethod = document.getElementById("resizeMethod");
 	const optionsBoxMode = document.getElementById("options-box-mode");
@@ -48,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var description = " ";
 	var minSizeValue = 50;
 	var maxSizeValue = 3000;
+	var maxFileNumberAllowed = 10;
 	var appName = "FreeImageResizer";
 
 
@@ -674,7 +677,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		return value;
 	}
+	function messageToUser(message) {
+		console.log("This is a message to the user: ", message);
 
+		// Create HTML elements
+		var alert_div = document.createElement("div");
+		alert_div.classList.add("alert");
+		alert_div.classList.add("alert-warning");
+		alert_div.setAttribute("role", "alert");
+		alert_div.innerHTML = message;
+		alert_div.onclick = function () {
+			//this.hide(); // TODO --> Hide alert
+		};
+		liveAlertPlaceholder.appendChild(alert_div);
+
+	}
 
 	// --------------------------------------------------- //
 	// Resizer caller
@@ -803,9 +820,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Update data display
 			dataDisplay();
 		},
+		// Warnings and errors
+		onwarning: function (error) {
+			//console.log("FP Warning", error);
+			if (error.body == "Max files") {
+				messageToUser("Sorry! You are trying to upload more than " + maxFileNumberAllowed + " files.");
+			} else {
+				messageToUser("We found some error uploading your file...");
+			}
+		},
 	});
 
-	pond.maxFiles = 10;
+	pond.maxFiles = maxFileNumberAllowed;
 	pond.allowReorder = false;
 
 	if (!window.matchMedia("(min-width: 500px)").matches) {
