@@ -355,16 +355,16 @@ a:hover {
 .gr-logo-light {
   background-image: url("/static/assets/grLogo-b.svg");
   background-repeat: no-repeat;
-  background-position: -32px -10px;
+  background-position: -15px -3px;
   width: 110px;
-  height: 130px;
+  height: 110px;
 }
 .gr-logo-dark {
   background-image: url("/static/assets/grLogo-w.svg");
   background-repeat: no-repeat;
-  background-position: -32px -10px;
+  background-position: -15px -3px;
   width: 110px;
-  height: 130px;
+  height: 110px;
   opacity: 0;
   position: absolute;
 }
@@ -603,13 +603,17 @@ body.dark .toggle-switch:hover:after {
     font-size: 1.3em;
   }
   .gr-logo-light, .gr-logo-dark {
-    background-position: -23px -20px;
-    background-size: 115px;
+    background-position: -10px -4px;
+    background-size: 80px;
     width: 80px;
-    height: 85px;
+    height: 80px;
   }
   .logo-text {
     
+  }
+  .main-header {
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
   }
   .example-image {
     width: auto;
@@ -633,10 +637,7 @@ body.dark .toggle-switch:hover:after {
   .filepond--drop-label {
     font-size: 1.1em !important;
   }
-  .main-header {
-    padding-top: 5px !important;
-    padding-bottom: 0 !important;
-  }
+  
   .example-image {
     width: auto;
     height: 110px;

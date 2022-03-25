@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var description = " ";
 	var minSizeValue = 50;
 	var maxSizeValue = 3000;
+	var appName = "FreeImageResizer";
 
 
 	// Image Class Constructor
@@ -370,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		s_btn.type = "button";
 		s_btn.id = "s_btn_" + id;
 		s_btn.onclick = function () {
-			let filename = "freeimageresizer_" + imageList[id].name;
+			let filename = appName + "-" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
 			element.setAttribute('href', url);
@@ -421,14 +422,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		m_btn.type = "button";
 		m_btn.id = "m_btn_" + id;
 		m_btn.onclick = function () {
-			let filename = "freeimageresizer_" + imageList[id].name;
+			let filename = appName + "-" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
 			element.setAttribute('href', url);
 			element.setAttribute('download', filename);
 			document.body.appendChild(element);
 			element.click();
-			console.log("Download with name: ", filename);
+			//console.log("Download with name: ", filename);
 		};
 		m_btn.classList.add("btn");
 		m_btn.classList.add("btn-download");
