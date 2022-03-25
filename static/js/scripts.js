@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		s_mob.classList.add("py-2");
 		s_mob.classList.add("text-center");
 		s_mob.classList.add("d-sm-none");
-		s_mob.innerHTML = "Or click image and add to your device <i class='bi bi-box-arrow-down'></i>";
+		s_mob.innerHTML = "Or click image and Add to Photos <i class='bi bi-box-arrow-down'></i>";
 		s_show.appendChild(s_img);
 		s_show.appendChild(s_siz);
 		s_column1.appendChild(s_show);
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		m_mob.classList.add("py-2");
 		m_mob.classList.add("text-center");
 		m_mob.classList.add("d-sm-none");
-		m_mob.innerHTML = "Or click image and add to your device <i class='bi bi-box-arrow-down'></i>";
+		m_mob.innerHTML = "Or click image and Add to Photos <i class='bi bi-box-arrow-down'></i>";
 		m_show.appendChild(m_img);
 		m_show.appendChild(m_siz);
 		m_container.appendChild(m_show);

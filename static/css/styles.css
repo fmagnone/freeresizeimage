@@ -113,6 +113,7 @@ a:hover {
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
   z-index: 10;
+  border: solid var(--color-theme-2);
 }
 .options-box {
   background-color: var(--color-theme-2);
@@ -256,6 +257,18 @@ a:hover {
 }
 .mobile-download-tag {
   color: var(--color-theme-8);
+}
+.btn-intense {
+  padding: 0.5em 1.2em;
+  border-radius: var(--border-radius);
+  background-color: var(--color-theme-1);
+  border: solid var(--border-width) var(--color-theme-4);
+  color: var(--color-intense-1);
+}
+.btn-intense:hover {
+  
+  border-color: var(--color-intense-1);
+  color: var(--color-intense-1);
 }
 .btn-update {
   padding: 7px;
