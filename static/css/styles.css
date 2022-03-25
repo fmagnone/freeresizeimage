@@ -254,6 +254,9 @@ a:hover {
   border-color: var(--color-intense-1);
   color: var(--color-intense-1);
 }
+.mobile-download-tag {
+  color: var(--color-theme-8);
+}
 .btn-update {
   padding: 7px;
   width: 100%;
@@ -444,7 +447,7 @@ a:hover {
 }
 .filepond--file-action-button {
   cursor: pointer;
-  background-color: var(--color-theme-6) !important;
+  background-color: var(--color-theme-4) !important;
 }
 .filepond--panel-root {
   background-color: transparent !important;
@@ -580,17 +583,20 @@ body.dark .toggle-switch:hover:after {
   h4 {
     font-size: 1.3em;
   }
+  h1 {
+    font-size: 1.6em;
+  }
   .filepond--root .filepond--drop-label {
     font-size: 1.3em;
   }
-  .gr-01 {
-    background-position: -23px -15px;
+  .gr-logo-light, .gr-logo-dark {
+    background-position: -23px -20px;
     background-size: 115px;
     width: 80px;
-    height: 90px;
+    height: 85px;
   }
   .logo-text {
-    font-size: 1.2em;
+    
   }
   .example-image {
     width: auto;
@@ -602,14 +608,20 @@ body.dark .toggle-switch:hover:after {
   }
 }
 @media only screen and (max-width: 320px) {
-  h5 {
-    font-size: 1.3em;
+  h1 {
+    font-size: 1.4em;
   }
   h4 {
     font-size: 1.1em;
   }
+  h5 {
+    font-size: 1.3em;
+  }
+  .filepond--drop-label {
+    font-size: 1.1em !important;
+  }
   .main-header {
-    padding-top: 0 !important;
+    padding-top: 5px !important;
     padding-bottom: 0 !important;
   }
   .example-image {

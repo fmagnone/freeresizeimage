@@ -53,17 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Image Class Constructor
 	class imageData {
 		constructor(
-			name, 
+			name,
 			url,
-			id_btn, 
+			id_btn,
 			id_file,
-			size_old, 
+			size_old,
 			size_new,
-			ext_old, 
+			ext_old,
 			ext_new,
-			res_old, 
+			res_old,
 			res_new
-			) {
+		) {
 			this.valid = true;
 			this.name = name;
 			this.url = url;
@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		new_image.ext_old = ext_old.toUpperCase();
 		new_image.ext_new = "-";
 		new_image.id_file = id_file;
-		//new_image.id_btn = "download_" + id;
 		new_image.size_new = "? (not calculated yet)";
 		new_image.res_old = "0x0";
 		new_image.res_new = "0x0";
@@ -149,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			presetSizeContainer.appendChild(cat_container);
 
 			// Add buttons
-			for	(let i = 0; i < presetSizeDataList.length; i++) {
+			for (let i = 0; i < presetSizeDataList.length; i++) {
 				if (presetSizeDataList[i].category == category) {
 					let btn_container = document.createElement('div');
 					let button = document.createElement('button');
@@ -171,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		}
-		
+
 		// Iterate through each category
 		let c = 0;
 		for (let category of presetSizeCategorySet) {
@@ -221,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		inputSlider.classList.remove('scale-slider-selected');
 		inputWidth.classList.remove('input-value-selected');
 		inputHeight.classList.remove('input-value-selected');
-		for	(let i = 0; i < presetSizeDataList.length; i++) {
+		for (let i = 0; i < presetSizeDataList.length; i++) {
 			let element = document.getElementById(presetSizeDataList[i].name);
 			element.classList.remove("preset-size-selected");
 		}
@@ -236,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// Check valid lenght count
 			let validLenght = 0;
-			for	(let i = 0; i < imageList.length; i++) { if (imageList[i].valid) { validLenght += 1; } }
+			for (let i = 0; i < imageList.length; i++) { if (imageList[i].valid) { validLenght += 1; } }
 
 			// Show single or multiple
 			if (validLenght == 1) {
@@ -270,13 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		// General Description
 
 		// Base data not defined
-		description = "All images were resized." + 
+		description = "All images were resized." +
 			"<br> Input Type: " + inputType +
 			"<br> crop mode: " + cropMode +
 			"<br> resizing factor: " + resizingFactor * 100 + "%" +
 			"<br> width height: " + resizingWidth + " x " + resizingHeight +
 			"<br> force mode: " + forceMode;  // TODO --> To be removed
-		
+
 		if (inputType == "percentage") {
 			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size.";
 		}
@@ -292,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + ".";
 		}
 		showDescription.innerHTML = description;
-
 
 		// Images size tag and description
 		for (let i = 0; i < imageList.length; i++) {
@@ -350,19 +348,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		var s_column1 = document.createElement("div");
 		var s_column2 = document.createElement("div");
 		var s_show = document.createElement("div");
-		//var s_plh = document.createElement("span");
 		var s_siz = document.createElement("div");
 		var s_img = document.createElement("img");
 		var s_txt = document.createElement("p");
 		var s_btn = document.createElement("button");
+		var s_mob = document.createElement("div");
 		s_container.id = "s_div_" + id;
 		s_container.classList.add("row");
 		s_column1.classList.add("col-sm-8");
 		s_column2.classList.add("col");
 		s_show.classList.add("show-single-image");
-		//s_plh.classList.add("placeholder");
-		//s_plh.classList.add("col-12");
-		//s_plh.style.height = "60vh";
 		s_siz.id = "s_siz_" + id;
 		s_siz.classList.add("show-size-tag");
 		s_siz.innerHTML = "0x0";
@@ -375,8 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		s_btn.type = "button";
 		s_btn.id = "s_btn_" + id;
 		s_btn.onclick = function () {
-			// TODO --> review download for iphone, should open image?
-			// Download (desktop)
 			let filename = "freeimageresizer_" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
@@ -384,28 +377,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			element.setAttribute('download', filename);
 			document.body.appendChild(element);
 			element.click();
-
-			// Open in new window (mobile)
-			//var image = new Image();
-			//image.src = imageList[id].url;
-			//var w = window.open("");
-			//w.document.write(image.outerHTML);
-
-			// TODO --> Mobile download
-			// Add a tag for user to save: click on image and save it, (icon iphone [^])
-			// hide "download?"
-			// open in a new browser button?
-
-			console.log("Download with name: ", filename);
+			//console.log("Download with name: ", filename);
 		};
 		s_btn.classList.add("btn");
 		s_btn.classList.add("btn-download");
+		s_mob.classList.add("mobile-download-tag");
+		s_mob.classList.add("py-2");
+		s_mob.classList.add("text-center");
+		s_mob.classList.add("d-sm-none");
+		s_mob.innerHTML = "Or click image and add to your device <i class='bi bi-box-arrow-down'></i>";
 		s_show.appendChild(s_img);
-		//s_show.appendChild(s_plh);
 		s_show.appendChild(s_siz);
 		s_column1.appendChild(s_show);
 		s_column2.appendChild(s_txt);
 		s_column2.appendChild(s_btn);
+		s_column2.appendChild(s_mob);
 		s_container.appendChild(s_column1);
 		s_container.appendChild(s_column2);
 		showSingleBox.appendChild(s_container);
@@ -418,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		var m_img = document.createElement("img");
 		var m_txt = document.createElement("p");
 		var m_btn = document.createElement("button");
+		var m_mob = document.createElement("div");
 		m_container.classList.add("col-sm-3");
 		m_container.classList.add("my-4");
 		m_container.id = "m_div_" + id;
@@ -434,7 +421,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		m_btn.type = "button";
 		m_btn.id = "m_btn_" + id;
 		m_btn.onclick = function () {
-			// TODO --> review download for iphone, should open image?
 			let filename = "freeimageresizer_" + imageList[id].name;
 			let url = imageList[id].url;
 			var element = document.createElement('a');
@@ -446,11 +432,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 		m_btn.classList.add("btn");
 		m_btn.classList.add("btn-download");
+		m_mob.classList.add("mobile-download-tag");
+		m_mob.classList.add("py-2");
+		m_mob.classList.add("text-center");
+		m_mob.classList.add("d-sm-none");
+		m_mob.innerHTML = "Or click image and add to your device <i class='bi bi-box-arrow-down'></i>";
 		m_show.appendChild(m_img);
 		m_show.appendChild(m_siz);
 		m_container.appendChild(m_show);
 		m_container.appendChild(m_txt);
 		m_container.appendChild(m_btn);
+		m_container.appendChild(m_mob);
 		showMultipleBox.appendChild(m_container);
 	}
 	function addPrevImageToDOM(fileItem, id) {
@@ -467,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		resizeModeDisplay(event.target.id);
 	});
 	function resizeModeDisplay(mode) {
+		localStorage.setItem("user-resize-mode-display", mode);
 		let pre = "btn-mode-";
 		let s = pre + "standard";
 		let c = pre + "custom";
@@ -758,7 +751,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		credits: false,
 		dropOnElement: false,
 		dropOnPage: true,
-		labelIdle: 'Drag & drop your image<br/><span class="filepond--label-action">or browse to upload</span>',
+		styleButtonRemoveItemPosition: 'right',
+		labelIdle: 'Drag & drop multiple images<br/><span class="filepond--label-action">or browse to upload</span>',
 
 		server: {
 			//url: "http://127.0.0.1:5000/", // Local server configuration
@@ -813,6 +807,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	pond.maxFiles = 10;
 	pond.allowReorder = false;
 
+	if (!window.matchMedia("(min-width: 500px)").matches) {
+		// Update text in mobile
+		pond.labelIdle = '<span class="filepond--label-action">Click to upload</span><br>multiple images';
+	}
+
 	function uploadCustomFile(src) {
 		pond.addFile(src);
 	}
@@ -825,15 +824,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	dataDisplay();
 	resizingWidth = 900;
 	resizingHeight = 600;
-	resizeModeDisplay("btn-mode-standard"); // Define init Resize Options
+	let initResizeMode = localStorage.getItem("user-resize-mode-display"); // Define init Resize Options
+	if (!initResizeMode) { initResizeMode = "btn-mode-standard" };
+	resizeModeDisplay(initResizeMode);
 	initInputType = "fixed"; // Define init Input Type
 	let presetSizeFirstButton = document.getElementsByClassName("preset-size-button");
 	if (presetSizeFirstButton[0]) { presetSizeFirstButton[0].click(); } // Click init first button
-	
+
 
 	// TEMP auto testing
 	//uploadCustomFile("static/img/Example-Porsche.jpg");
-	
+
 
 	// DOM info
 	//console.log('DOM fully loaded and parsed');

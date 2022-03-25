@@ -95,9 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log("Dark mode is: " + darkmodeactive + " and it will stay light");
     }
 
-    // Not sure if it's needed or could be removed:
-    //window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && stayDark());
-    //window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && stayLight());
+    window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && stayDark());
+    window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && stayLight());
 
     // User Actions
     $(".toggle-switch").click(function () {
