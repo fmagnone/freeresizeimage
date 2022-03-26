@@ -187,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Add List changer listener
 		selectList.addEventListener("change", function () {
 			//console.log(selectList.selectedIndex);
-			console.log(selectList.value);
 
 			for (let category of presetSizeCategorySet) {
 				let category_id = "cat_" + category;
@@ -803,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		// File has been removed
 		onremovefile: function (error, fileItem) {
-			console.log("FP Remove File Function called");
+			//console.log("FP Remove File Function called");
 
 			// Remove item from list and remove download button
 			removeImageData(fileItem.id);
