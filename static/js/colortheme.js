@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(function () {
         tempDisableAnim();
     }, 20);
-    $(window).resize(function () {
+    /*$(window).resize(function () {
         tempDisableAnim();
         setTimeout(function () {
             tempDisableAnim();
         }, 0);
-    });
+    });*/
 
     // Icon animated update
     function refreshFavicon() {

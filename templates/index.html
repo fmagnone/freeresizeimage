@@ -3,151 +3,148 @@
 
 {% block content %}
 
-<section>
-    <!-- Page Content Block 1 - Upload -->
-    <div class="container px-3 px-lg-5">
-        <!-- Message box -->
-        <div id="live-alert-placeholder">
-            
-        </div>
+<!-- Page Content Block 1 - Upload -->
 
-        <div class="upload-container row h-100">
-            <div class="col-sm p-0 mb-3">
-                <div class="row h-100 m-2">
-                    <div id="upload-box" class="upload-box animate d-flex flex-row align-items-center border-intense">
-                        <div class="filepond-container">
-                            <!-- FilePond Upload -->
-                            <form method="POST">
-                                <input id="fileUpload" type="file" class="filepond" name="filepond" multiple
-                                    data-allow-reorder="true" data-max-file-size="8MB" data-max-files="10">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="resizeOptionsContainer" class="col-sm p-0 mb-3">
-                <div class="options-box animate h-100 m-2 p-4">
-                    <!-- Resize options -->
-                    <div class="mb-3">
-                        <h4 class="pb-1">Resize options:</h4>
+<!-- Message box -->
+<div id="live-alert-placeholder">
 
-                        <!-- Resize options: Mode selector -->
-                        <div id="resizeMethod" class="row text-center">
-                            <div class="col-12 col-md-4 my-1">
-                                <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel"
-                                    type="button"><i class="bi bi-badge-sd bi-mr"></i>Standard size</button>
-                                <i id="btn-mode-standard-ar"
-                                    class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
-                            </div>
-                            <div class="col-12 col-md-4 my-1">
-                                <button id="btn-mode-custom" class="btn btn-resize-mode" type="button"><i
-                                        class="bi bi-aspect-ratio bi-mr"></i>Custom size</button>
-                                <i id="btn-mode-custom-ar" class="bi bi-chevron-down arr-resize-mode"></i>
-                            </div>
-                            <div class="col-12 col-md-4 my-1">
-                                <button id="btn-mode-percentage" class="btn btn-resize-mode" type="button"><i
-                                        class="bi bi-percent bi-mr"></i>Percentage</button>
-                                <i id="btn-mode-percentage-ar" class="bi bi-chevron-down arr-resize-mode"></i>
-                            </div>
-                        </div>
-                        <!-- Resize options: Options Blocks -->
-                        <div id="options-box-mode">
-                            <hr />
-                            <p><span class="span-options">Crop Mode: </span><input id="cropModeCheckbox" type="checkbox"
-                                    checked>
-                                <span class="span-options">crop</span>
-                                <input id="containModeCheckbox" type="checkbox"> <span
-                                    class="span-options">contain</span>
-                                ( background color
-                                <input type="color" id="backColorPicker" name="backColorPicker" value="#f5f5f5"> )
-                            </p>
+</div>
 
-                            <hr />
-                        </div>
-                        <div id="options-box-preset">
-
-                            <div id="presetListContainer">
-                                <span class="span-options">Scale to a standard size </span>
-                            </div>
-
-                            <hr />
-                        </div>
-                        <div id="options-box-custom-size">
-                            <div id="sizeContainer">
-                                <div class="py-2">
-
-                                    Width: <input min="0" max="2500" type="number" class="inputValue" id="width"
-                                        placeholder="auto">
-                                    px
-
-                                    -
-
-                                    Height: <input min="0" max="2500" type="number" class="inputValue" id="height"
-                                        placeholder="auto">
-                                    px
-
-                                </div>
-                                <div class="py-2">
-                                    <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to custom width and
-                                    height
-                                </div>
-                            </div>
-                            <hr />
-                        </div>
-                        <div id="options-box-percentage">
-                            <hr />
-                            <div id="sliderContainer">
-                                <div class="py-2">
-                                    Select a percentage
-                                </div>
-                                <div class="py-2">
-                                    <!-- review style 
-                                https://codepen.io/vsync/pen/mdEJMLv
-                                -->
-                                    <input type="range" min="5" max="95" value="50" class="scale-slider" id="range">
-                                </div>
-                            </div>
-                            <hr />
-                        </div>
-                    </div>
-
-                    <div id="updateModeContainer">
-                        Update mode:
-                        <input id="updateCheckbox" type="checkbox"> auto-update
-                        <button id="updateButton" class="btn btn-update">Update</button>
-                    </div>
+<div class="upload-container row h-100">
+    <div class="col-sm p-0 mb-3">
+        <div class="row h-100 m-2">
+            <div id="upload-box" class="upload-box animate d-flex flex-row align-items-center border-intense">
+                <div class="filepond-container">
+                    <!-- FilePond Upload -->
+                    <form method="POST">
+                        <input id="fileUpload" type="file" class="filepond" name="filepond" multiple
+                            data-allow-reorder="true" data-max-file-size="8MB" data-max-files="10">
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="resizeOptionsContainer" class="col-sm p-0 mb-3">
+        <div class="options-box animate h-100 m-2 p-4">
+            <!-- Resize options -->
+            <div class="mb-3">
+                <h4 class="pb-1">Resize options:</h4>
 
-        <!-- Example images -->
-        <div id="exampleImagesContainer" class="text-center mt-4">
-            <h4>Or select a image to try:</h4>
-            <div id="example-images" class="mt-3">
-                <img id="example-4" src="static/img/Example-CoupleBeach-thumb.jpg" alt="Couple in the beach"
-                    class="example-image" height="190" width="127">
-                <img id="example-5" src="static/img/Example-Porsche-thumb.jpg" alt="Porsche Panamera"
-                    class="example-image" height="190" width="285">
-                <!-- <img id="example-2" src="static/img/Example-HumanTower-thumb.jpg" alt="Human tower in Barcelona" class="example-image"> -->
-                <!-- <img id="example-3" src="static/img/Example-CoupleLove-thumb.jpg" alt="People love image in a mountain" class="example-image"> -->
-                <!-- <img id="example-1" src="static/img/Example-Paris-thumb.jpg" alt="Eiffel Tower in Paris" class="example-image">-->
-                <!-- <img id="example-6" src="static/img/Example-Tesla-thumb.jpg" alt="Tesla Model S" class="example-image"> -->
-            </div>
-        </div>
-
-        <!-- Show images -->
-        <div id="showContainer" class="show-container row">
-            <div class="col p-0">
-                <div class="show-box m-2 p-4">
-
-                    <h4 id="show-title" class="pb-1">Your resize image:</h4>
-                    <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9
-                        Widescreen.
+                <!-- Resize options: Mode selector -->
+                <div id="resizeMethod" class="row text-center">
+                    <div class="col-12 col-md-4 my-1">
+                        <button id="btn-mode-standard" class="btn btn-resize-mode btn-resize-mode-sel" type="button"><i
+                                class="bi bi-badge-sd bi-mr"></i>Standard size</button>
+                        <i id="btn-mode-standard-ar" class="bi bi-chevron-down arr-resize-mode arr-resize-mode-sel"></i>
+                    </div>
+                    <div class="col-12 col-md-4 my-1">
+                        <button id="btn-mode-custom" class="btn btn-resize-mode" type="button"><i
+                                class="bi bi-aspect-ratio bi-mr"></i>Custom size</button>
+                        <i id="btn-mode-custom-ar" class="bi bi-chevron-down arr-resize-mode"></i>
+                    </div>
+                    <div class="col-12 col-md-4 my-1">
+                        <button id="btn-mode-percentage" class="btn btn-resize-mode" type="button"><i
+                                class="bi bi-percent bi-mr"></i>Percentage</button>
+                        <i id="btn-mode-percentage-ar" class="bi bi-chevron-down arr-resize-mode"></i>
+                    </div>
+                </div>
+                <!-- Resize options: Options Blocks -->
+                <div id="options-box-mode">
+                    <hr />
+                    <p><span class="span-options">Crop Mode: </span><input id="cropModeCheckbox" type="checkbox"
+                            checked>
+                        <span class="span-options">crop</span>
+                        <input id="containModeCheckbox" type="checkbox"> <span class="span-options">contain</span>
+                        ( background color
+                        <input type="color" id="backColorPicker" name="backColorPicker" value="#f5f5f5"> )
                     </p>
 
-                    <!-- Show single image -->
-                    <div id="show-single">
-                        <!--
+                    <hr />
+                </div>
+                <div id="options-box-preset">
+
+                    <div id="presetListContainer">
+                        <span class="span-options">Scale to a standard size </span>
+                    </div>
+
+                    <hr />
+                </div>
+                <div id="options-box-custom-size">
+                    <div id="sizeContainer">
+                        <div class="py-2">
+
+                            Width: <input min="0" max="2500" type="number" class="inputValue" id="width"
+                                placeholder="auto">
+                            px
+
+                            -
+
+                            Height: <input min="0" max="2500" type="number" class="inputValue" id="height"
+                                placeholder="auto">
+                            px
+
+                        </div>
+                        <div class="py-2">
+                            <input id="autoForceWidthHeightCheckbox" type="checkbox"> Force to custom width and
+                            height
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div id="options-box-percentage">
+                    <hr />
+                    <div id="sliderContainer">
+                        <div class="py-2">
+                            Select a percentage
+                        </div>
+                        <div class="py-2">
+                            <!-- review style 
+                                https://codepen.io/vsync/pen/mdEJMLv
+                                -->
+                            <input type="range" min="5" max="95" value="50" class="scale-slider" id="range">
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+
+            <div id="updateModeContainer">
+                Update mode:
+                <input id="updateCheckbox" type="checkbox"> auto-update
+                <button id="updateButton" class="btn btn-update">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Example images -->
+<div id="exampleImagesContainer" class="text-center mt-4">
+    <h4>Or select a image to try:</h4>
+    <div id="example-images" class="mt-3">
+        <img id="example-4" src="static/img/Example-CoupleBeach-thumb.jpg" alt="Couple in the beach"
+            class="example-image" height="190" width="127">
+        <img id="example-5" src="static/img/Example-Porsche-thumb.jpg" alt="Porsche Panamera" class="example-image"
+            height="190" width="285">
+        <!-- <img id="example-2" src="static/img/Example-HumanTower-thumb.jpg" alt="Human tower in Barcelona" class="example-image"> -->
+        <!-- <img id="example-3" src="static/img/Example-CoupleLove-thumb.jpg" alt="People love image in a mountain" class="example-image"> -->
+        <!-- <img id="example-1" src="static/img/Example-Paris-thumb.jpg" alt="Eiffel Tower in Paris" class="example-image">-->
+        <!-- <img id="example-6" src="static/img/Example-Tesla-thumb.jpg" alt="Tesla Model S" class="example-image"> -->
+    </div>
+</div>
+
+<!-- Show images -->
+<div id="showContainer" class="show-container row">
+    <div class="col p-0">
+        <div class="show-box m-2 p-4">
+
+            <h4 id="show-title" class="pb-1">Your resize image:</h4>
+            <p id="show-description" class="mb-4">All auto resized and croped to a standard size of 16:9
+                Widescreen.
+            </p>
+
+            <!-- Show single image -->
+            <div id="show-single">
+                <!--
                     <div class="col-sm-8">
                         <div class="show-single-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:50vh;"></span>
@@ -161,10 +158,10 @@
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
                     -->
-                    </div>
-                    <!-- Show multiple image -->
-                    <div id="show-multiple" class="row">
-                        <!--
+            </div>
+            <!-- Show multiple image -->
+            <div id="show-multiple" class="row">
+                <!--
                     <div class="col-sm-3 my-4">
                         <div class="show-multiple-image">
                             <p class="placeholder-glow"><span class="placeholder col-12" style="height:20vh;"></span>
@@ -176,92 +173,88 @@
                                 class="bi bi-download bi-mr"></i>Download</button>
                     </div>
                     -->
-                    </div>
+            </div>
 
 
-                    <!-- Hidden images for system -->
-                    <div id="imagesPreviewContainer">
-                        <div id="imageResizedContainer">
-                            <h5>Resized image</h5>
-                        </div>
-                        <div id="imagePrevContainer">
-                            <h5>Prev image</h5>
-                        </div>
-                    </div>
+            <!-- Hidden images for system -->
+            <div id="imagesPreviewContainer">
+                <div id="imageResizedContainer">
+                    <h5>Resized image</h5>
+                </div>
+                <div id="imagePrevContainer">
+                    <h5>Prev image</h5>
                 </div>
             </div>
         </div>
-
     </div>
-</section>
+</div>
+
 <div class="spacer"></div>
-<!-- Page Content Block 2 -->
-<section>
-    <div class="container px-3 px-lg-5">
-        <!-- Content Row with cards -->
-        <div class="row gx-lg-5 text-center">
-            <h2 class="my-4 slide-top-1">Photo editing. Fully free. Directly in any browser.</h2>
-            <div class="col-md-4 mb-5 slide-top-2">
-                <div class="h-100">
-                    <div class="gr-desc-container mx-auto">
-                        <div class="gr-desc graphic-light gr-desc1-light"></div>
-                        <div class="gr-desc graphic-dark gr-desc1-dark"></div>
-                    </div>
-                    <p class="card-text">Resize and crop your photos for print or social media with auto-presets.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5 slide-top-2">
-                <div class="h-100">
-                    <div class="gr-desc-container mx-auto">
-                        <div class="gr-desc graphic-light gr-desc2-light"></div>
-                        <div class="gr-desc graphic-dark gr-desc2-dark"></div>
-                    </div>
-                    <p class="card-text">Bulk reduces file size in kb, contains it, or forces it to desired
-                        pixels.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5 slide-top-2">
-                <div class="h-100">
-                    <div class="gr-desc-container mx-auto">
-                        <div class="gr-desc graphic-light gr-desc3-light"></div>
-                        <div class="gr-desc graphic-dark gr-desc3-dark"></div>
-                    </div>
-                    <p class="card-text">Convert and download multiple formats and images at the same time.</p>
-                </div>
-            </div>
-        </div>
-        <div class="spacer"></div>
-        <!-- Text Description -->
-        <div class="row mb-5">
-            <h2 class="pb-4 slide-top-1">How we do it?</h2>
-            <div class="col-sm slide-top-2">
-                <p>Free Resize Image is an online app that allows you to compress your image on the web in order to
-                    adjust quality and optimize information. For Windows, Mac, iPhone, Android, or any
-                    other device. You could drag and drop or simple upload by clicking on the uploader.
-                </p>
-                <p>
-                    When you upload your image, our app will show you format, size, and
-                    resolution of previous image and new image. Typical formats like BMP, GIF, JPG or PNG are supported.
-                    You could also upload other image formats like iPhone HEIC files. The uploader is fast and secure
-                    and all the process is made online without storing information in any server.
-                </p>
 
+<!-- Page Content Block 2 -->
+<!-- Content Row with cards -->
+<div class="row gx-lg-5 text-center">
+    <h2 class="my-4 slide-top-1">Photo editing. Fully free. Directly in any browser.</h2>
+    <div class="col-md-4 mb-5 slide-top-2">
+        <div class="h-100">
+            <div class="gr-desc-container mx-auto">
+                <div class="gr-desc graphic-light gr-desc1-light"></div>
+                <div class="gr-desc graphic-dark gr-desc1-dark"></div>
             </div>
-            <div class="col-sm slide-top-2">
-                <p>Photos from modern cellphones and cameras usually have over 6 million pixels, while most cellphones,
-                    tablets, notebook or TV screens have only about 1.5 million pixels, which means you end up seeing a
-                    resized version of the image (you only use the full image if you print it).
-                </p>
-                <p>
-                    So by resizing your image, decreasing its width and height to a reduced size, your image would have
-                    about the same number of pixels as the screens that will display it, and you wouldn’t be losing any
-                    quality or detail, even looking at your image in full screen mode.
-                </p>
-            </div>
+            <p class="card-text">Resize and crop your photos for print or social media with auto-presets.
+            </p>
         </div>
     </div>
-</section>
+    <div class="col-md-4 mb-5 slide-top-2">
+        <div class="h-100">
+            <div class="gr-desc-container mx-auto">
+                <div class="gr-desc graphic-light gr-desc2-light"></div>
+                <div class="gr-desc graphic-dark gr-desc2-dark"></div>
+            </div>
+            <p class="card-text">Bulk reduces file size in kb, contains it, or forces it to desired
+                pixels.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5 slide-top-2">
+        <div class="h-100">
+            <div class="gr-desc-container mx-auto">
+                <div class="gr-desc graphic-light gr-desc3-light"></div>
+                <div class="gr-desc graphic-dark gr-desc3-dark"></div>
+            </div>
+            <p class="card-text">Convert and download multiple formats and images at the same time.</p>
+        </div>
+    </div>
+</div>
+<div class="spacer"></div>
+<!-- Text Description -->
+<div class="row mb-5">
+    <h2 class="pb-4 slide-top-1">How we do it?</h2>
+    <div class="col-sm slide-top-2">
+        <p>Free Resize Image is an online app that allows you to compress your image on the web in order to
+            adjust quality and optimize information. For Windows, Mac, iPhone, Android, or any
+            other device. You could drag and drop or simple upload by clicking on the uploader.
+        </p>
+        <p>
+            When you upload your image, our app will show you format, size, and
+            resolution of previous image and new image. Typical formats like BMP, GIF, JPG or PNG are supported.
+            You could also upload other image formats like iPhone HEIC files. The uploader is fast and secure
+            and all the process is made online without storing information in any server.
+        </p>
+
+    </div>
+    <div class="col-sm slide-top-2">
+        <p>Photos from modern cellphones and cameras usually have over 6 million pixels, while most cellphones,
+            tablets, notebook or TV screens have only about 1.5 million pixels, which means you end up seeing a
+            resized version of the image (you only use the full image if you print it).
+        </p>
+        <p>
+            So by resizing your image, decreasing its width and height to a reduced size, your image would have
+            about the same number of pixels as the screens that will display it, and you wouldn’t be losing any
+            quality or detail, even looking at your image in full screen mode.
+        </p>
+    </div>
+</div>
+
 
 {% endblock %}

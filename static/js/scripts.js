@@ -1,6 +1,7 @@
 // DOM load
 document.addEventListener('DOMContentLoaded', () => {
 
+
 	// Elements
 	// --> General
 	const imagesContainer = document.getElementById("showContainer");

@@ -270,14 +270,13 @@ a:hover {
 .btn-intense {
   padding: 0.5em 1.2em;
   border-radius: var(--border-radius);
-  background-color: var(--color-theme-1);
-  border: solid var(--border-width) var(--color-theme-4);
+  border: solid var(--border-width) var(--color-intense-1);
   color: var(--color-intense-1);
 }
 .btn-intense:hover {
-  
+  background-color: var(--color-intense-1);
   border-color: var(--color-intense-1);
-  color: var(--color-intense-1);
+  color: var(--color-theme-0);
 }
 .btn-update {
   padding: 7px;
