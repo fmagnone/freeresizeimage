@@ -18,6 +18,7 @@ ext = Sitemap(app=app)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+
 @app.after_request
 def after_request(response):
     """ Cache 200 """
@@ -65,10 +66,19 @@ def terms_page():
 
 
 # Sitemap extension
+# ####### TODO --> To be removed?
 @ext.register_generator
 def index_sitemap():
     yield 'index', {}
 
+
+# Favicon
+app.add_url_rule('/favicon.ico',
+                 redirect_to=url_for('static', filename='favicon.ico'))
+app.add_url_rule('/browserconfig.xml',
+                 redirect_to=url_for('static', filename='browserconfig.xml'))
+app.add_url_rule('/apple-touch-icon.png',
+                 redirect_to=url_for('static', filename='apple-touch-icon.png'))
 
 # Debugger mode
 if __name__ == '__main__':
