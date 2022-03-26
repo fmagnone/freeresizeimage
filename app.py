@@ -82,8 +82,6 @@ def AppleTouchIcon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                           'apple-touch-icon.png',mimetype='image/png')
 #app.add_url_rule('/apple-touch-icon.png', redirect_to=url_for('static', filename='apple-touch-icon.png'))
-
-#app.add_url_rule('/favicon.ico', redirect_to='/static/favicon.ico')
 #app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
 #app.add_url_rule('/browserconfig.xml', redirect_to=url_for('static', filename='browserconfig.xml'))
 
