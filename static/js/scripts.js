@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
 	const uploadBox = document.getElementById("upload-box");
 	const liveAlertPlaceholder = document.getElementById("live-alert-placeholder");
-	
+
 	// --> Options
 	const resizeMethod = document.getElementById("resizeMethod");
 	const optionsBoxMode = document.getElementById("options-box-mode");
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var maxSizeValue = 3000;
 	var maxFileNumberAllowed = 10;
 	var appName = "FreeImageResizer";
+	var alert_timeout;
 
 
 	// Image Class Constructor
@@ -663,33 +664,42 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	function preventUserMinMax(value, text) {
 		if (isNaN(value)) {
-			console.warn(text + " should be a numeric value."); // TODO --> Tell to the user
+			messageToUser(text + " should be a numeric value.");
 			return "";
 		}
 		if (value < minSizeValue) {
-			console.warn(text + " of " + value + " px is too small, min value is " + minSizeValue + " px."); // TODO --> Tell to the user
+			messageToUser(text + " of " + value + " px is too small, min value is " + minSizeValue + " px.");
 			return "";
 		}
 		if (value > maxSizeValue) {
-			console.warn(text + " of " + value + " px is too big, max value is " + maxSizeValue + " px."); // TODO --> Tell to the user
+			messageToUser(text + " of " + value + " px is too big, max value is " + maxSizeValue + " px.");
 			return "";
 		}
 		return value;
 	}
 	function messageToUser(message) {
 		console.log("This is a message to the user: ", message);
+		if (alert_timeout) { clearTimeout(alert_timeout); }
 
 		// Create HTML elements
-		var alert_div = document.createElement("div");
-		alert_div.classList.add("alert");
-		alert_div.classList.add("alert-warning");
-		alert_div.setAttribute("role", "alert");
-		alert_div.innerHTML = message;
-		alert_div.onclick = function () {
-			//this.hide(); // TODO --> Hide alert
-		};
-		liveAlertPlaceholder.appendChild(alert_div);
-
+		var a_div = document.createElement("div");
+		a_div.classList.add("alert");
+		a_div.classList.add("alert-warning");
+		a_div.classList.add("alert-dismissible");
+		a_div.classList.add("fade");
+		a_div.classList.add("show");
+		a_div.classList.add("alert-fixed");
+		a_div.innerHTML = "<i class='bi-exclamation-triangle-fill'></i> <strong>Sorry!</strong> " + message +
+			"<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
+		alert_timeout = setTimeout(function () {
+			let clickeableButtons = liveAlertPlaceholder.getElementsByClassName("btn-close");
+			for (let i = 0; i < clickeableButtons.length; i++) {
+				clickeableButtons[i].click();
+			}
+		}, 5000);
+		
+		// Append message
+		liveAlertPlaceholder.appendChild(a_div);
 	}
 
 	// --------------------------------------------------- //
@@ -823,7 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		onwarning: function (error) {
 			//console.log("FP Warning", error);
 			if (error.body == "Max files") {
-				messageToUser("Sorry! You are trying to upload more than " + maxFileNumberAllowed + " files.");
+				messageToUser("You are trying to upload more than " + maxFileNumberAllowed + " files.");
 			} else {
 				messageToUser("We found some error uploading your file...");
 			}

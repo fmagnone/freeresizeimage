@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onload = function () {
         if (localStorage.darkmode == "true") {
             //console.log("User manually selected dark mode from a past session");
-            // TODO --> INSTEAD OF GO DARK SHOULD BE DARK without anim
             goDark();
         } else if (localStorage.darkmode == "false") {
             //console.log("User manually selected light mode from a past session");
@@ -144,13 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(function () {
         tempDisableAnim();
     }, 20);
-    /*
     $(window).resize(function () {
         tempDisableAnim();
         setTimeout(function () {
             tempDisableAnim();
         }, 0);
-    });*/
+    });
 
     // Icon animated update
     function refreshFavicon() {

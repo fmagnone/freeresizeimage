@@ -209,6 +209,15 @@ a:hover {
 .border-intense {
   border: var(--color-intense-1) solid;
 }
+.alert-fixed {
+  position: fixed; 
+  top: 1em; 
+  left: 1em; 
+  width: calc(100% - 2em);
+  z-index: 5000;
+}
+
+
 
 /* Buttons and options */
 .bi {
