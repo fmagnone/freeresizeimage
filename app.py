@@ -2,7 +2,7 @@
 
 # Import Librarys
 #import os
-from flask import Flask, session, request, flash, jsonify, redirect, render_template
+from flask import Flask, send_from_directory, session, request, flash, jsonify, redirect, render_template
 from flask_cors import CORS, cross_origin
 # from datetime import datetime, timedelta
 from flask_sitemap import Sitemap
@@ -73,12 +73,20 @@ def index_sitemap():
 
 
 # Favicon
-app.add_url_rule('/favicon.ico',
-                 redirect_to=url_for('static', filename='favicon.ico'))
-app.add_url_rule('/browserconfig.xml',
-                 redirect_to=url_for('static', filename='browserconfig.xml'))
-app.add_url_rule('/apple-touch-icon.png',
-                 redirect_to=url_for('static', filename='apple-touch-icon.png'))
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
+@app.route('/apple-touch-icon.png')
+def AppleTouchIcon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'apple-touch-icon.png',mimetype='image/png')
+#app.add_url_rule('/apple-touch-icon.png', redirect_to=url_for('static', filename='apple-touch-icon.png'))
+
+#app.add_url_rule('/favicon.ico', redirect_to='/static/favicon.ico')
+#app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
+#app.add_url_rule('/browserconfig.xml', redirect_to=url_for('static', filename='browserconfig.xml'))
+
 
 # Debugger mode
 if __name__ == '__main__':
