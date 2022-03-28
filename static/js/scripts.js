@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var maxSizeValue = 3000;
 	var maxFileNumberAllowed = 10;
 	var appName = "FreeImageResizer";
+	var standardSizeLeyend = "";
 	var alert_timeout;
 
 
@@ -189,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Add List changer listener
 		selectList.addEventListener("change", function () {
 			//console.log(selectList.selectedIndex);
-
 			for (let category of presetSizeCategorySet) {
 				let category_id = "cat_" + category;
 				let element = document.getElementById(category_id);
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function dataDisplay() {
 		// General Description
 
-		// Base data not defined
+		// Base data if data is not defined
 		description = "All images were resized." +
 			"<br> Input Type: " + inputType +
 			"<br> crop mode: " + cropMode +
@@ -281,19 +281,38 @@ document.addEventListener('DOMContentLoaded', () => {
 			"<br> width height: " + resizingWidth + " x " + resizingHeight +
 			"<br> force mode: " + forceMode;  // TODO --> To be removed
 
-		if (inputType == "percentage") {
-			description = "All images were auto resize and crop to <b>" + parseInt(resizingFactor * 100) + "%</b> of it original size.";
-		}
 		if (inputType == "fixed") {
 			let txt1;
 			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
 			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
-			description = "All images were auto resize and " + txt1 + " a standard or custom size.";
+			if (standardSizeLeyend != "") {
+				description = "All images were auto resize and " + txt1 + " a <b>standard size (" + standardSizeLeyend + ")</b> of " + resizingWidth + " x " + resizingHeight + " px.";
+			} else if (standardSizeLeyend == "" && resizingWidth == 0 && resizingHeight == 0) {
+				description = "All images were <b>not resized</b>. We need width and height!";
+			} else if (standardSizeLeyend == "" && resizingWidth == 0) {
+				description = "All images were auto resize and " + txt1 + " a <b>custom height</b> of " + resizingHeight + " px and auto width.";	
+			} else if (standardSizeLeyend == "" && resizingHeight == 0) {
+				description = "All images were auto resize and " + txt1 + " a <b>custom width</b> of " + resizingWidth + " px and auto height.";	
+			} else if (standardSizeLeyend == "" && resizingHeight != 0 && resizingHeight != 0) {
+				description = "All images were auto resize and " + txt1 + " a <b>custom width and height</b> of " + resizingWidth + "x" + resizingHeight + "px.";	
+			} 
+			
 			// "All auto resized and croped to a standard size of 16:9 Widescreen."
 			// TODO --> Complete all descriptions
 		}
-		if (inputType == "forced" && resizingWidth != 0 && resizingHeight != 0) {
-			description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + ".";
+		if (inputType == "forced") {
+			if (resizingWidth != 0 && resizingHeight != 0) {
+				description = "All images were <b>forced</b> to a custom size of " + resizingWidth + " x " + resizingHeight + " px.";
+			} else if (resizingWidth != 0) {
+				description = "All images were auto resized but <b>not forced</b> using <b>Width: " + resizingWidth + " px</b>.";
+			} else if (resizingHeight != 0) {
+				description = "All images were auto resized but <b>not forced</b> using <b>Height " + resizingHeight + " px</b>.";
+			} else {
+				description = "All images were <b>not resized</b>. Force mode is active, but we need width and height!";
+			}
+		}
+		if (inputType == "percentage") {
+			description = "All images were auto resize to <b>percentage of " + parseInt(resizingFactor * 100) + "%</b> of it original size.";
 		}
 		showDescription.innerHTML = description;
 
@@ -590,6 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		resizingWidth = parseInt(i);
 		resizingHeight = parseInt(z); // NEW
 		inputType = "fixed";
+		standardSizeLeyend = "";
 
 		// Prevent from empty field
 		if (isNaN(resizingWidth)) { resizingWidth = 0; }
@@ -603,6 +623,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Update values and styles if forced
 		if (forceMode) {
 			inputType = "forced";
+			/*if (resizingWidth == 0) {
+				messageToUser("We are trying to force rezise but Width is 0! Auto resized with height of " + resizingHeight + "px.");
+			}
+			if (resizingHeight == 0) {
+				messageToUser("We are trying to force rezise but Height is 0! Auto resized with height of " + resizingWidth + "px.");
+			}*/
 		}
 
 		// Resize images update
@@ -621,6 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		resizingHeight = parseInt(i);
 		resizingWidth = parseInt(z); // NEW
 		inputType = "fixed";
+		standardSizeLeyend = "";
 
 		// Prevent from empty field
 		if (isNaN(resizingWidth)) { resizingWidth = 0; }
@@ -643,16 +670,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Get values
 		let w;
 		let h;
+		let c;
+		let l;
 		for (let i = 0; i < presetSizeDataList.length; i++) {
 			if (button_id == presetSizeDataList[i].name) {
 				w = presetSizeDataList[i].width;
 				h = presetSizeDataList[i].height;
+				c = presetSizeDataList[i].category
+				l = presetSizeDataList[i].tag;
 			}
 		}
 		// Update values
 		clearValues();
 		resizingWidth = w;
 		resizingHeight = h;
+		standardSizeLeyend = c + ": " +  l;
 		inputType = "fixed";
 
 		// Update styles
@@ -690,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		a_div.classList.add("fade");
 		a_div.classList.add("show");
 		a_div.classList.add("alert-fixed");
-		a_div.innerHTML = "<i class='bi-exclamation-triangle-fill'></i> <strong>Sorry!</strong> " + message +
+		a_div.innerHTML = "<i class='bi-exclamation-triangle-fill'></i> " + message +
 			"<button type='button' class='btn-close' data-bs-dismiss='alert'></button>";
 		alert_timeout = setTimeout(function () {
 			let clickeableButtons = liveAlertPlaceholder.getElementsByClassName("btn-close");
