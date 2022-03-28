@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
 			if (cropMode) { txt1 = "<b>croped</b> to"; } else { txt1 = "<b>contained</b> in"; }
 			if (standardSizeLeyend != "") {
-				description = "All images were auto resize and " + txt1 + " a <b>standard size (" + standardSizeLeyend + ")</b> of " + resizingWidth + " x " + resizingHeight + " px.";
+				description = "All images were auto resize and " + txt1 + " a standard size <b>" + standardSizeLeyend + "</b> with " + resizingWidth + " x " + resizingHeight + " px.";
 			} else if (standardSizeLeyend == "" && resizingWidth == 0 && resizingHeight == 0) {
 				description = "All images were <b>not resized</b>. We need width and height!";
 			} else if (standardSizeLeyend == "" && resizingWidth == 0) {
@@ -671,12 +671,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		let w;
 		let h;
 		let c;
+		let p;
 		let l;
 		for (let i = 0; i < presetSizeDataList.length; i++) {
 			if (button_id == presetSizeDataList[i].name) {
 				w = presetSizeDataList[i].width;
 				h = presetSizeDataList[i].height;
-				c = presetSizeDataList[i].category
+				c = presetSizeDataList[i].category;
+				p = presetSizeDataList[i].prop;
 				l = presetSizeDataList[i].tag;
 			}
 		}
@@ -684,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		clearValues();
 		resizingWidth = w;
 		resizingHeight = h;
-		standardSizeLeyend = c + ": " +  l;
+		standardSizeLeyend = p + " " +  l;
 		inputType = "fixed";
 
 		// Update styles
@@ -698,6 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	function preventUserMinMax(value, text) {
 		if (isNaN(value)) {
 			messageToUser(text + " should be a numeric value.");
+			return "";
+		}
+		if (value == 0) {
 			return "";
 		}
 		if (value < minSizeValue) {
