@@ -74,14 +74,14 @@ presetSizeDataList.push(new presetSizeData(
     "Twitter", 
     "twitter_header", 
     "Header", 
-    "4:1", 
+    "3:1", 
     1500, 500
 ));
 presetSizeDataList.push(new presetSizeData(
     "Twitter", 
     "twitter_instream", 
     "In-Stream", 
-    "0.84:1", 
+    "16:19", 
     1600, 1900
 ));
 presetSizeDataList.push(new presetSizeData(
@@ -97,13 +97,6 @@ presetSizeDataList.push(new presetSizeData(
     "Thumbnail",  
     "16:9", 
     1280, 720
-));
-presetSizeDataList.push(new presetSizeData(
-    "Pinterest", 
-    "pinterest_pin", 
-    "Pin",  
-    "2:3", 
-    735, 1102
 ));
 presetSizeDataList.push(new presetSizeData(
     "LinkedIn", 
