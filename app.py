@@ -67,7 +67,6 @@ def terms_page():
 
 
 # Sitemap extension
-# ####### TODO --> To be removed?
 @ext.register_generator
 def index_sitemap():
     yield 'index', {}

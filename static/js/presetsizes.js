@@ -43,6 +43,20 @@ presetSizeDataList.push(new presetSizeData(
     1080, 1080
 ));
 presetSizeDataList.push(new presetSizeData(
+    "Instagram", 
+    "instagram_profile", 
+    "Profile", 
+    "1:1", 
+    320, 320
+));
+presetSizeDataList.push(new presetSizeData(
+    "Snapchat", 
+    "snapchat_story", 
+    "Story",  
+    "9:16", 
+    1080, 1920
+));
+presetSizeDataList.push(new presetSizeData(
     "Facebook", 
     "facebook_post", 
     "Post",  
@@ -57,11 +71,53 @@ presetSizeDataList.push(new presetSizeData(
     1200, 670
 ));
 presetSizeDataList.push(new presetSizeData(
+    "Twitter", 
+    "twitter_header", 
+    "Header", 
+    "4:1", 
+    1500, 500
+));
+presetSizeDataList.push(new presetSizeData(
+    "Twitter", 
+    "twitter_instream", 
+    "In-Stream", 
+    "0.84:1", 
+    1600, 1900
+));
+presetSizeDataList.push(new presetSizeData(
+    "Twitter", 
+    "twitter_profile", 
+    "Profile", 
+    "1:1", 
+    400, 400
+));
+presetSizeDataList.push(new presetSizeData(
+    "YouTube", 
+    "youtube_thumbnail", 
+    "Thumbnail",  
+    "16:9", 
+    1280, 720
+));
+presetSizeDataList.push(new presetSizeData(
+    "Pinterest", 
+    "pinterest_pin", 
+    "Pin",  
+    "2:3", 
+    735, 1102
+));
+presetSizeDataList.push(new presetSizeData(
     "LinkedIn", 
     "linkedin_sharedimage", 
     "Shared Image",  
     "1.91:1", 
     1200, 628
+));
+presetSizeDataList.push(new presetSizeData(
+    "LinkedIn", 
+    "linkedin_profile", 
+    "Profile",  
+    "1:1", 
+    400, 400
 ));
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
