@@ -31,7 +31,7 @@ FMR
 ## Version History
 
 * 1.0
-    * Deploy online and improve options.
+    * Deploy online, improve style, and upgrade settings.
 * 0.2
     * Various bug fixes and optimizations
 * 0.1
