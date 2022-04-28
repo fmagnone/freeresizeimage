@@ -6,7 +6,7 @@ import os
 from flask import Flask, send_from_directory, session, request, flash, jsonify, redirect, render_template
 from flask_cors import CORS, cross_origin
 # from datetime import datetime, timedelta
-from flask_sitemap import Sitemap
+# from flask_sitemap import Sitemap
 
 
 # Configure application
@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app, support_credentials=True)
 
 # Sitemap
-ext = Sitemap(app=app)
+# ext = Sitemap(app=app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -67,9 +67,14 @@ def terms_page():
 
 
 # Sitemap extension
-@ext.register_generator
-def index_sitemap():
-    yield 'index', {}
+# @ext.register_generator
+# def index_sitemap():
+#    yield 'index', {}
+
+@app.route('/sitemap.xml')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'sitemap.xml',mimetype='application/xml')
+
 
 
 # Favicon
