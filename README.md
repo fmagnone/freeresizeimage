@@ -30,6 +30,8 @@ FMR
 
 ## Version History
 
+* 1.0
+    * Deploy online, improve style, and upgrade settings.
 * 0.2
     * Various bug fixes and optimizations
 * 0.1
@@ -38,7 +40,7 @@ FMR
 
 ## License
 
-Copyright (c) [2022] [FMR]
+Copyright (c) [2022] [FMR.UY]
 
 MIT License (https://choosealicense.com/licenses/mit/)
 
