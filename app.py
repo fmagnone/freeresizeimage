@@ -72,7 +72,7 @@ def terms_page():
 #    yield 'index', {}
 
 @app.route('/sitemap.xml')
-def favicon():
+def sitemap_xml():
     return send_from_directory(os.path.join(app.root_path, 'static'),'sitemap.xml',mimetype='application/xml')
 
 
