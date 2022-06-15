@@ -6,3 +6,5 @@ __pycache__
 .DS_Store?
 .Trashes
 Thumbs.db
+static/.DS_Store
+templates/.DS_Store
