@@ -37,17 +37,17 @@ presetSizeDataList.push(new presetSizeData(
 ));
 presetSizeDataList.push(new presetSizeData(
     "Instagram", 
-    "instagram_square", 
-    "Square", 
-    "1:1", 
-    1080, 1080
-));
-presetSizeDataList.push(new presetSizeData(
-    "Instagram", 
     "instagram_profile", 
     "Profile", 
     "1:1", 
     320, 320
+));
+presetSizeDataList.push(new presetSizeData(
+    "Instagram", 
+    "instagram_square", 
+    "Square", 
+    "1:1", 
+    1080, 1080
 ));
 presetSizeDataList.push(new presetSizeData(
     "Snapchat", 
@@ -117,7 +117,7 @@ presetSizeDataList.push(new presetSizeData(
     "standard_square", 
     "Square", 
     "1:1",
-    900, 900
+    1080, 1080
 ));
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
@@ -153,6 +153,20 @@ presetSizeDataList.push(new presetSizeData(
     "Portrait", 
     "2:3",
     900, 1350
+));
+presetSizeDataList.push(new presetSizeData(
+    "Standard", 
+    "standard_square_large", 
+    "Large Square", 
+    "1:1",
+    1600, 1600
+));
+presetSizeDataList.push(new presetSizeData(
+    "Standard", 
+    "standard_thumbnail", 
+    "Thumbnail", 
+    "1:1",
+    400, 400
 ));
 
 // Console info
