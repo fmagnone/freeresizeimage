@@ -58,13 +58,17 @@ def contact_page():
     title = "Contact - "
     return render_template('contact.html', title=title)
 
-
 # Terms Page
 @app.route("/terms")
 def terms_page():
     title = "Terms - "
     return render_template('terms.html', title=title)
 
+# Other pages
+@app.route("/resize1080x1080")
+def resize1080_page():
+    title = "Resize 1080x1080 - "
+    return render_template('resize1080.html', title=title)
 
 # Sitemap extension
 # @ext.register_generator
