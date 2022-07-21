@@ -79,6 +79,9 @@ def resize1080_page():
 def sitemap_xml():
     return send_from_directory(os.path.join(app.root_path, 'static'),'sitemap.xml',mimetype='application/xml')
 
+@app.route('/robots.xml')
+def robots_txt():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'robots.txt',mimetype='text/plain')
 
 
 # Favicon
