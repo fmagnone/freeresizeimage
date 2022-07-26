@@ -79,6 +79,13 @@ presetSizeDataList.push(new presetSizeData(
 ));
 presetSizeDataList.push(new presetSizeData(
     "Twitter", 
+    "twitter_social", 
+    "Social", 
+    "2:1", 
+    1500, 750
+));
+presetSizeDataList.push(new presetSizeData(
+    "Twitter", 
     "twitter_instream", 
     "In-Stream", 
     "16:19", 
