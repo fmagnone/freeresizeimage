@@ -70,6 +70,11 @@ def resize1080_page():
     title = "Resize 1080x1080 - "
     return render_template('resize1080.html', title=title)
 
+@app.route("/resizeSEOandSocialMedia")
+def resizeSEOSocialMedia_page():
+    title = "Resize for SEO and Social Media - "
+    return render_template('resizeSEOSocialMedia.html', title=title)
+
 # Sitemap extension
 # @ext.register_generator
 # def index_sitemap():
