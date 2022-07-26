@@ -37,18 +37,19 @@ presetSizeDataList.push(new presetSizeData(
 ));
 presetSizeDataList.push(new presetSizeData(
     "Instagram", 
-    "instagram_profile", 
-    "Profile", 
-    "1:1", 
-    320, 320
-));
-presetSizeDataList.push(new presetSizeData(
-    "Instagram", 
     "instagram_square", 
     "Square", 
     "1:1", 
     1080, 1080
 ));
+presetSizeDataList.push(new presetSizeData(
+    "Instagram", 
+    "instagram_profile", 
+    "Profile", 
+    "1:1", 
+    320, 320
+));
+
 presetSizeDataList.push(new presetSizeData(
     "Snapchat", 
     "snapchat_story", 
@@ -76,13 +77,6 @@ presetSizeDataList.push(new presetSizeData(
     "Header", 
     "3:1", 
     1500, 500
-));
-presetSizeDataList.push(new presetSizeData(
-    "Twitter", 
-    "twitter_social", 
-    "Social", 
-    "2:1", 
-    1500, 750
 ));
 presetSizeDataList.push(new presetSizeData(
     "Twitter", 
@@ -120,25 +114,28 @@ presetSizeDataList.push(new presetSizeData(
     400, 400
 ));
 presetSizeDataList.push(new presetSizeData(
-    "Standard", 
-    "standard_square", 
-    "Square", 
-    "1:1",
-    1080, 1080
+    "SEO", 
+    "seo_facebook", 
+    "Facebook",
+    "1.91:1",
+    1640,  856
 ));
+presetSizeDataList.push(new presetSizeData(
+    "SEO", 
+    "seo_twitter", 
+    "Twitter",
+    "2:1",
+    1600, 800
+));
+
+
+
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
     "standard_widescreen", 
     "Widescreen", 
     "16:9",
     1600, 900
-));
-presetSizeDataList.push(new presetSizeData(
-    "Standard", 
-    "standard_iphone", 
-    "iPhone", 
-    "9:16",
-    900, 1600
 ));
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
@@ -163,18 +160,26 @@ presetSizeDataList.push(new presetSizeData(
 ));
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
-    "standard_square_large", 
-    "Large Square", 
-    "1:1",
-    1600, 1600
+    "standard_iphone", 
+    "iPhone", 
+    "9:16",
+    900, 1600
 ));
 presetSizeDataList.push(new presetSizeData(
     "Standard", 
-    "standard_thumbnail", 
-    "Thumbnail", 
+    "standard_square", 
+    "Square", 
+    "1:1",
+    1080, 1080
+));
+presetSizeDataList.push(new presetSizeData(
+    "Standard", 
+    "standard_thumb", 
+    "Thumb", 
     "1:1",
     400, 400
 ));
+
 
 // Console info
 //console.log("Preset size data loaded");
