@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elements
     var root = document.querySelector(':root');
     let navbar = document.getElementById("navbar");
+    let body = document.getElementsByTagName("body")[0];
     let graphicsLight = document.getElementsByClassName("graphic-light");
     let graphicsDark = document.getElementsByClassName("graphic-dark");
+    let toggleSwitch = document.getElementsByClassName("toggle-switch")[0];
+    let labelLightSpan = document.getElementsByClassName("label-light")[0];
+    let labelDarkSpan = document.getElementsByClassName("label-dark")[0];
 
     // Basic color pallette
     function assignColor(theme) {
@@ -61,15 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Light and Dark functions
     function labelDark() {
-        $(".toggle-switch").attr("alt", "Go light");
-        $(".toggle-switch").attr("title", "Go light");
+        //$(".toggle-switch").attr("alt", "Go light");
+        //$(".toggle-switch").attr("title", "Go light");
+        toggleSwitch.alt = "Go light";
+        toggleSwitch.title = "Go light";
+        
+        // TODO review if functional
     }
     function goDark() {
-        // console.log("Dark mode is active");  // TODO --> Delete
         labelDark();
-        $("body").addClass("dark");
+        body.classList.add("dark");
         refreshFavicon();
         assignColor("dark");
+
+        // TODO review if functional
     }
     function stayDark() {
         goDark();
@@ -78,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log("Dark mode is: " + darkmodeactive + " and it will stay dark");
     }
     function labelLight() {
-        $(".toggle-switch").attr("alt", "Go dark");
-        $(".toggle-switch").attr("title", "Go dark");
+        toggleSwitch.alt = "Go dark";
+        toggleSwitch.title = "Go dark";
     }
     function goLight() {
         //console.log("Light mode is active");
         labelLight();
-        $("body").removeClass("dark");
+        body.classList.remove("dark");
         refreshFavicon();
         assignColor("light");
     }
@@ -99,23 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && stayLight());
 
     // User Actions
-    $(".toggle-switch").click(function () {
-        if ($("body").hasClass("dark")) {
+    
+    checkDarkLight = function () {
+        if (body.classList.contains("dark")) {
             stayLight();
         } else {
             stayDark();
         }
-    });
-    $(".label-light").click(function () {
-        if ($("body").hasClass("dark")) {
-            stayLight();
-        }
-    });
-    $(".label-dark").click(function () {
-        if (!$("body").hasClass("dark")) {
-            stayDark();
-        }
-    });
+    }
+    toggleSwitch.onclick = checkDarkLight;
+    labelLightSpan.onclick = checkDarkLight;
+    labelDarkSpan.onclick = checkDarkLight;
+    
     window.onload = function () {
         if (localStorage.darkmode == "true") {
             //console.log("User manually selected dark mode from a past session");
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             goLight();
         } else {
             //console.log("User hasn't selected dark or light mode from a past session, dark mode has been served by default and OS-level changes will automatically reflect");
-            if ($("body").hasClass("dark")) {
+            if (body.classList.contains("dark")) {
                 labelDark();
             } else {
                 labelLight();
@@ -135,20 +139,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Animation disable functions
     function tempDisableAnim() {
+        /*
         $("*").addClass("disableEasingTemporarily");
         setTimeout(function () {
             $("*").removeClass("disableEasingTemporarily");
         }, 20);
+        */
+
+        // TODO convert query selector All to vanilla js
+        //example 
+        //document.querySelectorAll('.item').forEach(item => {
+        //    item.style.display = 'none';
+        //});
     }
     setTimeout(function () {
         tempDisableAnim();
     }, 20);
-    /*$(window).resize(function () {
-        tempDisableAnim();
-        setTimeout(function () {
-            tempDisableAnim();
-        }, 0);
-    });*/
 
     // Icon animated update
     function refreshFavicon() {
