@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	var standardSizeLeyend = "";
 	var alert_timeout;
 
-
 	// Image Class Constructor
 	class imageData {
 		constructor(
@@ -354,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (var i = 0; i < exampleImage.length; i++) {
 		// Add example image event listeners
 		exampleImage[i].onclick = function () {
-			let url = this.src.replace("-thumb", "");
+			let url = this.src.replace("-thumb.webp", ".jpg");
 			uploadCustomFile(url);
 		};
 	}
