@@ -5,14 +5,18 @@
 import os
 from flask import Flask, send_from_directory, session, request, flash, jsonify, redirect, render_template
 from flask_cors import CORS, cross_origin
-# from datetime import datetime, timedelta
-# from flask_sitemap import Sitemap
+#from datetime import datetime, timedelta
+#from flask_sitemap import Sitemap
 from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_talisman import Talisman
+#from flask_sslify import SSLify
 
 
 
 # Configure application
 app = Flask(__name__)
+Talisman(app)
+#sslify = SSLify(app)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
 CORS(app, support_credentials=True)
 
