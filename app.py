@@ -59,32 +59,32 @@ def index():
         return redirect("/")
     else:
         # GET method
-        title = ""
+        title = "Free Image Resizer to resize images and photos online"
         return render_template('index.html', title=title)
 
 
 # Contact Page
 @app.route("/contact")
 def contact_page():
-    title = "Contact - "
+    title = "Contact - Free Image Resizer"
     return render_template('contact.html', title=title)
 
 # Terms Page
 @app.route("/terms")
 def terms_page():
-    title = "Terms - "
+    title = "Terms - Free Image Resizer"
     return render_template('terms.html', title=title)
 
 # Other pages
-@app.route("/resize1080x1080")
+@app.route("/resize-image-to-1080x1080")
 def resize1080_page():
-    title = "Resize 1080x1080 - "
-    return render_template('resize1080.html', title=title)
+    title = "Resize image to 1080x1080 - Free Image Resizer"
+    return render_template('resize-image-to-1080x1080.html', title=title)
 
-@app.route("/resizeSEOandSocialMedia")
+@app.route("/resize-images-for-seo-and-social-media")
 def resizeSEOSocialMedia_page():
-    title = "Resize for SEO and Social Media - "
-    return render_template('resizeSEOSocialMedia.html', title=title)
+    title = "Resize images for SEO and Social Media - Free Image Resizer"
+    return render_template('resize-images-for-seo-and-social-media.html', title=title)
 
 # Sitemap extension
 # @ext.register_generator
