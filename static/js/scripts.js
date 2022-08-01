@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// --> General
 	const imagesContainer = document.getElementById("showContainer");
 	const resizeOptionsContainer = document.getElementById("resizeOptionsContainer");
-	const exampleImageContainer = document.getElementById("exampleImagesContainer");
+	const exampleImageContainer = document.getElementById("exampleImageContainer");
 	const imageResizedContainer = document.getElementById("imageResizedContainer");
 	const imagePrevContainer = document.getElementById("imagePrevContainer");
 	const uploadBox = document.getElementById("upload-box");
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const showDescription = document.getElementById("show-description");
 	const showSingleBox = document.getElementById("show-single");
 	const showMultipleBox = document.getElementById("show-multiple");
-
 
 	// Variables
 	var presetSizeCategorySet = new Set();
@@ -266,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			resizeOptionsContainer.style.display = "none";
 			imagesContainer.style.display = "none";
 			exampleImageContainer.style.display = "block";
-			//clearValues();
 		}
 	}
 	function dataDisplay() {
