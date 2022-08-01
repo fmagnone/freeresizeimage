@@ -66,7 +66,7 @@ def index():
 # Contact Page
 @app.route("/contact")
 def contact_page():
-    title = "Contact - Free Image Resizer"
+    title = "Contact Us - Free Image Resizer"
     return render_template('contact.html', title=title)
 
 # Terms Page
