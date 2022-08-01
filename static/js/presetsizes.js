@@ -114,14 +114,14 @@ presetSizeDataList.push(new presetSizeData(
     400, 400
 ));
 presetSizeDataList.push(new presetSizeData(
-    "OpenGraph", 
+    "Open Graph", 
     "opengraph_facebook", 
     "Facebook",
     "1.91:1",
-    1640,  856
+    1640, 856
 ));
 presetSizeDataList.push(new presetSizeData(
-    "OpenGraph", 
+    "Open Graph", 
     "opengraph_twitter", 
     "Twitter",
     "2:1",

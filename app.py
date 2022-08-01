@@ -81,10 +81,10 @@ def resizeimageto1080x1080_page():
     title = "Resize image to 1080x1080 - Free Image Resizer"
     return render_template('resize-image-to-1080x1080.html', title=title)
 
-@app.route("/resize-images-for-seo-and-social-media")
-def resizeimagesforseoandsocialmedia_page():
-    title = "Resize images for SEO and Social Media - Free Image Resizer"
-    return render_template('resize-images-for-seo-and-social-media.html', title=title)
+@app.route("/resize-images-for-open-graph-social-media")
+def resizeimagesforopengraphsocialmedia_page():
+    title = "Resize images for Open Graph and Social Media - Free Image Resizer"
+    return render_template('resize-images-for-open-graph-social-media.html', title=title)
 
 @app.route("/how-to-reduce-jpg-size-online")
 def hotworeducejpgsizeonline_page():
