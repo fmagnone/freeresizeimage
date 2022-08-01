@@ -7,14 +7,13 @@ from flask import Flask, send_from_directory, session, request, flash, jsonify, 
 from flask_cors import CORS, cross_origin
 # from datetime import datetime, timedelta
 # from flask_sitemap import Sitemap
-#from werkzeug.middleware.proxy_fix import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 
 # Configure application
 app = Flask(__name__)
-app.run(ssl_context='adhoc')
-#app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
 CORS(app, support_credentials=True)
 
 # Sitemap
