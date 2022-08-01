@@ -49,6 +49,14 @@
   --color-intense-1: #ec4e6e;
 }
 
+/* Font-Face */
+@font-face {
+  font-display: swap;
+  font-family: 'bootstrap-icons';
+  src: url('../fonts/bootstrap-icons.woff') format('woff'), 
+      url('../fonts/bootstrap-icons.woff2') format('woff2');
+}
+
 /* General Style */
 body {
   font-family: "Lato", Helvetica, sans-serif;
