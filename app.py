@@ -7,18 +7,22 @@ from flask import Flask, send_from_directory, session, request, flash, jsonify, 
 from flask_cors import CORS, cross_origin
 #from datetime import datetime, timedelta
 #from flask_sitemap import Sitemap
-from werkzeug.middleware.proxy_fix import ProxyFix
-from flask_talisman import Talisman
+#from werkzeug.middleware.proxy_fix import ProxyFix
+#from flask_talisman import Talisman
 #from flask_sslify import SSLify
 
 
 
 # Configure application
 app = Flask(__name__)
-Talisman(app)
+
+# Wrap Flask app with Talisman
+#Talisman(app)
+
 #sslify = SSLify(app)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
+#app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
 CORS(app, support_credentials=True)
+
 
 # Sitemap
 # ext = Sitemap(app=app)
@@ -115,6 +119,8 @@ def browserconfigXml():
   return send_from_directory(os.path.join(app.root_path, 'static'),'browserconfig.xml', mimetype='image/png')
 
 
+
+
 # Debugger mode
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
