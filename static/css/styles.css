@@ -89,6 +89,9 @@ footer {
 .spacer {
   height: 30px;
 }
+.main-title h2 {
+  font-size: 1.5em;
+}
 h6 {
   font-weight: 700;
 }
@@ -606,6 +609,9 @@ body.dark .toggle-switch:hover:after {
 
 /* Mobile Adjustemnts Portrait */
 @media only screen and (max-width: 600px) {
+  .main-title h2 {
+    font-size: 1.5em;
+  }
   h5 {
     font-size: 1.5em;
   }
@@ -641,6 +647,9 @@ body.dark .toggle-switch:hover:after {
   }
 }
 @media only screen and (max-width: 320px) {
+  .main-title h2 {
+    font-size: 1.3em;
+  }
   h1 {
     font-size: 1.4em;
   }
