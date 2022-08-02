@@ -62,7 +62,10 @@
 
     <!-- FilePond-->
     <!-- Copyright (c) 2019 PQINA | Rik Schennink <rik@pqina.nl> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.3/filepond.min.css" />
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.3/filepond.min.css" />
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.3/filepond.min.css">
+    </noscript>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-THHY4V7YZ2"></script>
