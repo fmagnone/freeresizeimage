@@ -1,6 +1,9 @@
 // DOM load
 document.addEventListener('DOMContentLoaded', () => {
 
+	// Check if is root
+	var is_root = location.pathname == "/";
+	console.log("Root: " + is_root);
 
 	// Elements
 	// --> General
@@ -339,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	function checkAutoUpdateMode() {
 		// Check defined mode when start app
-		if (autoUpdate == true) {
+		if (autoUpdate === true) {
 			updateCheckbox.checked = true;
 			updateButton.style.display = "none";
 		}
@@ -789,7 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	function updateImagesResize() {
 		for (let i = 0; i < imageList.length; i++) {
-			if (imageList[i].valid == true) {
+			if (imageList[i].valid === true) {
 				let id = parseInt(i);
 				//console.log("CALL", id)
 				resizeImage(id);
@@ -854,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// Update show status
 			let off = true;
-			for (let i = 0; i < imageList.length; i++) { if (imageList[i].valid == true) { off = false; } }
+			for (let i = 0; i < imageList.length; i++) { if (imageList[i].valid === true) { off = false; } }
 			if (off) {
 				displayState(false);
 			} else {
