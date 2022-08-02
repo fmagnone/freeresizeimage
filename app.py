@@ -1,4 +1,4 @@
-# Profile Image Resize - 2022
+# Resize Image App - 2022
 
 # Import Librarys
 #import os

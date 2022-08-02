@@ -38,20 +38,27 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 
-    <!-- Bootstrap CSS -->
-    <!-- Bootstrap Copyright (c) 2011-2022 Twitter, Inc. -->
-    <!--           Copyright (c) 2011-2022 The Bootstrap Authors -->
-    <!-- <link rel="stylesheet" href="/static/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="/static/css/bootstrap-icons.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link rel="stylesheet preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+    <!-- Bootstrap CSS -- Loaded Defered -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />-->
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </noscript>
+
+    <link rel="stylesheet preload" as="style"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+
 
     <!-- Custom CSS -->
     <link href="/static/css/styles.min.css" rel="stylesheet" />
 
     <!-- Custom Font -->
-    <link rel="preload" as="style" href='http://fonts.googleapis.com/css?family=Lato:200,400,700&display=swap' rel='stylesheet' type='text/css'>
+    <link rel="preload" as="style" href='http://fonts.googleapis.com/css?family=Lato:200,400,700&display=swap'
+        rel='stylesheet' type='text/css'>
 
     <!-- FilePond-->
     <!-- Copyright (c) 2019 PQINA | Rik Schennink <rik@pqina.nl> -->
@@ -124,8 +131,8 @@
             <div class="d-flex align-items-center">
                 <div class="graphic-light gr-logo-light"></div>
                 <div class="graphic-dark gr-logo-dark"></div>
-                <h1 class="logo-text"><span style="font-weight: 700;">Free</span> <span
-                        style="font-weight: 400;">Image Resizer</span></h1>
+                <h1 class="logo-text"><span style="font-weight: 700;">Free</span> <span style="font-weight: 400;">Image
+                        Resizer</span></h1>
             </div>
             <h2>Bulk resizer app for multiple image and files.</h2>
         </div>
@@ -148,7 +155,8 @@
                         <a class="nav-link" href="/resize-image-to-1080x1080">1080x1080</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/resize-images-for-open-graph-social-media">WhatsApp & Social Media</a>
+                        <a class="nav-link" href="/resize-images-for-open-graph-social-media">WhatsApp & Social
+                            Media</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/how-to-reduce-jpg-size-online">How to reduce JPG size online</a>
