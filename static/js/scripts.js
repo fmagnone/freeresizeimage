@@ -2,9 +2,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 	// Check if is root
-	var is_root = location.pathname == "/";
-	console.log("Root: " + is_root);
+	const IS_ROOT = location.pathname == "/";
+	//console.log("ROOT: " + IS_ROOT);
 
+	// Prevent to load scripts
+	if (!IS_ROOT) 
+		return;
+	
 	// Elements
 	// --> General
 	const imagesContainer = document.getElementById("showContainer");
