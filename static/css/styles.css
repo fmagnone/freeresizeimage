@@ -116,6 +116,7 @@ a:hover {
 }
 .upload-box {
   width: 100%;
+  min-height: 110px;
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
   z-index: 10;
