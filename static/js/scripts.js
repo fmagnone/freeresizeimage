@@ -1,6 +1,5 @@
 // DOM load
 document.addEventListener('DOMContentLoaded', () => {
-
 	// Check if is root
 	const IS_ROOT = location.pathname == "/";
 	//console.log("ROOT: " + IS_ROOT);

@@ -108,9 +108,7 @@ a:hover {
 .container {
   color: var(--color-theme-10);
 }
-.upload-container {
-}
-.animate {
+.animate, input {
   transition: color var(--animate-speed) ease-in-out,
     background var(--animate-speed) ease-in-out;
 }
@@ -125,8 +123,6 @@ a:hover {
 .options-box {
   background-color: var(--color-theme-2);
   border-radius: calc(var(--border-radius) * 2);
-}
-.show-container {
 }
 .show-container img,
 .show-container .placeholder {
