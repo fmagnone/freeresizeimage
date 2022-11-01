@@ -105,7 +105,7 @@ def robots_txt():
     return send_from_directory(os.path.join(app.root_path, 'static'),'robots.txt',mimetype='text/plain')
 
 @app.route('/ads.txt')
-def robots_txt():
+def ads_txt():
     return send_from_directory(os.path.join(app.root_path, 'static'),'ads.txt',mimetype='text/plain')
 
 # Favicon
